@@ -22,7 +22,7 @@
             <label for="sex">Employee sex</label><br>
             <input type="text" name="sex"> <br> <br>
 
-            <label for="email">Branch name</label><br>
+            <label for="email">Employee email</label><br>
             <input type="email" name="email"> <br> <br>
 
             <input type="submit" value="Save employee data">
