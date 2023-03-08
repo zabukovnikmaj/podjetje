@@ -8,7 +8,7 @@ use Controllers\Products;
 
 return [
     '/' => [
-        Index::class, "index"
+        'GET' => [Index::class, "index"]
     ],
     '/branchOffice' =>[
         'GET' => [BranchOffice::class, "branchOffice"]
