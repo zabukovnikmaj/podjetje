@@ -32,17 +32,17 @@ class Router
             die("404 Not Found");
         }
 
-//        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $routes = $this->routes[$uri];
-//        if (!array_key_exists($requestMethod, $routes)) {
-//            http_response_code(403);
-//            die("Request method not allowed");
-//        }
+        if (!array_key_exists($requestMethod, $routes)) {
+            http_response_code(403);
+            die("Request method not allowed");
+        }
 
-//        $route = $routes[$requestMethod];
+        $route = $routes[$requestMethod];
+        $controller = new $route[0];
 
-        $controller = new $routes[0];
-        call_user_func_array([$controller, $routes[1]], [$_REQUEST]);
+        call_user_func_array([$controller, $route[1]], [$_REQUEST]);
     }
 }
