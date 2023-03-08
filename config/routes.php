@@ -11,7 +11,8 @@ return [
         'GET' => [Index::class, "index"]
     ],
     '/branchOffice' =>[
-        'GET' => [BranchOffice::class, "branchOffice"]
+        'GET' => [BranchOffice::class, "branchOffice"],
+        'POST' => [BranchOffice::class, '']
     ],
     '/products' => [
         'GET' => [Products::class, 'products']
