@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class Products
+class Products extends BaseModel
 {
     public string $name;
     public string $description;
