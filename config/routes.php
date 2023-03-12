@@ -8,11 +8,11 @@ use Controllers\Products;
 
 return [
     '/' => [
-        'GET' => [Index::class, "index"]
+        'GET' => [Index::class, 'index']
     ],
     '/branchOffice' =>[
-        'GET' => [BranchOffice::class, "branchOffice"],
-        'POST' => [BranchOffice::class, '']
+        'GET' => [BranchOffice::class, 'branchOffice'],
+        'POST' => [BranchOffice::class, 'processData']
     ],
     '/products' => [
         'GET' => [Products::class, 'products']
