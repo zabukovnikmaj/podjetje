@@ -6,6 +6,6 @@ class Products extends BaseModel
 {
     public string $name;
     public string $description;
-    public double $price;
+    public float $price;
     public string $date;
 }
