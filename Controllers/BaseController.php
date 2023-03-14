@@ -15,7 +15,6 @@ abstract class BaseController
                 $err[] = "The value of " . $key . ' cannot be empty!';
             }
         }
-        var_dump($err);
         return $err;
     }
 }
