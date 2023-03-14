@@ -13,44 +13,7 @@
         <input type="text" name="address"><br><br>
 
         <label for="products">Products name</label><br>
-        <input type="text" name="products[]"><br><br>
-
-        <script>
-            // Get the input elements
-            const inputElements = document.querySelectorAll('input[name="products[]"]');
-
-            // Get the form element
-            const formElement = inputElements[0].closest('form');
-
-            // Attach an event listener to the parent element
-            formElement.addEventListener('input', function(event) {
-                // Check if the target of the event is an input element with the name "products[]"
-                if (event.target.name === 'products[]') {
-                    // Get the index of the input element in the NodeList
-                    const index = Array.from(inputElements).indexOf(event.target);
-
-                    // Check if the input element has a value
-                    if (event.target.value !== '') {
-                        // Create a new empty input element
-                        const newInputElement = document.createElement('input');
-                        newInputElement.type = 'text';
-                        newInputElement.name = 'products[]';
-                        newInputElement.style.display = 'block';
-
-                        // Insert the new input element after the current input element
-                        formElement.insertBefore(newInputElement, event.target.nextSibling);
-                    }
-
-                    // Remove any empty input fields after the current input field
-                    for (let i = index + 1; i < inputElements.length; i++) {
-                        if (inputElements[i].value === '') {
-                            formElement.removeChild(inputElements[i]);
-                            inputElements[i].style.display = 'none';
-                        }
-                    }
-                }
-            });
-        </script>
+        <textarea name="description" cols="50" rows="4"></textarea>
 
         <input type="submit" value="Save branch office data">
     </form>
