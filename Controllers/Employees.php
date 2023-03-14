@@ -5,14 +5,17 @@ use Models\Employees as EmployeesModel;
 
 class Employees extends BaseController
 {
-    public function employees(): void{
+    public function employees(array $err = []): void{
         include_once __DIR__ . '/../views/employees/employeesForm.php';
     }
 
     public function processData(): void{
-        if(!empty($this->findErrors())){
+        $err = $this->findErrors();
+        if(!empty($err)){
+            $this->employees($err);
             return;
         }
+        header('Location: /');
         $employeesModel = new EmployeesModel();
         $employeesModel->branchOffice = $_POST['branchOffice'];
         $employeesModel->name = $_POST['name'];
