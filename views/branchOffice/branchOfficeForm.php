@@ -13,7 +13,7 @@
         <input type="text" name="address"><br><br>
 
         <label for="products">Products name</label><br>
-        <textarea name="description" cols="50" rows="4"></textarea>
+        <textarea name="products" cols="50" rows="4"></textarea>
 
         <input type="submit" value="Save branch office data">
     </form>
