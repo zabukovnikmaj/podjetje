@@ -25,7 +25,13 @@
             <label for="email">Employee email</label><br>
             <input type="email" name="email"> <br> <br>
 
-            <input type="submit" value="Save employee data">
+            <input type="submit" value="Save employee data"> <br> <br>
+
+                    <?php foreach($err as $error){
+                        if(strpos($error, "!")){
+                            echo '<li>' . $error . '</li>';
+                        }
+                    }?>
         </form>
     </body>
 </html>

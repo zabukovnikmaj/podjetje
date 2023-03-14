@@ -13,9 +13,15 @@
         <input type="text" name="address"><br><br>
 
         <label for="products">Products name</label><br>
-        <textarea name="products" cols="50" rows="4"></textarea>
+        <textarea name="products" cols="50" rows="4"></textarea> <br> <br>
 
-        <input type="submit" value="Save branch office data">
+        <input type="submit" value="Save branch office data"> <br> <br>
+
+        <?php foreach($err as $error){
+            if(strpos($error, "!")){
+                echo '<li>' . $error . '</li>';
+            }
+        }?>
     </form>
 </body>
 </html>

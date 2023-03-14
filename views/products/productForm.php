@@ -19,7 +19,13 @@
             <label for="deliveryDate">Product delivery date</label><br>
             <input type="date" name="deliveryDate"><br><br>
 
-            <input type="submit" value="Save product data">
+            <input type="submit" value="Save product data"> <br> <br>
+
+            <?php foreach($err as $error){
+                if(strpos($error, "!")){
+                    echo '<li>' . $error . '</li>';
+                }
+            }?>
         </form>
     </body>
 </html>
