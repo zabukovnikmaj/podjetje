@@ -11,5 +11,3 @@ spl_autoload_register(function ($class) {
 $router = new Router();
 $router->loadConfig();
 $router->handle();
-
-//TODO: base view for opening forms
