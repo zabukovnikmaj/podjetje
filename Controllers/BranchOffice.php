@@ -11,12 +11,10 @@ class BranchOffice extends BaseController
         if(!empty($this->findErrors())){
             return;
         }
-
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->name = $_POST['name'];
         $branchOfficeModel->address = $_POST['address'];
         $branchOfficeModel->products = $_POST['products'];
-
         $branchOfficeModel->savingData();
     }
 }
