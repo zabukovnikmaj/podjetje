@@ -7,9 +7,9 @@ class BranchOffice extends BaseController
     public function branchOffice(): void{
         include_once __DIR__ . '/../views/branchOffice/branchOfficeForm.php';
     }
-    public function processData(): bool{
+    public function processData(): void{
         if(!empty($this->findErrors())){
-            return false;
+            return;
         }
 
         $branchOfficeModel = new BranchOfficeModels();
@@ -18,7 +18,5 @@ class BranchOffice extends BaseController
         $branchOfficeModel->products = $_POST['products'];
 
         $branchOfficeModel->savingData();
-
-        return true;
     }
 }
