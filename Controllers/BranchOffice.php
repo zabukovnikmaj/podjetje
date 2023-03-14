@@ -14,7 +14,7 @@ class BranchOffice extends BaseController
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->name = $_POST['name'];
         $branchOfficeModel->address = $_POST['address'];
-        $branchOfficeModel->products = $_POST['products'];
+        $branchOfficeModel->products = explode(',', $_POST['products']);
         $branchOfficeModel->savingData();
     }
 }
