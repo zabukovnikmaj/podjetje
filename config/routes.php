@@ -10,8 +10,8 @@ return [
     '/' => [
         'GET' => [Index::class, 'index']
     ],
-    '/branchOffice/create/' =>[
-        'GET' => [BranchOffice::class, 'branchOffice'],
+    '/branchOffices/create/' =>[
+        'GET' => [BranchOffice::class, 'showCreateForm'],
         'POST' => [BranchOffice::class, 'processData']
     ],
     '/products/create/' => [
@@ -23,6 +23,8 @@ return [
         'POST' => [Employees::class, 'processData']
     ],
     '/employees/list/' => [],
-    '/branchOffice/list/' => [],
+    '/branchOffice/list/' => [
+        'GET' => [BranchOffice::class, 'list']
+    ],
     '/products/list/' => []
 ];
