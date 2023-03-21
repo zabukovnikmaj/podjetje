@@ -10,16 +10,19 @@ return [
     '/' => [
         'GET' => [Index::class, 'index']
     ],
-    '/branchOffice/display/' =>[
+    '/branchOffice/create/' =>[
         'GET' => [BranchOffice::class, 'branchOffice'],
         'POST' => [BranchOffice::class, 'processData']
     ],
-    '/products/display/' => [
+    '/products/create/' => [
         'GET' => [Products::class, 'products'],
         'POST' => [Products::class, 'processData']
     ],
-    '/employees/display/' => [
+    '/employees/create/' => [
         'GET' => [Employees::class, 'employees'],
         'POST' => [Employees::class, 'processData']
-    ]
+    ],
+    '/employees/list/' => [],
+    '/branchOffice/list/' => [],
+    '/products/list/' => []
 ];
