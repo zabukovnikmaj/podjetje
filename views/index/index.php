@@ -6,8 +6,8 @@
 </head>
 <body>
     <h1>Company</h1>
-    <a href="/branchOffice/list">Seznam fakultet</a>
-    <a href="/employees/list">Seznam zaposlenih</a>
-    <a href="/products/list">Seznam predmetov</a>
+    <a href="/branchOffice/list">List branch offices</a> <br>
+    <a href="/employees/list">List employees</a> <br>
+    <a href="/products/list">List products</a> <br>
 </body>
 </html>
