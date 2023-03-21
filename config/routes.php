@@ -19,10 +19,12 @@ return [
         'POST' => [Products::class, 'processData']
     ],
     '/employees/create/' => [
-        'GET' => [Employees::class, 'employees'],
+        'GET' => [Employees::class, 'showCreateForm'],
         'POST' => [Employees::class, 'processData']
     ],
-    '/employees/list/' => [],
+    '/employees/list/' => [
+        'GET' => [Employees::class, 'list']
+    ],
     '/branchOffice/list/' => [
         'GET' => [BranchOffice::class, 'list']
     ],

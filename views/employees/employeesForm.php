@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1>Enter information about an employee</h1>
+<?php if (!empty($errors)): ?>
+    <p>
+    <ul class="errors">
+        <?php foreach($errors as $field => $error): ?>
+            <li><?php echo $field; ?>: <?php echo $error; ?></li>
+        <?php endforeach; ?>
+    </ul>
+    </p>
+<?php endif; ?>
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
     <input type="text" name="branchOffice"> <br> <br>
@@ -26,13 +35,6 @@
     <input type="email" name="email"> <br> <br>
 
     <input type="submit" value="Save employee data"> <br> <br>
-
-    <?php foreach($err as $error){
-        if(strpos($error, "!")){
-            echo '<li>' . $error . '</li>';
-        }
-    }
-    ?>
 </form>
 </body>
 </html>

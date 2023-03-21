@@ -22,8 +22,8 @@ class BranchOffice extends BaseController
         $err = Validator::required($_POST, 'name', 'address', 'products');
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-            'errors' => $err
-        ]);
+                'errors' => $err
+            ]);
             return;
         }
         header('Location: /');

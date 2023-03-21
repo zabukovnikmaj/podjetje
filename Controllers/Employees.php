@@ -1,18 +1,29 @@
 <?php
 
 namespace Controllers;
+
 use Models\Employees as EmployeesModel;
+use Services\Validator;
 
 class Employees extends BaseController
 {
-    public function employees(array $err = []): void{
-        include_once __DIR__ . '/../views/employees/employeesForm.php';
+    public function showCreateForm(): void
+    {
+        view('employees/employeesForm');
     }
 
-    public function processData(): void{
-        $err = $this->findErrors();
-        if(!empty($err)){
-            $this->employees($err);
+    public function list(): void
+    {
+        view('employees/list');
+    }
+
+    public function processData(): void
+    {
+        $err = Validator::required($_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
+        if (!empty($err)) {
+            view('employees/employeesForm', [
+                'errors' => $err
+            ]);
             return;
         }
         header('Location: /');

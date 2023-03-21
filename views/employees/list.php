@@ -1,5 +1,5 @@
 <p>
-    <a href="/employee/create/">New employee</a>
+    <a href="/employees/create/">New employee</a>
 </p>
 
 <table>
