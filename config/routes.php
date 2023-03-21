@@ -10,15 +10,15 @@ return [
     '/' => [
         'GET' => [Index::class, 'index']
     ],
-    '/branchOffice' =>[
+    '/branchOffice/display/' =>[
         'GET' => [BranchOffice::class, 'branchOffice'],
         'POST' => [BranchOffice::class, 'processData']
     ],
-    '/products' => [
+    '/products/display/' => [
         'GET' => [Products::class, 'products'],
         'POST' => [Products::class, 'processData']
     ],
-    '/employees' => [
+    '/employees/display/' => [
         'GET' => [Employees::class, 'employees'],
         'POST' => [Employees::class, 'processData']
     ]
