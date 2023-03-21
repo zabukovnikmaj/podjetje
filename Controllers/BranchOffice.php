@@ -7,16 +7,27 @@ use Services\Validator;
 
 class BranchOffice extends BaseController
 {
+    /**
+     * function for displaying form
+     * @return void
+     */
     public function showCreateForm(): void
     {
         view('branchOffice/branchOfficeForm');
     }
 
+    /**
+     * function for displaying existing data
+     * @return void
+     */
     public function list(): void
     {
         view('branchOffice/list');
     }
-
+    /**
+     * function for processing entered data and later saving it by using model
+     * @return void
+     */
     public function processData(): void
     {
         $err = Validator::required($_POST, 'name', 'address', 'products');

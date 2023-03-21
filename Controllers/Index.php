@@ -4,7 +4,11 @@ namespace Controllers;
 
 class Index
 {
+    /**
+     * function for displaying form
+     * @return void
+     */
     public function index(): void{
-        include_once __DIR__ . '/../views/index/index.php';
+        view('index/index');
     }
 }
