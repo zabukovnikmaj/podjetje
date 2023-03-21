@@ -15,7 +15,7 @@ return [
         'POST' => [BranchOffice::class, 'processData']
     ],
     '/products/create/' => [
-        'GET' => [Products::class, 'products'],
+        'GET' => [Products::class, 'showCreateForm'],
         'POST' => [Products::class, 'processData']
     ],
     '/employees/create/' => [
@@ -28,5 +28,7 @@ return [
     '/branchOffice/list/' => [
         'GET' => [BranchOffice::class, 'list']
     ],
-    '/products/list/' => []
+    '/products/list/' => [
+        'GET' => [Products::class, 'list']
+    ]
 ];

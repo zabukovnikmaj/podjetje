@@ -3,17 +3,27 @@
 namespace Controllers;
 
 use Models\Products as ProductsModel;
+use Services\Validator;
 
 class Products extends BaseController
 {
-    public function products(array $err = []): void{
-        include_once __DIR__ . '/../views/products/productForm.php';
+    public function showCreateForm(): void
+    {
+        view('products/productForm');
     }
 
-    public function processData(): void{
-        $err = $this->findErrors();
-        if(!empty($err)){
-            $this->products($err);
+    public function list(): void
+    {
+        view('products/list');
+    }
+
+    public function processData(): void
+    {
+        $err = Validator::required($_POST, 'name', 'description', 'price', 'deliveryDate');
+        if (!empty($err)) {
+            view('products/productForm', [
+                'errors' => $err
+            ]);
             return;
         }
         header('Location: /');

@@ -7,7 +7,7 @@ use Services\Validator;
 
 class BranchOffice extends BaseController
 {
-    public function showCreateForm(array $err = []): void
+    public function showCreateForm(): void
     {
         view('branchOffice/branchOfficeForm');
     }
