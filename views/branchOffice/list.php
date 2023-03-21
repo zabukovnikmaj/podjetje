@@ -1,5 +1,5 @@
 <p>
-    <a href="/faculty/create">New branch office</a>
+    <a href="/branchOffices/display">New branch office</a>
 </p>
 
 <table>
