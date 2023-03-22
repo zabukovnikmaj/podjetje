@@ -4,7 +4,9 @@ namespace Services;
 
 class Validator
 {
-    /**function for checking $_POST array for certain methods and returning array with errors if fields are empty
+    /**
+     * function for checking $_POST array for certain methods and returning array with errors if fields are empty
+     *
      * @param array $source
      * @param ...$fields
      * @return array

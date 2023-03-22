@@ -9,6 +9,7 @@ class Employees extends BaseController
 {
     /**
      * function for displaying form
+     *
      * @return void
      */
     public function showCreateForm(): void
@@ -17,6 +18,7 @@ class Employees extends BaseController
     }
     /**
      * function for displaying existing data
+     *
      * @return void
      */
     public function list(): void
@@ -25,6 +27,7 @@ class Employees extends BaseController
     }
     /**
      * function for processing entered data and later saving it by using model
+     *
      * @return void
      */
     public function processData(): void

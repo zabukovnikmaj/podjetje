@@ -5,8 +5,9 @@ namespace Models;
 abstract class BaseModel
 {
     /**
-     * @return void
      * generalized method for saving all data from class variables to .json file with the same name as class
+     *
+     * @return void
      */
     public function savingData(): void
     {
