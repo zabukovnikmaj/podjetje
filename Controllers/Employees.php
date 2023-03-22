@@ -39,7 +39,7 @@ class Employees extends BaseController
             ]);
             return;
         }
-        header('Location: /');
+
         $employeesModel = new EmployeesModel();
         $employeesModel->branchOffice = $_POST['branchOffice'];
         $employeesModel->name = $_POST['name'];
@@ -48,5 +48,6 @@ class Employees extends BaseController
         $employeesModel->sex = $_POST['sex'];
         $employeesModel->email = $_POST['email'];
         $employeesModel->savingData();
+        header('Location: /');
     }
 }

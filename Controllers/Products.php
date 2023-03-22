@@ -40,12 +40,13 @@ class Products extends BaseController
             ]);
             return;
         }
-        header('Location: /');
+
         $productsModes = new ProductsModel();
         $productsModes->name = $_POST['name'];
         $productsModes->date = $_POST['deliveryDate'];
         $productsModes->price = floatval($_POST['price']);
         $productsModes->description = $_POST['description'];
         $productsModes->savingData();
+        header('Location: /');
     }
 }

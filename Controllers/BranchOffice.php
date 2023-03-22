@@ -40,11 +40,12 @@ class BranchOffice extends BaseController
             ]);
             return;
         }
-        header('Location: /');
+
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->name = $_POST['name'];
         $branchOfficeModel->address = $_POST['address'];
         $branchOfficeModel->products = explode(', ', $_POST['products']);
         $branchOfficeModel->savingData();
+        header('Location: /');
     }
 }
