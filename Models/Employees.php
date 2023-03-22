@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class Employees
+class Employees extends BaseModel
 {
     public string $branchOffice;
     public string $name;
@@ -10,12 +10,5 @@ class Employees
     public int $age;
     public string $sex;
     public string $email;
-    public function SavingData(array $data): void{
-        $branchOffice = $data['branchOffice'];
-        $name = $data['name'];
-        $position = $data['position'];
-        $age = intval($data['age']);
-        $sex = $data['sex'];
-        $email = $data['email'];
-    }
+
 }

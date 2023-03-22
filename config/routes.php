@@ -8,15 +8,27 @@ use Controllers\Products;
 
 return [
     '/' => [
-        Index::class, "index"
+        'GET' => [Index::class, 'index']
     ],
-    '/branchOffice' =>[
-        'GET' => [BranchOffice::class, "branchOffice"]
+    '/branchOffices/create/' =>[
+        'GET' => [BranchOffice::class, 'showCreateForm'],
+        'POST' => [BranchOffice::class, 'processData']
     ],
-    '/products' => [
-        'GET' => [Products::class, 'products']
+    '/products/create/' => [
+        'GET' => [Products::class, 'showCreateForm'],
+        'POST' => [Products::class, 'processData']
     ],
-    '/employees' => [
-        'GET' => [Employees::class, 'employees']
+    '/employees/create/' => [
+        'GET' => [Employees::class, 'showCreateForm'],
+        'POST' => [Employees::class, 'processData']
+    ],
+    '/employees/list/' => [
+        'GET' => [Employees::class, 'list']
+    ],
+    '/branchOffice/list/' => [
+        'GET' => [BranchOffice::class, 'list']
+    ],
+    '/products/list/' => [
+        'GET' => [Products::class, 'list']
     ]
 ];
