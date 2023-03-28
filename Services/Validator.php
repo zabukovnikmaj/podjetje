@@ -84,18 +84,29 @@ class Validator
     }
 
     /**
-     * function for checking name's validity
+     * function for checking general strings
      *
-     * @param string $name
+     * @param string $input
      * @return bool
      */
-    public static function checkNameValidity(string $name): bool
+    public static function checkGeneral(string $input): bool
     {
-        if (strlen($name) > 0 && strlen($name) < 30) {
+        if (strlen($input) > 0 && strlen($input) < 50) {
             $regex = '/^[a-zA-Z\- ]+$/';
-            return preg_match($regex, $name);
+            return preg_match($regex, $input);
         } else {
             return false;
         }
+    }
+
+    /**
+     * function for checking if all of the entered products already exist
+     *
+     * @param array $products
+     * @return bool
+     */
+    public static function checkProducts(array $products): bool{
+        //TODO: add validator for checking if all of the entered products already exist
+        return true;
     }
 }
