@@ -39,5 +39,20 @@ class Validator
         return $errors;
     }
 
+    /**
+     * Validator for checking if entered sex was in valid format
+     *
+     * @param string $sex
+     * @param array $errors
+     * @return array
+     */
+    public static function checkSex(string $sex, array $errors): array
+    {
+        if (strtoupper($sex) != 'M' || strtoupper($sex) != "Ž") {
+            $errors[] = "Sex can only be M or Ž!";
+        }
+        return $errors;
+    }
+
 
 }
