@@ -100,6 +100,32 @@ class Validator
     }
 
     /**
+     * validator for limiting description length
+     *
+     * @param string $description
+     * @return bool
+     */
+    public static function checkDescription(string $description): bool
+    {
+        if(strlen($description) > 1000){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * validator for checking date validity
+     *
+     * @param string $date
+     * @return bool
+     */
+    public static function checkDate(string $date): bool
+    {
+        $dateFromFormat = DateTime::createFromFormat('Y-m-d', $date);
+        return $dateFromFormat && $dateFromFormat->format('Y-m-d') === $date;
+    }
+
+    /**
      * function for checking if all of the entered products already exist
      *
      * @param array $products
@@ -111,6 +137,12 @@ class Validator
         return true;
     }
 
+    /**
+     * funciton for checking if entered office already exists
+     *
+     * @param string $branchOffice
+     * @return bool
+     */
     public static function checkBranchOffice(string $branchOffice): bool
     {
         //TODO: add validator for checking if entered branch office already exist
