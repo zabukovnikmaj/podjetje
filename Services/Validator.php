@@ -71,4 +71,19 @@ class Validator
         }
         return $errors;
     }
+
+    /**
+     * function for checking if price is positive and not bigger than 1000.00
+     *
+     * @param float $price
+     * @param array $errors
+     * @return array
+     */
+    public static function checkPrice(float $price, array $errors): array
+    {
+        if($price <= 0 || $price > 1000.00){
+            $errors[] = "Price is not in the correct format!";
+        }
+        return $errors;
+    }
 }
