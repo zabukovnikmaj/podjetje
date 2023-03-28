@@ -23,4 +23,21 @@ class Validator
 
         return $errors;
     }
+
+    /**
+     * function for checking if age is inside accaptable range
+     *
+     * @param int $age
+     * @param array $errors
+     * @return array
+     */
+    public static function checkAge(int $age, array $errors): array
+    {
+        if (!($age >= 15 && $age <= 65)) {
+            $errors[] = "Age needs to be between 15 and 65!";
+        }
+        return $errors;
+    }
+
+
 }
