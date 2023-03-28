@@ -60,10 +60,10 @@ class Validator
      */
     public static function checkEmail(string $email): bool
     {
-        if(!strpos($email, "@")){
+        if (!strpos($email, "@")) {
             return false;
         }
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ class Validator
      */
     public static function checkPrice(float $price): bool
     {
-        if($price <= 0 || $price > 1000.00){
+        if ($price <= 0 || $price > 1000.00) {
             return false;
         }
         return true;
@@ -105,8 +105,15 @@ class Validator
      * @param array $products
      * @return bool
      */
-    public static function checkProducts(array $products): bool{
+    public static function checkProducts(array $products): bool
+    {
         //TODO: add validator for checking if all of the entered products already exist
+        return true;
+    }
+
+    public static function checkBranchOffice(string $branchOffice): bool
+    {
+        //TODO: add validator for checking if entered branch office already exist
         return true;
     }
 }
