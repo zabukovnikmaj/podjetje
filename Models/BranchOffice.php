@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use InvalidArgumentException;
 use Services\Validator;
 
 class BranchOffice extends BaseModel
@@ -51,7 +52,7 @@ class BranchOffice extends BaseModel
         if (Validator::checkProducts($products)) {
             $this->products = $products;
         } else {
-            throw new InvalidArgumentException("Invalid title: $products");
+            throw new InvalidArgumentException("Invalid title: " . strval($products));
         }
     }
 }

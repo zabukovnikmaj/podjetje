@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use InvalidArgumentException;
 use Services\Validator;
 
 class Employees extends BaseModel
