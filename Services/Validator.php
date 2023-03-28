@@ -48,7 +48,7 @@ class Validator
      */
     public static function checkSex(string $sex): bool
     {
-        if (strtoupper($sex) != 'M' || strtoupper($sex) != "Ž") {
+        if (strtoupper($sex) != 'M' && strtoupper($sex) != "Ž") {
             return false;
         }
         return true;
