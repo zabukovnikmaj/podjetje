@@ -82,4 +82,20 @@ class Validator
         }
         return true;
     }
+
+    /**
+     * function for checking name's validity
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function checkNameValidity(string $name): bool
+    {
+        if (strlen($name) > 0 && strlen($name) < 30) {
+            $regex = '/^[a-zA-Z\- ]+$/';
+            return preg_match($regex, $name);
+        } else {
+            return false;
+        }
+    }
 }
