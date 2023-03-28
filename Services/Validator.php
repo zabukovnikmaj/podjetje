@@ -94,7 +94,7 @@ class Validator
     public static function checkGeneral(string $input): bool
     {
         if (strlen($input) > 0 && strlen($input) < 50) {
-            $regex = '/^[a-zA-Z\- ]+$/';
+            $regex = '/^[a-zA-Z0-9\- ]+$/';
             return preg_match($regex, $input);
         } else {
             return false;
