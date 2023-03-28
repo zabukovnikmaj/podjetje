@@ -28,62 +28,58 @@ class Validator
      * function for checking if age is inside accaptable range
      *
      * @param int $age
-     * @param array $errors
-     * @return array
+     * @return bool
      */
-    public static function checkAge(int $age, array $errors): array
+    public static function checkAge(int $age): bool
     {
         if (!($age >= 15 && $age <= 65)) {
-            $errors[] = "Age needs to be between 15 and 65!";
+            return false;
         }
-        return $errors;
+        return true;
     }
 
     /**
      * Validator for checking if entered sex was in valid format
      *
      * @param string $sex
-     * @param array $errors
-     * @return array
+     * @return bool
      */
-    public static function checkSex(string $sex, array $errors): array
+    public static function checkSex(string $sex): bool
     {
         if (strtoupper($sex) != 'M' || strtoupper($sex) != "Ž") {
-            $errors[] = "Sex can only be M or Ž!";
+            return false;
         }
-        return $errors;
+        return true;
     }
 
     /**
      * function for checking if email contains @ and if it doesn't contain any whitespaces
      *
      * @param string $email
-     * @param array $errors
-     * @return array
+     * @return bool
      */
-    public static function checkEmail(string $email, array $errors): array
+    public static function checkEmail(string $email): bool
     {
         if(!strpos($email, "@")){
-            $errors[] = "Email is not in the correct format!";
+            return false;
         }
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = "Invalid email format!";
+            return false;
         }
-        return $errors;
+        return true;
     }
 
     /**
-     * function for checking if price is positive and not bigger than 1000.00
+     * function for checking if price is positive and smaller then 1000
      *
      * @param float $price
-     * @param array $errors
-     * @return array
+     * @return bool
      */
-    public static function checkPrice(float $price, array $errors): array
+    public static function checkPrice(float $price): bool
     {
         if($price <= 0 || $price > 1000.00){
-            $errors[] = "Price is not in the correct format!";
+            return false;
         }
-        return $errors;
+        return true;
     }
 }
