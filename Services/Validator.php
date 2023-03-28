@@ -54,5 +54,21 @@ class Validator
         return $errors;
     }
 
-
+    /**
+     * function for checking if email contains @ and if it doesn't contain any whitespaces
+     *
+     * @param string $email
+     * @param array $errors
+     * @return array
+     */
+    public static function checkEmail(string $email, array $errors): array
+    {
+        if(!strpos($email, "@")){
+            $errors[] = "Email is not in the correct format!";
+        }
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $errors[] = "Invalid email format!";
+        }
+        return $errors;
+    }
 }
