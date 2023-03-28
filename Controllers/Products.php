@@ -42,10 +42,10 @@ class Products extends BaseController
         }
 
         $productsModes = new ProductsModel();
-        $productsModes->name = $_POST['name'];
-        $productsModes->date = $_POST['deliveryDate'];
-        $productsModes->price = floatval($_POST['price']);
-        $productsModes->description = $_POST['description'];
+        $productsModes->setName($_POST['name']);
+        $productsModes->setDate($_POST['deliveryDate']);
+        $productsModes->setPrice(floatval($_POST['price']));
+        $productsModes->setDescription($_POST['description']);
         $productsModes->savingData();
         header('Location: /');
     }

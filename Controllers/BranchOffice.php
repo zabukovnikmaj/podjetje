@@ -42,9 +42,9 @@ class BranchOffice extends BaseController
         }
 
         $branchOfficeModel = new BranchOfficeModels();
-        $branchOfficeModel->name = $_POST['name'];
-        $branchOfficeModel->address = $_POST['address'];
-        $branchOfficeModel->products = explode(', ', $_POST['products']);
+        $branchOfficeModel->setName($_POST['name']);
+        $branchOfficeModel->setAddress($_POST['address']);
+        $branchOfficeModel->setProducts(explode(', ', $_POST['products']));
         $branchOfficeModel->savingData();
         header('Location: /');
     }
