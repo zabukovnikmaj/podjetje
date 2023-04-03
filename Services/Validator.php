@@ -51,7 +51,7 @@ class Validator
         if (strtoupper($sex) != 'M' && strtoupper($sex) != "Ž") {
             return "Sex is not in correct format!";
         }
-        return true;
+        return "";
     }
 
     /**
@@ -65,7 +65,7 @@ class Validator
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return "Email is not in correct format!";
         }
-        return true;
+        return "";
     }
 
     /**
@@ -79,7 +79,7 @@ class Validator
         if ($price <= 0 || $price > 1000.00) {
             return "The price has to be a number between 0 and 1000!";
         }
-        return true;
+        return "";
     }
 
     /**
@@ -90,12 +90,7 @@ class Validator
      */
     public static function checkGeneral(string $input): string
     {
-        if (strlen($input) > 0 && strlen($input) < 50) {
-            $regex = '/^[a-zA-Z0-9\- ]+$/';
-            if(!preg_match($regex, $input)){
-                return "Input contains forbidden characters!";
-            }
-        } else {
+        if (!(strlen($input) > 0 && strlen($input) < 50)) {
             return "Input is too long!";
         }
         return "";
@@ -160,14 +155,10 @@ class Validator
     public static function checkBranchOffice(string $branchOffice): string
     {
         $data = Storage::loadElements("BranchOffice");
-        $foundMatches = [];
         foreach ($data as $element){
-            if (in_array($element['name'], $branchOffice)) {
-                $foundMatches[] = $element['name'];
+            if ($element['name'] === $branchOffice) {
+                return "";
             }
-        }
-        if(count($foundMatches) === count($branchOffice)){
-            return "";
         }
         return "One or more of the entered branch offices do not exists in database!";
     }

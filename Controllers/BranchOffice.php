@@ -34,7 +34,7 @@ class BranchOffice extends BaseController
     public function processData(): void
     {
         $err = Validator::required([], $_POST, 'name', 'address', 'products');
-        $err = $this->processData($err);
+        $err = $this->validateData($err);
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
                 'errors' => $err
@@ -45,7 +45,7 @@ class BranchOffice extends BaseController
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
         $branchOfficeModel->setAddress($_POST['address']);
-        $branchOfficeModel->setProducts(explode(', ', $_POST['products']));
+        $branchOfficeModel->setProducts($this->makeArray($_POST['products']));
         $branchOfficeModel->savingData();
         header('Location: /');
     }
@@ -60,8 +60,23 @@ class BranchOffice extends BaseController
     {
         $err[] = Validator::checkGeneral($_POST['name']);
         $err[] = Validator::checkGeneral($_POST['address']);
-        $err[] = Validator::checkProducts($_POST['products']);
-
+        $err[] = Validator::checkProducts($this->makeArray($_POST['products']));
         return $this->filterArray($err, "");
+    }
+
+    /**
+     * function for creating array from string
+     *
+     * @param string $products
+     * @return string[]
+     */
+    protected function makeArray(string $products): array
+    {
+        if (strpos($products, ',')) {
+            $productsArray = explode(", ", $products);
+        } else {
+            $productsArray = array($products);
+        }
+        return $productsArray;
     }
 }
