@@ -33,7 +33,8 @@ class BranchOffice extends BaseController
      */
     public function processData(): void
     {
-        $err = Validator::required($_POST, 'name', 'address', 'products');
+        $err = Validator::required([], $_POST, 'name', 'address', 'products');
+        $err = $this->processData($err);
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
                 'errors' => $err
@@ -47,5 +48,20 @@ class BranchOffice extends BaseController
         $branchOfficeModel->setProducts(explode(', ', $_POST['products']));
         $branchOfficeModel->savingData();
         header('Location: /');
+    }
+
+    /**
+     * function for checking validity of entered arguments
+     *
+     * @param array $err
+     * @return array
+     */
+    protected function validateData(array $err): array
+    {
+        $err[] = Validator::checkGeneral($_POST['name']);
+        $err[] = Validator::checkGeneral($_POST['address']);
+        $err[] = Validator::checkProducts($_POST['products']);
+
+        return $this->filterArray($err, "");
     }
 }

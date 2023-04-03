@@ -2,14 +2,11 @@
 
 namespace Models;
 
-use InvalidArgumentException;
-use Services\Validator;
-
 class BranchOffice extends BaseModel
 {
-    public string $name;
-    public string $address;
-    public array $products;
+    protected string $name;
+    protected string $address;
+    protected array $products;
 
     /**
      * setter for name
@@ -19,11 +16,7 @@ class BranchOffice extends BaseModel
      */
     public function setName(string $name): void
     {
-        if (Validator::checkGeneral($name)) {
-            $this->name = $name;
-        } else {
-            throw new InvalidArgumentException("Invalid title: $name");
-        }
+        $this->name = $name;
     }
 
     /**
@@ -34,11 +27,7 @@ class BranchOffice extends BaseModel
      */
     public function setAddress(string $address): void
     {
-        if (Validator::checkGeneral($address)) {
-            $this->address = $address;
-        } else {
-            throw new InvalidArgumentException("Invalid title: $address");
-        }
+        $this->address = $address;
     }
 
     /**
@@ -49,10 +38,6 @@ class BranchOffice extends BaseModel
      */
     public function setProducts(array $products): void
     {
-        if (Validator::checkProducts($products)) {
-            $this->products = $products;
-        } else {
-            throw new InvalidArgumentException("Invalid title: " . strval($products));
-        }
+        $this->products = $products;
     }
 }

@@ -2,15 +2,12 @@
 
 namespace Models;
 
-use InvalidArgumentException;
-use Services\Validator;
-
 class Products extends BaseModel
 {
-    public string $name;
-    public string $description;
-    public float $price;
-    public string $date;
+    protected string $name;
+    protected string $description;
+    protected float $price;
+    protected string $date;
 
     /**
      * setter for name
@@ -20,11 +17,7 @@ class Products extends BaseModel
      */
     public function setName(string $name): void
     {
-        if (Validator::checkGeneral($name)) {
-            $this->name = $name;
-        } else {
-            throw new InvalidArgumentException("Invalid name: $name");
-        }
+        $this->name = $name;
     }
 
     /**
@@ -35,11 +28,7 @@ class Products extends BaseModel
      */
     public function setDescription(string $description): void
     {
-        if (Validator::checkDescription($description)) {
             $this->description = $description;
-        } else {
-            throw new InvalidArgumentException("Invalid name: $description");
-        }
     }
 
     /**
@@ -50,11 +39,7 @@ class Products extends BaseModel
      */
     public function setPrice(float $price): void
     {
-        if (Validator::checkPrice($price)) {
-            $this->price = $price;
-        } else {
-            throw new InvalidArgumentException("Invalid name: $price");
-        }
+        $this->price = $price;
     }
 
     /**
@@ -65,10 +50,6 @@ class Products extends BaseModel
      */
     public function setDate(string $date): void
     {
-        if (Validator::checkDate($date)) {
-            $this->date = $date;
-        } else {
-            throw new InvalidArgumentException("Invalid name: $date");
-        }
+        $this->date = $date;
     }
 }
