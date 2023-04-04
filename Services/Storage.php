@@ -27,8 +27,8 @@ class Storage
      */
     public function addElement(string $tableName, Model $model): void
     {
-        $elements = $this->loadElements($tableName);
-        $elements[] = $model;
+        $elements = $this->loadStorage($tableName);
+        $elements["data"][$model->id] = $model;
 
         $this->saveElements($tableName, $elements);
     }
