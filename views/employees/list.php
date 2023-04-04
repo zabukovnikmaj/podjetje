@@ -34,7 +34,7 @@
         <?php endforeach; ?>
     <?php else: ?>
         <tr>
-            <td colspan="4">No faculties found!</td>
+            <td colspan="4">No employees found!</td>
         </tr>
     <?php endif; ?>
     </tbody>
