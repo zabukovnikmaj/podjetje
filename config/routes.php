@@ -30,5 +30,14 @@ return [
     ],
     '/products/list/' => [
         'GET' => [Products::class, 'list']
+    ],
+    '/branchOffice/delete' => [
+        'GET' => [BranchOffice::class, 'deleteItem']
+    ],
+    '/employees/delete' => [
+        'GET' => [Employees::class, 'deleteItem']
+    ],
+    '/products/delete' => [
+        'GET' => [Products::class, 'deleteItem']
     ]
 ];

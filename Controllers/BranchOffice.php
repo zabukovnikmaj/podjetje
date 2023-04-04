@@ -31,6 +31,7 @@ class BranchOffice extends BaseController
             'branchOffices' => $branchOffices
             ]);
     }
+
     /**
      * function for processing entered data and later saving it by using model
      *

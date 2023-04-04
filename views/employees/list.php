@@ -25,8 +25,8 @@
                 <td><?php echo $employee['sex']; ?></td>
                 <td><?php echo $employee['email']; ?></td>
                 <td>
-                    <a href="/faculty/edit?id=<?php echo $employee['uuid']; ?>">Edit</a>
-                    <a href="/faculty/delete?id=<?php echo $employee['uuid']; ?>"
+                    <a href="/employees/edit?id=<?php echo $employee['uuid']; ?>">Edit</a>
+                    <a href="/employees/delete?id=<?php echo $employee['uuid']; ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>

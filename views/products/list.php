@@ -21,8 +21,8 @@
                 <td><?php echo $product['price']; ?></td>
                 <td><?php echo $product['date']; ?></td>
                 <td>
-                    <a href="/faculty/edit?id=<?php echo $product['uuid']; ?>">Edit</a>
-                    <a href="/faculty/delete?id=<?php echo $product['uuid']; ?>"
+                    <a href="/products/edit?id=<?php echo $product['uuid']; ?>">Edit</a>
+                    <a href="/products/delete?id=<?php echo $product['uuid']; ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>

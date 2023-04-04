@@ -19,8 +19,8 @@
                 <td><?php echo $branchOffice['address']; ?></td>
                 <td><?php echo implode(', ', $branchOffice['products']);?></td>
                 <td>
-                    <a href="/faculty/edit?id=<?php echo $branchOffice['uuid']; ?>">Edit</a>
-                    <a href="/faculty/delete?id=<?php echo $branchOffice['uuid']; ?>"
+                    <a href="/branchOffice/edit?id=<?php echo $branchOffice['uuid']; ?>">Edit</a>
+                    <a href="/branchOffice/delete?id=<?php echo $branchOffice['uuid']; ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>
