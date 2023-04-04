@@ -47,6 +47,7 @@ class Products extends BaseController
         $productsModes->setDate($_POST['deliveryDate']);
         $productsModes->setPrice(floatval($_POST['price']));
         $productsModes->setDescription($_POST['description']);
+        $productsModes->setUuid();
         $productsModes->savingData();
         header('Location: /');
     }

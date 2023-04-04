@@ -48,6 +48,7 @@ class Employees extends BaseController
         $employeesModel->setAge(intval($_POST['age']));
         $employeesModel->setSex($_POST['sex']);
         $employeesModel->setEmail($_POST['email']);
+        $employeesModel->setUuid();
         $employeesModel->savingData();
         header('Location: /');
     }
