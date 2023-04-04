@@ -15,17 +15,27 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>primer imena pisarne</td>
-        <td>primer imena zaposlenega</td>
-        <td>primer pozicije</td>
-        <td>primer starosti</td>
-        <td>primer spola</td>
-        <td>primer emaila</td>
-        <td>
-            <a href="">Uredi</a>
-            <a href="">Izbriši</a>
-        </td>
-    </tr>
+    <?php if (count($employees) > 0): ?>
+        <?php foreach ($employees as $employee): ?>
+            <tr>
+                <td><?php echo $employee['branchOffice']; ?></td>
+                <td><?php echo $employee['name']; ?></td>
+                <td><?php echo $employee['position']; ?></td>
+                <td><?php echo $employee['age']; ?></td>
+                <td><?php echo $employee['sex']; ?></td>
+                <td><?php echo $employee['email']; ?></td>
+                <td>
+                    <a href="/faculty/edit?id=<?php echo $employee['uuid']; ?>">Edit</a>
+                    <a href="/faculty/delete?id=<?php echo $employee['uuid']; ?>"
+                       onclick="return confirm('Confirm?');"
+                    >Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">No faculties found!</td>
+        </tr>
+    <?php endif; ?>
     </tbody>
 </table>

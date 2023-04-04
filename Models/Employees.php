@@ -74,7 +74,7 @@ class Employees extends BaseModel
      */
     public function setSex(string $sex): void
     {
-        $this->sex = $sex;
+        $this->sex = strtolower($sex);
     }
 
     /**

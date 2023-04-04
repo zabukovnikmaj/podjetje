@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Employees as EmployeesModel;
+use Services\Storage;
 use Services\Validator as Validator;
 
 class Employees extends BaseController
@@ -23,7 +24,10 @@ class Employees extends BaseController
      */
     public function list(): void
     {
-        view('employees/list');
+        $emoployees = Storage::loadElements('Employees');;
+        view('employees/list', [
+            'employees' => $emoployees
+        ]);
     }
     /**
      * function for processing entered data and later saving it by using model
