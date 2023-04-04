@@ -41,12 +41,15 @@ return [
         'GET' => [Products::class, 'deleteItem']
     ],
     '/branchOffice/edit' => [
-        'GET' => [BranchOffice::class, 'displayEditItem']
+        'GET' => [BranchOffice::class, 'displayEditItem'],
+        'POST' => [BranchOffice::class, 'saveEditedData']
     ],
     '/employees/edit' => [
-        'GET' => [Employees::class, 'displayEditItem']
+        'GET' => [Employees::class, 'displayEditItem'],
+        'POST' => [Employees::class, 'saveEditedData']
     ],
     '/products/edit' => [
-        'GET' => [Products::class, 'displayEditItem']
+        'GET' => [Products::class, 'displayEditItem'],
+        'POST' => [Products::class, 'saveEditedData']
     ]
 ];
