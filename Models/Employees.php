@@ -4,12 +4,23 @@ namespace Models;
 
 class Employees extends BaseModel
 {
+    protected string $uuid;
     protected string $branchOffice;
     protected string $name;
     protected string $position;
     protected int $age;
     protected string $sex;
     protected string $email;
+
+    /**
+     * setter for uuid
+     *
+     * @return void
+     */
+    public function setUuid(): void
+    {
+        $this->uuid = $this->getUuid();
+    }
 
     /**
      * setter for branch office

@@ -2,6 +2,8 @@
 
 namespace Models;
 
+require_once __DIR__ . '/../Services/Functions.php';
+
 abstract class BaseModel
 {
     /**
@@ -21,5 +23,9 @@ abstract class BaseModel
 
         $data[] = $new_entry;
         file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    public function getUuid(): string{
+        return uuid();
     }
 }
