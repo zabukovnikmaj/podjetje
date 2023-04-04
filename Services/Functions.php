@@ -18,7 +18,7 @@ function base_path(string $path): string
  */
 function storage_path(string $path): string
 {
-    return base_path("storage/" . $path);
+    return base_path("data/" . $path);
 }
 
 /**

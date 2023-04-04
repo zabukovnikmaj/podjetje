@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Models\Products as ProductsModel;
-use Services\Validator;
+use Services\Validator as Validator;
 
 class Products extends BaseController
 {
@@ -33,7 +33,8 @@ class Products extends BaseController
      */
     public function processData(): void
     {
-        $err = Validator::required($_POST, 'name', 'description', 'price', 'deliveryDate');
+        $err = Validator::required([], $_POST, 'name', 'description', 'price', 'deliveryDate');
+        $err = $this->validateData($err);
         if (!empty($err)) {
             view('products/productForm', [
                 'errors' => $err
@@ -42,11 +43,27 @@ class Products extends BaseController
         }
 
         $productsModes = new ProductsModel();
-        $productsModes->name = $_POST['name'];
-        $productsModes->date = $_POST['deliveryDate'];
-        $productsModes->price = floatval($_POST['price']);
-        $productsModes->description = $_POST['description'];
+        $productsModes->setName($_POST['name']);
+        $productsModes->setDate($_POST['deliveryDate']);
+        $productsModes->setPrice(floatval($_POST['price']));
+        $productsModes->setDescription($_POST['description']);
         $productsModes->savingData();
         header('Location: /');
+    }
+
+    /**
+     * function for checking validity of entered arguments
+     *
+     * @param array $err
+     * @return array
+     */
+    protected function validateData(array $err): array
+    {
+        $err[] = Validator::checkGeneral($_POST['name']);
+        $err[] = Validator::checkDescription($_POST['description']);
+        $err[] = Validator::checkPrice(floatval($_POST['price']));
+        $err[] = Validator::checkDate($_POST['deliveryDate']);
+
+        return $this->filterArray($err, "");
     }
 }

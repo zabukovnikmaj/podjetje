@@ -39,7 +39,7 @@ class Storage
      * @param string $tableName
      * @return array
      */
-    private function loadElements(string $tableName): array
+    public static function loadElements(string $tableName): array
     {
         $filename = storage_path($tableName . ".json");
         if (!file_exists($filename)) {

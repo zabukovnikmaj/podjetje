@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Models\Employees as EmployeesModel;
-use Services\Validator;
+use Services\Validator as Validator;
 
 class Employees extends BaseController
 {
@@ -32,7 +32,8 @@ class Employees extends BaseController
      */
     public function processData(): void
     {
-        $err = Validator::required($_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
+        $err = Validator::required([], $_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
+        $err = $this->validateData($err);
         if (!empty($err)) {
             view('employees/employeesForm', [
                 'errors' => $err
@@ -41,13 +42,31 @@ class Employees extends BaseController
         }
 
         $employeesModel = new EmployeesModel();
-        $employeesModel->branchOffice = $_POST['branchOffice'];
-        $employeesModel->name = $_POST['name'];
-        $employeesModel->position = $_POST['position'];
-        $employeesModel->age = intval($_POST['age']);
-        $employeesModel->sex = $_POST['sex'];
-        $employeesModel->email = $_POST['email'];
+        $employeesModel->setBranchOffice($_POST['branchOffice']);
+        $employeesModel->setName($_POST['name']);
+        $employeesModel->setPosition($_POST['position']);
+        $employeesModel->setAge(intval($_POST['age']));
+        $employeesModel->setSex($_POST['sex']);
+        $employeesModel->setEmail($_POST['email']);
         $employeesModel->savingData();
         header('Location: /');
+    }
+
+    /**
+     * function for checking validity of entered arguments
+     *
+     * @param array $err
+     * @return array
+     */
+    protected function validateData(array $err): array
+    {
+        $err[] = Validator::checkBranchOffice($_POST['branchOffice']);
+        $err[] = Validator::checkGeneral($_POST['name']);
+        $err[] = Validator::checkGeneral($_POST['position']);
+        $err[] = Validator::checkAge(intval($_POST['age']));
+        $err[] = Validator::checkSex($_POST['sex']);
+        $err[] = Validator::checkEmail($_POST['email']);
+
+        return $this->filterArray($err, "");
     }
 }
