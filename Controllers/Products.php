@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Products as ProductsModel;
+use Services\Storage;
 use Services\Validator as Validator;
 
 class Products extends BaseController
@@ -23,7 +24,10 @@ class Products extends BaseController
      */
     public function list(): void
     {
-        view('products/list');
+        $products = Storage::loadElements('Products');
+        view('products/list', [
+            'products' => $products
+        ]);
     }
 
     /**
