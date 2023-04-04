@@ -40,4 +40,20 @@ abstract class BaseController
         Storage::saveElements($filename, $newData);
         header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
     }
+
+    /**
+     * general function for displaying data to edit
+     *
+     * @return void
+     */
+    public function displayEditItem(): void
+    {
+        $filename = substr(strrchr(get_class($this), "\\"), 1);
+        $existingData = Storage::loadElements($filename);
+
+        $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
+        view($filename . '/edit', [
+            'existingData' => $existingData
+        ]);
+    }
 }

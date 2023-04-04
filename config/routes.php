@@ -39,5 +39,14 @@ return [
     ],
     '/products/delete' => [
         'GET' => [Products::class, 'deleteItem']
+    ],
+    '/branchOffice/edit' => [
+        'GET' => [BranchOffice::class, 'displayEditItem']
+    ],
+    '/employees/edit' => [
+        'GET' => [Employees::class, 'displayEditItem']
+    ],
+    '/products/edit' => [
+        'GET' => [Products::class, 'displayEditItem']
     ]
 ];
