@@ -28,7 +28,7 @@ abstract class BaseController
      */
     public function deleteItem(): void
     {
-        $filename = substr(strrchr(get_class($this), "\\"), 1);
+        $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $newData = [];
 
@@ -49,7 +49,7 @@ abstract class BaseController
      */
     public function displayEditItem(): void
     {
-        $filename = substr(strrchr(get_class($this), "\\"), 1);
+        $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $filteredData = [];
 
@@ -78,7 +78,7 @@ abstract class BaseController
         $errors = Validator::required([], $_POST, 'name', 'address', 'products');
         $errors = $this->validateData($errors);
 
-        $filename = substr(strrchr(get_class($this), "\\"), 1);
+        $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
@@ -109,5 +109,10 @@ abstract class BaseController
         Storage::saveElements(substr(strrchr(get_class($this), "\\"), 1), $existingData);
 
         header('Location: /' . $filename . '/list/');
+    }
+
+    protected function getFilenameFromClass(): string
+    {
+        return substr(strrchr(get_class($this), "\\"), 1);
     }
 }
