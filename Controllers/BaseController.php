@@ -51,10 +51,18 @@ abstract class BaseController
     {
         $filename = substr(strrchr(get_class($this), "\\"), 1);
         $existingData = Storage::loadElements($filename);
+        $filteredData = [];
+
+        foreach ($existingData as $data){
+            if($data['uuid'] == $_GET['id']){
+                $filteredData = $data;
+                break;
+            }
+        }
 
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
         view($filename . '/edit', [
-            'existingData' => $existingData
+            'filteredData' => $filteredData
         ]);
     }
 
@@ -65,6 +73,8 @@ abstract class BaseController
      */
     public function saveEditedData(): void
     {
+        //TODO: fix validator for empty filieds in general
+        //TODO: fix bugs when saving edited data from products
         $errors = Validator::required([], $_POST, 'name', 'address', 'products');
         $errors = $this->validateData($errors);
 
@@ -86,7 +96,7 @@ abstract class BaseController
                     if(isset($_POST[$filed])){
                         if($filed === 'products'){
                             $existingData[$index][$filed] = $this->makeArray($_POST['products']);
-                        }else{
+                        } else{
                             $existingData[$index][$filed] = $_POST[$filed];
                         }
                     }
