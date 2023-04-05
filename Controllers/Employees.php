@@ -24,7 +24,7 @@ class Employees extends BaseController
      */
     public function list(): void
     {
-        $emoployees = Storage::loadElements('Employees');;
+        $emoployees = Storage::loadElements('Employees');
         view('employees/list', [
             'employees' => $emoployees
         ]);
