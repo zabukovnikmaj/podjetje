@@ -23,15 +23,15 @@
                 <input type="text" name="position" value="<?php echo $data['position']; ?>"> <br> <br>
 
                 <label for="age">Employee age<label><br>
-                        <input type="number" name="age" step="1" min="15" max="100" value="<?php echo $data['age']; ?>"><br><br>
+                <input type="number" name="age" step="1" min="15" max="100" value="<?php echo $data['age']; ?>"><br><br>
 
-                        <label for="sex">Employee sex</label><br>
-                        <input type="text" name="sex" value="<?php echo $data['sex']; ?>"> <br> <br>
+                <label for="sex">Employee sex</label><br>
+                <input type="text" name="sex" value="<?php echo $data['sex']; ?>"> <br> <br>
 
-                        <label for="email">Employee email</label><br>
-                        <input type="email" name="email" value="<?php echo $data['email']; ?>"> <br> <br>
+                <label for="email">Employee email</label><br>
+                <input type="email" name="email" value="<?php echo $data['email']; ?>"> <br> <br>
 
-                        <input type="submit" value="Save employee data"> <br> <br>
+                <input type="submit" value="Save employee data"> <br> <br>
             </form>
         <?php endif; ?>
     <?php endforeach; ?>

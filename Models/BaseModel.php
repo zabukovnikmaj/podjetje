@@ -31,7 +31,8 @@ abstract class BaseModel
      * @return string
      * @throws \Exception
      */
-    public function getUuid(): string{
+    public function getUuid(): string
+    {
         return uuid();
     }
 }
