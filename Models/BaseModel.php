@@ -2,8 +2,6 @@
 
 namespace Models;
 
-require_once __DIR__ . '/../Services/Functions.php';
-
 abstract class BaseModel
 {
     /**
