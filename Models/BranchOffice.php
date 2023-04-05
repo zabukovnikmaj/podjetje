@@ -2,11 +2,24 @@
 
 namespace Models;
 
+use Services\Storage;
+
 class BranchOffice extends BaseModel
 {
+    protected string $uuid;
     protected string $name;
     protected string $address;
     protected array $products;
+
+    /**
+     * setter for uuid
+     *
+     * @return void
+     */
+    public function setUuid(): void
+    {
+        $this->uuid = $this->getUuid();
+    }
 
     /**
      * setter for name

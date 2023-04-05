@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\BranchOffice as BranchOfficeModels;
 use Services\Validator;
+use Services\Storage;
 
 class BranchOffice extends BaseController
 {
@@ -24,8 +25,13 @@ class BranchOffice extends BaseController
      */
     public function list(): void
     {
-        view('branchOffice/list');
+        $branchOffices = Storage::loadElements('BranchOffice');
+
+        view('branchOffice/list', [
+            'branchOffices' => $branchOffices
+            ]);
     }
+
     /**
      * function for processing entered data and later saving it by using model
      *
@@ -37,15 +43,15 @@ class BranchOffice extends BaseController
         $err = $this->validateData($err);
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-                'errors' => $err
+                'err' => $err
             ]);
             return;
         }
-
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
         $branchOfficeModel->setAddress($_POST['address']);
         $branchOfficeModel->setProducts($this->makeArray($_POST['products']));
+        $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();
         header('Location: /');
     }

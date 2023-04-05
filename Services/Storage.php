@@ -27,8 +27,8 @@ class Storage
      */
     public function addElement(string $tableName, Model $model): void
     {
-        $elements = $this->loadElements($tableName);
-        $elements[] = $model;
+        $elements = $this->loadStorage($tableName);
+        $elements["data"][$model->id] = $model;
 
         $this->saveElements($tableName, $elements);
     }
@@ -57,9 +57,9 @@ class Storage
      * @param array $elements
      * @return void
      */
-    private function saveElements(string $tableName, array $elements): void
+    public static function saveElements(string $tableName, array $elements): void
     {
         $filename = storage_path($tableName . ".json");
-        file_put_contents($filename, json_encode($elements));
+        file_put_contents($filename, json_encode($elements, JSON_PRETTY_PRINT));
     }
 }

@@ -10,6 +10,8 @@ return [
     '/' => [
         'GET' => [Index::class, 'index']
     ],
+
+
     '/branchOffices/create/' =>[
         'GET' => [BranchOffice::class, 'showCreateForm'],
         'POST' => [BranchOffice::class, 'processData']
@@ -22,6 +24,8 @@ return [
         'GET' => [Employees::class, 'showCreateForm'],
         'POST' => [Employees::class, 'processData']
     ],
+
+
     '/employees/list/' => [
         'GET' => [Employees::class, 'list']
     ],
@@ -30,5 +34,30 @@ return [
     ],
     '/products/list/' => [
         'GET' => [Products::class, 'list']
+    ],
+
+
+    '/branchOffice/delete' => [
+        'GET' => [BranchOffice::class, 'deleteItem']
+    ],
+    '/employees/delete' => [
+        'GET' => [Employees::class, 'deleteItem']
+    ],
+    '/products/delete' => [
+        'GET' => [Products::class, 'deleteItem']
+    ],
+
+
+    '/branchOffice/edit' => [
+        'GET' => [BranchOffice::class, 'displayEditItem'],
+        'POST' => [BranchOffice::class, 'saveEditedData']
+    ],
+    '/employees/edit' => [
+        'GET' => [Employees::class, 'displayEditItem'],
+        'POST' => [Employees::class, 'saveEditedData']
+    ],
+    '/products/edit' => [
+        'GET' => [Products::class, 'displayEditItem'],
+        'POST' => [Products::class, 'saveEditedData']
     ]
 ];

@@ -22,4 +22,15 @@ abstract class BaseModel
         $data[] = $new_entry;
         file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
     }
+
+    /**
+     * method for generating uuid
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getUuid(): string
+    {
+        return uuid();
+    }
 }

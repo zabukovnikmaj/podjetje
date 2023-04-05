@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Products as ProductsModel;
+use Services\Storage;
 use Services\Validator as Validator;
 
 class Products extends BaseController
@@ -23,7 +24,10 @@ class Products extends BaseController
      */
     public function list(): void
     {
-        view('products/list');
+        $products = Storage::loadElements('Products');
+        view('products/list', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -37,7 +41,7 @@ class Products extends BaseController
         $err = $this->validateData($err);
         if (!empty($err)) {
             view('products/productForm', [
-                'errors' => $err
+                'err' => $err
             ]);
             return;
         }
@@ -47,6 +51,7 @@ class Products extends BaseController
         $productsModes->setDate($_POST['deliveryDate']);
         $productsModes->setPrice(floatval($_POST['price']));
         $productsModes->setDescription($_POST['description']);
+        $productsModes->setUuid();
         $productsModes->savingData();
         header('Location: /');
     }

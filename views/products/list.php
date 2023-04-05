@@ -13,15 +13,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>primer imena izdelka</td>
-        <td>primer opisa</td>
-        <td>primer cene</td>
-        <td>primer datuma dostave</td>
-        <td>
-            <a href="">Uredi</a>
-            <a href="">Izbriši</a>
-        </td>
-    </tr>
+    <?php if (count($products) > 0): ?>
+        <?php foreach ($products as $product): ?>
+            <tr>
+                <td><?php echo $product['name']; ?></td>
+                <td><?php echo $product['description']; ?></td>
+                <td><?php echo $product['price']; ?></td>
+                <td><?php echo $product['date']; ?></td>
+                <td>
+                    <a href="/products/edit?id=<?php echo $product['uuid']; ?>">Edit</a>
+                    <a href="/products/delete?id=<?php echo $product['uuid']; ?>"
+                       onclick="return confirm('Confirm?');"
+                    >Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">No products found!</td>
+        </tr>
+    <?php endif; ?>
     </tbody>
 </table>
