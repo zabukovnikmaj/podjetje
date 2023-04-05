@@ -53,8 +53,8 @@ abstract class BaseController
         $existingData = Storage::loadElements($filename);
         $filteredData = [];
 
-        foreach ($existingData as $data){
-            if($data['uuid'] == $_GET['id']){
+        foreach ($existingData as $data) {
+            if ($data['uuid'] == $_GET['id']) {
                 $filteredData = $data;
                 break;
             }
@@ -89,14 +89,29 @@ abstract class BaseController
             return;
         }
 
+        $existingData = $this->replaceExistingData($existingData);
+
+        Storage::saveElements($this->getFilenameFromClass(), $existingData);
+
+        header('Location: /' . $filename . '/list/');
+    }
+
+    /**
+     * function for finding data that will be changed and changing it
+     *
+     * @param array $existingData
+     * @return array
+     */
+    protected function replaceExistingData(array $existingData): array
+    {
         $index = 0;
-        foreach ($existingData as $data){
-            if($data['uuid'] === $_GET['id']){
-                foreach ($data as $filed => $element){
-                    if(isset($_POST[$filed])){
-                        if($filed === 'products'){
+        foreach ($existingData as $data) {
+            if ($data['uuid'] === $_GET['id']) {
+                foreach ($data as $filed => $element) {
+                    if (isset($_POST[$filed])) {
+                        if ($filed === 'products') {
                             $existingData[$index][$filed] = $this->makeArray($_POST['products']);
-                        } else{
+                        } else {
                             $existingData[$index][$filed] = $_POST[$filed];
                         }
                     }
@@ -105,12 +120,14 @@ abstract class BaseController
             }
             $index++;
         }
-
-        Storage::saveElements(substr(strrchr(get_class($this), "\\"), 1), $existingData);
-
-        header('Location: /' . $filename . '/list/');
+        return $existingData;
     }
 
+    /**
+     * function for getting file name from class name
+     *
+     * @return string
+     */
     protected function getFilenameFromClass(): string
     {
         return substr(strrchr(get_class($this), "\\"), 1);
