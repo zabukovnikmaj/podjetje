@@ -43,7 +43,7 @@ class BranchOffice extends BaseController
         $err = $this->validateData($err);
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-                'errors' => $err
+                'err' => $err
             ]);
             return;
         }

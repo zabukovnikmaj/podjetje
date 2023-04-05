@@ -40,7 +40,7 @@ class Employees extends BaseController
         $err = $this->validateData($err);
         if (!empty($err)) {
             view('employees/employeesForm', [
-                'errors' => $err
+                'err' => $err
             ]);
             return;
         }

@@ -6,15 +6,15 @@
 </head>
 <body>
 <h1>Enter information about an employee</h1>
-<?php if (!empty($errors)): ?>
-    <p>
-    <ul class="errors">
-        <?php foreach($errors as $field => $error): ?>
-            <li><?php echo $field; ?>: <?php echo $error; ?></li>
-        <?php endforeach; ?>
-    </ul>
-    </p>
-<?php endif; ?>
+
+<?php
+if(!isset($err)){
+    $err = [];
+}
+view('partials/errors', [
+    'err' => $err
+]); ?>
+
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
     <input type="text" name="branchOffice"> <br> <br>

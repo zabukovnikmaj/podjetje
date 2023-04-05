@@ -41,7 +41,7 @@ class Products extends BaseController
         $err = $this->validateData($err);
         if (!empty($err)) {
             view('products/productForm', [
-                'errors' => $err
+                'err' => $err
             ]);
             return;
         }
