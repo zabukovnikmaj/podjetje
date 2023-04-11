@@ -132,4 +132,21 @@ abstract class BaseController
     {
         return substr(strrchr(get_class($this), "\\"), 1);
     }
+
+    /**
+     * function for getting name of the item/branch office from uuid for nicer data displaying
+     *
+     * @param string $table
+     * @param string $uuid
+     * @return string
+     */
+    protected function getNameFromUuid(string $table, string $uuid): string{
+        $data = Storage::loadElements($table);
+        foreach ($data as $item){
+            if($item['uuid'] == $uuid){
+                return $item['name'];
+            }
+        }
+        return "error loading item's name";
+    }
 }
