@@ -48,7 +48,7 @@ class Validator
      */
     public static function checkSex(string $sex): string
     {
-        if (strtoupper($sex) != 'M' && strtoupper($sex) != "Ž") {
+        if (!(strtoupper($sex) == 'M' || strtoupper($sex) == "F")) {
             return "Sex is not in correct format!";
         }
         return "";
