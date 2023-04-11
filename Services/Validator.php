@@ -126,7 +126,7 @@ class Validator
     }
 
     /**
-     * function for checking if all of the entered products already exist
+     * function for checking if all the entered products already exist
      *
      * @param array $products
      * @return string
