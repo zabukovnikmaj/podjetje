@@ -24,9 +24,16 @@ class Employees extends BaseController
      */
     public function list(): void
     {
-        $emoployees = Storage::loadElements('Employees');
+        $employees = Storage::loadElements('Employees');
+
+        $employeesIndex = 0;
+        foreach ($employees as $employee){
+            $employees[$employeesIndex]['branchOffice'] = $this->getNameFromUuid('BranchOffice', $employee['branchOffice']);
+            $employeesIndex++;
+        }
+
         view('employees/list', [
-            'employees' => $emoployees
+            'employees' => $employees
         ]);
     }
     /**
