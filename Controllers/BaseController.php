@@ -144,6 +144,6 @@ abstract class BaseController
                 return $item['name'];
             }
         }
-        return "error loading item's name";
+        return '';
     }
 }
