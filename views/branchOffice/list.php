@@ -15,12 +15,12 @@
     <?php if (count($branchOffices) > 0): ?>
         <?php foreach ($branchOffices as $branchOffice): ?>
             <tr>
-                <td><?php echo $branchOffice['name']; ?></td>
-                <td><?php echo $branchOffice['address']; ?></td>
-                <td><?php echo implode(', ', $branchOffice['products']);?></td>
+                <td><?php echo htmlspecialchars($branchOffice['name']); ?></td>
+                <td><?php echo htmlspecialchars($branchOffice['address']); ?></td>
+                <td><?php echo htmlspecialchars(implode(', ', $branchOffice['products']));?></td>
                 <td>
-                    <a href="/branchOffice/edit?id=<?php echo $branchOffice['uuid']; ?>">Edit</a>
-                    <a href="/branchOffice/delete?id=<?php echo $branchOffice['uuid']; ?>"
+                    <a href="/branchOffice/edit?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>">Edit</a>
+                    <a href="/branchOffice/delete?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>

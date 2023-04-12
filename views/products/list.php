@@ -16,13 +16,13 @@
     <?php if (count($products) > 0): ?>
         <?php foreach ($products as $product): ?>
             <tr>
-                <td><?php echo $product['name']; ?></td>
-                <td><?php echo $product['description']; ?></td>
-                <td><?php echo $product['price']; ?></td>
-                <td><?php echo $product['date']; ?></td>
+                <td><?php echo htmlspecialchars($product['name']); ?></td>
+                <td><?php echo htmlspecialchars($product['description']); ?></td>
+                <td><?php echo htmlspecialchars($product['price']); ?></td>
+                <td><?php echo htmlspecialchars($product['date']); ?></td>
                 <td>
-                    <a href="/products/edit?id=<?php echo $product['uuid']; ?>">Edit</a>
-                    <a href="/products/delete?id=<?php echo $product['uuid']; ?>"
+                    <a href="/products/edit?id=<?php echo htmlspecialchars($product['uuid']); ?>">Edit</a>
+                    <a href="/products/delete?id=<?php echo htmlspecialchars($product['uuid']); ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>

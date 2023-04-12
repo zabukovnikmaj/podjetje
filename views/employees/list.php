@@ -18,15 +18,15 @@
     <?php if (count($employees) > 0): ?>
         <?php foreach ($employees as $employee): ?>
             <tr>
-                <td><?php echo $employee['branchOffice']; ?></td>
-                <td><?php echo $employee['name']; ?></td>
-                <td><?php echo $employee['position']; ?></td>
-                <td><?php echo $employee['age']; ?></td>
-                <td><?php echo $employee['sex']; ?></td>
-                <td><?php echo $employee['email']; ?></td>
+                <td><?php echo htmlspecialchars($employee['branchOffice']); ?></td>
+                <td><?php echo htmlspecialchars($employee['name']); ?></td>
+                <td><?php echo htmlspecialchars($employee['position']); ?></td>
+                <td><?php echo htmlspecialchars($employee['age']); ?></td>
+                <td><?php echo htmlspecialchars($employee['sex']); ?></td>
+                <td><?php echo htmlspecialchars($employee['email']); ?></td>
                 <td>
-                    <a href="/employees/edit?id=<?php echo $employee['uuid']; ?>">Edit</a>
-                    <a href="/employees/delete?id=<?php echo $employee['uuid']; ?>"
+                    <a href="/employees/edit?id=<?php echo htmlspecialchars($employee['uuid']); ?>">Edit</a>
+                    <a href="/employees/delete?id=<?php echo htmlspecialchars($employee['uuid']); ?>"
                        onclick="return confirm('Confirm?');"
                     >Delete</a>
                 </td>
