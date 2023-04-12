@@ -27,6 +27,16 @@ class BranchOffice extends BaseController
     {
         $branchOffices = Storage::loadElements('BranchOffice');
 
+        $officeIndex = 0;
+        foreach ($branchOffices as $branchOffice){
+            $productIndex = 0;
+            foreach ($branchOffice['products'] as $product){
+                $branchOffices[$officeIndex]['products'][$productIndex] = $this->getNameFromUuid('Products', $product);
+                $productIndex++;
+            }
+            $officeIndex++;
+        }
+
         view('branchOffice/list', [
             'branchOffices' => $branchOffices
             ]);

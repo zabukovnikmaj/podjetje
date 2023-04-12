@@ -48,7 +48,7 @@ class Validator
      */
     public static function checkSex(string $sex): string
     {
-        if (strtoupper($sex) != 'M' && strtoupper($sex) != "Ž") {
+        if (!(strtoupper($sex) === 'M' || strtoupper($sex) === "F")) {
             return "Sex is not in correct format!";
         }
         return "";
@@ -126,7 +126,7 @@ class Validator
     }
 
     /**
-     * function for checking if all of the entered products already exist
+     * function for checking if all the entered products already exist
      *
      * @param array $products
      * @return string
@@ -136,8 +136,8 @@ class Validator
         $data = Storage::loadElements("Products");
         $foundMatches = [];
         foreach ($data as $element){
-            if (in_array($element['name'], $products)) {
-                $foundMatches[] = $element['name'];
+            if (in_array($element['uuid'], $products)) {
+                $foundMatches[] = $element['uuid'];
             }
         }
         if(count($foundMatches) === count($products)){
@@ -156,7 +156,7 @@ class Validator
     {
         $data = Storage::loadElements("BranchOffice");
         foreach ($data as $element){
-            if ($element['name'] === $branchOffice) {
+            if ($element['uuid'] === $branchOffice) {
                 return "";
             }
         }

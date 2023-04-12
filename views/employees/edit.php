@@ -1,11 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
 <h1>Enter information about the employee</h1>
 <?php
-if(!isset($err)){
+if (!isset($err)) {
     $err = [];
 }
 view('partials/errors', [
     'err' => $err
-]); ?>
+]);
+?>
 
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
@@ -28,3 +36,4 @@ view('partials/errors', [
 
     <input type="submit" value="Save employee data"> <br> <br>
 </form>
+</body>
