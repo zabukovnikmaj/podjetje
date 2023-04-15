@@ -47,7 +47,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function displayEditItem(array $err = []): void
+    public function displayEditItem(): void
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
@@ -61,9 +61,9 @@ abstract class BaseController
         }
 
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
+
         view($filename . '/edit', [
             'filteredData' => $filteredData,
-            'err' => $err
         ]);
     }
 
@@ -81,7 +81,9 @@ abstract class BaseController
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         if (!empty($err)) {
-            $this->displayEditItem($err);
+            view($filename . '/edit', [
+                'err' => $err
+            ]);
             return;
         }
 

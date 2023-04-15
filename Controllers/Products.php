@@ -38,7 +38,10 @@ class Products extends BaseController
     public function processData(): void
     {
         $err = Validator::required([], $_POST, 'name', 'description', 'price', 'deliveryDate');
-        $err = $this->validateData($err);
+        if(empty($err)){
+            $err = $this->validateData($err);
+        }
+
         if (!empty($err)) {
             view('products/productForm', [
                 'err' => $err
@@ -64,10 +67,10 @@ class Products extends BaseController
      */
     protected function validateData(array $err): array
     {
-        $err[] = Validator::checkGeneral($_POST['name']);
-        $err[] = Validator::checkDescription($_POST['description']);
-        $err[] = Validator::checkPrice(floatval($_POST['price']));
-        $err[] = Validator::checkDate($_POST['deliveryDate']);
+        $err['name'] = Validator::checkGeneral($_POST['name']);
+        $err['description'] = Validator::checkDescription($_POST['description']);
+        $err['price'] = Validator::checkPrice(floatval($_POST['price']));
+        $err['deliveryDate'] = Validator::checkDate($_POST['deliveryDate']);
 
         return $this->filterArray($err, "");
     }

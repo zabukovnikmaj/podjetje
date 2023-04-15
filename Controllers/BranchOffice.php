@@ -50,7 +50,10 @@ class BranchOffice extends BaseController
     public function processData(): void
     {
         $err = Validator::required([], $_POST, 'name', 'address', 'products');
-        $err = $this->validateData($err);
+        if(empty($err)){
+            $err = $this->validateData($err);
+        }
+
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
                 'err' => $err
@@ -74,9 +77,9 @@ class BranchOffice extends BaseController
      */
     protected function validateData(array $err): array
     {
-        $err[] = Validator::checkGeneral($_POST['name']);
-        $err[] = Validator::checkGeneral($_POST['address']);
-        $err[] = Validator::checkProducts($this->makeArray($_POST['products']));
+        $err['name'] = Validator::checkGeneral($_POST['name']);
+        $err['address'] = Validator::checkGeneral($_POST['address']);
+        $err['products'] = Validator::checkProducts($this->makeArray($_POST['products']));
         return $this->filterArray($err, "");
     }
 

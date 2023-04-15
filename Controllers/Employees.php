@@ -44,7 +44,10 @@ class Employees extends BaseController
     public function processData(): void
     {
         $err = Validator::required([], $_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
-        $err = $this->validateData($err);
+        if(empty($err)){
+            $err = $this->validateData($err);
+        }
+
         if (!empty($err)) {
             view('employees/employeesForm', [
                 'err' => $err
@@ -72,12 +75,12 @@ class Employees extends BaseController
      */
     protected function validateData(array $err): array
     {
-        $err[] = Validator::checkBranchOffice($_POST['branchOffice']);
-        $err[] = Validator::checkGeneral($_POST['name']);
-        $err[] = Validator::checkGeneral($_POST['position']);
-        $err[] = Validator::checkAge(intval($_POST['age']));
-        $err[] = Validator::checkSex($_POST['sex']);
-        $err[] = Validator::checkEmail($_POST['email']);
+        $err['branchOffice'] = Validator::checkBranchOffice($_POST['branchOffice']);
+        $err['name'] = Validator::checkGeneral($_POST['name']);
+        $err['position'] = Validator::checkGeneral($_POST['position']);
+        $err['age'] = Validator::checkAge(intval($_POST['age']));
+        $err['sex'] = Validator::checkSex($_POST['sex']);
+        $err['email'] = Validator::checkEmail($_POST['email']);
 
         return $this->filterArray($err, "");
     }
