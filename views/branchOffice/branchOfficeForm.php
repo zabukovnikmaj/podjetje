@@ -9,20 +9,26 @@
 <?php
 if(!isset($err)){
     $err = [];
-}
-view('partials/errors', [
-    'err' => $err
-]); ?>
+} ?>
 
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
-    <input type="text" name="name"><br><br>
+    <input type="text" name="name"><br>
+    <?php view('partials/errors', [
+    'err' => $err['name']
+    ]); ?><br>
 
     <label for="address">Branch address</label><br>
-    <input type="text" name="address"><br><br>
+    <input type="text" name="address"><br>
+    <?php view('partials/errors', [
+        'err' => $err['address']
+    ]); ?><br>
 
     <label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"></textarea> <br> <br>
+    <textarea name="products" cols="50" rows="4"></textarea> <br>
+    <?php view('partials/errors', [
+        'err' => $err['products']
+    ]); ?><br>
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>
