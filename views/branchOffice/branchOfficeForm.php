@@ -16,13 +16,13 @@ view('partials/errors', [
 
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
-    <input type="text" name="name" value="<?php echo $formData['name'] ?? ''; ?>"><br><br>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"><br><br>
 
     <label for="address">Branch address</label><br>
-    <input type="text" name="address" value="<?php echo $formData['address'] ?? ''; ?>"><br><br>
+    <input type="text" name="address" value="<?php echo htmlspecialchars($formData['address']) ?? ''; ?>"><br><br>
 
     <label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"><?php echo $formData['products'] ?? '';?></textarea> <br> <br>
+    <textarea name="products" cols="50" rows="4"><?php echo htmlspecialchars($formData['products']) ?? '';?></textarea> <br> <br>
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>
