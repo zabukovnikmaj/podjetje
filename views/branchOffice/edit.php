@@ -16,7 +16,8 @@ view('partials/errors', [
 
     <label for="products">Products name</label><br>
     <?php view('partials/productsCheckbox', [
-        'products' => $products
+        'products' => $products,
+        'productsData' => $filteredData['products']
     ]); ?>
 
     <input type="submit" value="Save branch office data"> <br> <br>
