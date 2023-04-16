@@ -64,7 +64,9 @@ abstract class BaseController
 
         view($filename . '/edit', [
             'filteredData' => $filteredData,
-            'products' => Storage::loadElements('products')
+            'products' => Storage::loadElements('products'),
+            //TODO: already selected products should be selected when editing
+            'branchOffices' => Storage::loadElements('BranchOffice')
         ]);
     }
 
@@ -84,7 +86,8 @@ abstract class BaseController
         if (!empty($err)) {
             view($filename . '/edit', [
                 'err' => $err,
-                'products' => Storage::loadElements('products')
+                'products' => Storage::loadElements('products'),
+                'branchOffices' => Storage::loadElements('BranchOffice')
             ]);
             return;
         }

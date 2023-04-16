@@ -15,7 +15,9 @@ class Employees extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('employees/employeesForm');
+        view('employees/employeesForm', [
+            'branchOffices' => Storage::loadElements('BranchOffice')
+        ]);
     }
     /**
      * function for displaying existing data
@@ -50,7 +52,8 @@ class Employees extends BaseController
 
         if (!empty($err)) {
             view('employees/employeesForm', [
-                'err' => $err
+                'err' => $err,
+                'branchOffices' => Storage::loadElements('BranchOffice')
             ]);
             return;
         }
@@ -75,7 +78,6 @@ class Employees extends BaseController
      */
     protected function validateData(array $err): array
     {
-        $err['branchOffice'] = Validator::checkBranchOffice($_POST['branchOffice']);
         $err['name'] = Validator::checkGeneral($_POST['name']);
         $err['position'] = Validator::checkGeneral($_POST['position']);
         $err['age'] = Validator::checkAge(intval($_POST['age']));
