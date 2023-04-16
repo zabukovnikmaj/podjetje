@@ -22,7 +22,11 @@ view('partials/errors', [
     <input type="text" name="address"><br><br>
 
     <label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"></textarea> <br> <br>
+    <?php view('partials/productsCheckbox', [
+            'products' => $products
+]); ?>
+    <!--<label for="products">Products name</label><br>
+    <textarea name="products" cols="50" rows="4"></textarea> <br> <br>-->
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>
