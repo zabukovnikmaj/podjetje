@@ -15,8 +15,9 @@ view('partials/errors', [
     <input type="text" name="address" value="<?php echo htmlspecialchars($filteredData['address']); ?>"><br><br>
 
     <label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"><?php echo htmlspecialchars(implode(', ', $filteredData['products'])); ?></textarea> <br>
-    <br>
+    <?php view('partials/productsCheckbox', [
+        'products' => $products
+    ]); ?>
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>

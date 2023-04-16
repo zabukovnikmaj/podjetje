@@ -25,8 +25,6 @@ view('partials/errors', [
     <?php view('partials/productsCheckbox', [
             'products' => $products
 ]); ?>
-    <!--<label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"></textarea> <br> <br>-->
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>

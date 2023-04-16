@@ -58,14 +58,16 @@ class BranchOffice extends BaseController
 
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-                'err' => $err
+                'err' => $err,
+                'products' => Storage::loadElements('products')
             ]);
             return;
         }
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
         $branchOfficeModel->setAddress($_POST['address']);
-        $branchOfficeModel->setProducts($this->makeArray($_POST['products']));
+        var_dump($_POST['products']);
+        $branchOfficeModel->setProducts($_POST['products']);
         $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();
         header('Location: /');
@@ -81,7 +83,6 @@ class BranchOffice extends BaseController
     {
         $err['name'] = Validator::checkGeneral($_POST['name']);
         $err['address'] = Validator::checkGeneral($_POST['address']);
-        $err['products'] = Validator::checkProducts($this->makeArray($_POST['products']));
         return $this->filterArray($err, "");
     }
 
