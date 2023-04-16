@@ -8,7 +8,7 @@ if(isset($products) && !empty($products)):
         <label>
             <input type="checkbox" name="products[]" value="<?php echo htmlspecialchars($product['uuid']) ?>"
                 <?php echo (in_array($product['uuid'], $productsData) ? 'checked' : ''); ?>>
-            <?php echo htmlspecialchars($product['name'])  ?>
+                <?php echo htmlspecialchars($product['name'])  ?>
         </label><br>
 
     <?php
