@@ -15,6 +15,8 @@ view('partials/errors', [
     'err' => $err
 ]); ?>
 
+<a href="/products/list/">Back</a>
+
 <form action="" method="POST">
     <label for="name">Product name</label><br>
     <input type="text" name="name"> <br> <br>
