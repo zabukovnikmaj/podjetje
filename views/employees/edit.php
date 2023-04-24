@@ -28,7 +28,7 @@ view('partials/errors', [
     <label for="age">Employee age</label><br>
     <input type="number" name="age" step="1" min="15" max="100" value="<?php echo htmlspecialchars($filteredData['age']); ?>"><br><br>
 
-    <label for="sex">Employee sex</label><br>
+    <label for="sex">Employee sex (m/f)</label><br>
     <input type="text" name="sex" value="<?php echo htmlspecialchars($filteredData['sex']); ?>"> <br> <br>
 
     <label for="email">Employee email</label><br>
