@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use Exception;
+
 abstract class BaseModel
 {
     /**
@@ -27,7 +29,7 @@ abstract class BaseModel
      * method for generating uuid
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getUuid(): string
     {
