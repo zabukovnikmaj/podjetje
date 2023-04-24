@@ -15,7 +15,9 @@ class BranchOffice extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('branchOffice/branchOfficeForm');
+        view('branchOffice/edit', [
+            'filteredData' => null
+        ]);
     }
 
     /**

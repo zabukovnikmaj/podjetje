@@ -50,7 +50,7 @@ return [
 
     '/branchOffice/edit' => [
         'GET' => [BranchOffice::class, 'displayEditItem'],
-        'POST' => [BranchOffice::class, 'saveEditedData']
+        'PUT' => [BranchOffice::class, 'saveEditedData']
     ],
     '/employees/edit' => [
         'GET' => [Employees::class, 'displayEditItem'],

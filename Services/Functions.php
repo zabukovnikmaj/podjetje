@@ -70,3 +70,18 @@ function old(string $name, ?string $default = null): string
 
     return htmlspecialchars((string)$default);
 }
+
+/**
+ * Method is used to render request method field in form
+ *
+ * @param string $method
+ * @param $var
+ * @return string
+ */
+function request_method(string $method, $var): string
+{
+    if (!empty($var)) {
+        return '<input type="hidden" name="_method" value="' . $method . '">';
+    }
+    return '';
+}
