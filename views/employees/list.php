@@ -26,9 +26,11 @@
                 <td><?php echo htmlspecialchars($employee['email']); ?></td>
                 <td>
                     <a href="/employees/edit?id=<?php echo htmlspecialchars($employee['uuid']); ?>">Edit</a>
-                    <a href="/employees/delete?id=<?php echo htmlspecialchars($employee['uuid']); ?>"
-                       onclick="return confirm('Confirm?');"
-                    >Delete</a>
+
+                    <form action="/employees/delete?id=<?php echo htmlspecialchars($employee['uuid']); ?>" method="POST">
+                        <?php echo request_method('DELETE', $employee); ?>
+                        <button type="submit" onclick="return confirm('Confirm?');">Delete</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

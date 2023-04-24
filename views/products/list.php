@@ -22,9 +22,10 @@
                 <td><?php echo htmlspecialchars($product['date']); ?></td>
                 <td>
                     <a href="/products/edit?id=<?php echo htmlspecialchars($product['uuid']); ?>">Edit</a>
-                    <a href="/products/delete?id=<?php echo htmlspecialchars($product['uuid']); ?>"
-                       onclick="return confirm('Confirm?');"
-                    >Delete</a>
+                    <form action="/products/delete?id=<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
+                        <?php echo request_method('DELETE', $product); ?>
+                        <button type="submit" onclick="return confirm('Confirm?');">Delete</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

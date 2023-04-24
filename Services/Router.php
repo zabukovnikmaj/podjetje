@@ -26,8 +26,8 @@ class Router
      */
     public function handle(): void
     {
-        if (isset($_POST['_method']) && $_POST['_method'] === 'PUT') {
-            $_SERVER['REQUEST_METHOD'] = 'PUT';
+        if (isset($_POST['_method'])) {
+            $_SERVER['REQUEST_METHOD'] = $_POST['_method'];
         }
 
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
