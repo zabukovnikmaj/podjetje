@@ -15,7 +15,9 @@ class Products extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('products/productForm');
+        view('products/edit', [
+            'filteredData' => null
+        ]);
     }
     /**
      * function for displaying existing data

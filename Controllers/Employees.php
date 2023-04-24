@@ -15,7 +15,9 @@ class Employees extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('employees/employeesForm');
+        view('employees/edit', [
+            'filteredData' => null
+        ]);
     }
     /**
      * function for displaying existing data
