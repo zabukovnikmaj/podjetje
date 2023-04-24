@@ -38,13 +38,13 @@ return [
 
 
     '/branchOffice/delete' => [
-        'GET' => [BranchOffice::class, 'deleteItem']
+        'DELETE' => [BranchOffice::class, 'deleteItem']
     ],
     '/employees/delete' => [
-        'GET' => [Employees::class, 'deleteItem']
+        'DELETE' => [Employees::class, 'deleteItem']
     ],
     '/products/delete' => [
-        'GET' => [Products::class, 'deleteItem']
+        'DELETE' => [Products::class, 'deleteItem']
     ],
 
 
