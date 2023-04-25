@@ -56,12 +56,12 @@ class Employees extends BaseController
         }
 
         $employeesModel = new EmployeesModel();
-        $employeesModel->setBranchOffice($_POST['branchOffice']);
-        $employeesModel->setName($_POST['name']);
-        $employeesModel->setPosition($_POST['position']);
-        $employeesModel->setAge(intval($_POST['age']));
-        $employeesModel->setSex($_POST['sex']);
-        $employeesModel->setEmail($_POST['email']);
+        $employeesModel->setBranchOffice(htmlspecialchars($_POST['branchOffice']));
+        $employeesModel->setName(htmlspecialchars($_POST['name']));
+        $employeesModel->setPosition(htmlspecialchars($_POST['position']));
+        $employeesModel->setAge(htmlspecialchars(intval($_POST['age'])));
+        $employeesModel->setSex(htmlspecialchars($_POST['sex']));
+        $employeesModel->setEmail(htmlspecialchars($_POST['email']));
         $employeesModel->setUuid();
         $employeesModel->savingData();
         header('Location: /');

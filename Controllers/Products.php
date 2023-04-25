@@ -50,10 +50,10 @@ class Products extends BaseController
         }
 
         $productsModes = new ProductsModel();
-        $productsModes->setName($_POST['name']);
-        $productsModes->setDate($_POST['deliveryDate']);
-        $productsModes->setPrice(floatval($_POST['price']));
-        $productsModes->setDescription($_POST['description']);
+        $productsModes->setName(htmlspecialchars($_POST['name']));
+        $productsModes->setDate(htmlspecialchars($_POST['deliveryDate']));
+        $productsModes->setPrice(floatval(htmlspecialchars($_POST['price'])));
+        $productsModes->setDescription(htmlspecialchars($_POST['description']));
         $productsModes->setUuid();
         $productsModes->savingData();
         header('Location: /');
