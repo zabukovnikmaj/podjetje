@@ -13,7 +13,8 @@ abstract class BaseModel
      */
     public function savingData(): void
     {
-        $directory = __DIR__ . '/../data/' . basename(get_class($this)) . '.json';
+        $className = str_replace('\\', '/', get_class($this));
+        $directory = __DIR__ . '/../data/' . basename($className) . '.json';
         $data = json_decode(file_get_contents($directory), true);
         $new_entry = [];
 
