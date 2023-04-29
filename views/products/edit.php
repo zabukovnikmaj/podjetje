@@ -1,26 +1,56 @@
-<?php view('partials/navBar' , []); ?>
-<h1>Enter information about the products</h1>
+<!DOCTYPE html>
+<html lang="en" class="bootstrap">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 70px; /* Add top padding to accommodate the fixed navbar */
+        }
+    </style>
+</head>
+<body>
+<?php view('partials/navBar', []); ?>
 
-<?php
-if(!isset($err)){
-    $err = [];
-}
-view('partials/errors', [
-    'err' => $err
-]); ?>
+<div class="container">
+    <h1>Enter information about the products</h1>
 
-<form action="" method="POST">
-    <label for="name">Product name</label><br>
-    <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"> <br> <br>
+    <?php
+    if (!isset($err)) {
+        $err = [];
+    }
+    view('partials/errors', [
+        'err' => $err
+    ]);
+    ?>
 
-    <label for="description">Product description</label><br>
-    <textarea name="description" cols="50" rows="4"><?php echo htmlspecialchars($filteredData['description']); ?></textarea> <br><br>
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="name">Product name</label>
+            <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($filteredData['name']); ?>">
+        </div>
 
-    <label for="price">Product price</label><br>
-    <input type="number" name="price" step="0.01" min="0" max="10000" value="<?php echo htmlspecialchars($filteredData['price']); ?>"><br><br>
+        <div class="form-group">
+            <label for="description">Product description</label>
+            <textarea name="description" cols="50" rows="4" class="form-control"><?php echo htmlspecialchars($filteredData['description']); ?></textarea>
+        </div>
 
-    <label for="deliveryDate">Product delivery date</label><br>
-    <input type="date" name="deliveryDate" value="<?php echo htmlspecialchars($filteredData['date']); ?>"><br><br>
+        <div class="form-group">
+            <label for="price">Product price</label>
+            <input type="number" name="price" step="0.01" min="0" max="10000" class="form-control" value="<?php echo htmlspecialchars($filteredData['price']); ?>">
+        </div>
 
-    <input type="submit" value="Save product data"> <br> <br>
-</form>
+        <div class="form-group">
+            <label for="deliveryDate">Product delivery date</label>
+            <input type="date" name="deliveryDate" class="form-control" value="<?php echo htmlspecialchars($filteredData['date']); ?>">
+        </div>
+
+        <input type="submit" value="Save product data" class="btn btn-primary">
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
