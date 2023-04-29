@@ -1,3 +1,4 @@
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about the products</h1>
 
 <?php

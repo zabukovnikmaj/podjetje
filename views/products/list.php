@@ -1,3 +1,4 @@
+<?php view('partials/navBar' , []); ?>
 <p>
     <a href="/products/create/">New product</a>
 </p>

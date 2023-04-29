@@ -1,3 +1,4 @@
+<?php view('partials/navBar' , []); ?>
 <p>
     <a href="/employees/create/">New employee</a>
 </p>

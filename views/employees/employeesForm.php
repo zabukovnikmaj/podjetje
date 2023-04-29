@@ -5,6 +5,7 @@
     <title>Employees</title>
 </head>
 <body>
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about an employee</h1>
 
 <?php

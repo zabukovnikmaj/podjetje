@@ -5,6 +5,7 @@
     <title>Product</title>
 </head>
 <body>
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about a product</h1>
 
 <?php

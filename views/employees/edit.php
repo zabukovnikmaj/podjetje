@@ -5,6 +5,7 @@
     <title>Edit</title>
 </head>
 <body>
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about the employee</h1>
 <?php
 if (!isset($err)) {

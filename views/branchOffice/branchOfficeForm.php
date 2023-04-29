@@ -4,6 +4,7 @@
     <title>Branch office</title>
 </head>
 <body>
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about the branch office</h1>
 
 <?php

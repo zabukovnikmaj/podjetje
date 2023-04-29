@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+<?php view('partials/navBar' , []); ?>
 <div class="container">
     <h1>Company</h1>
     <a class="btn btn-primary" href="/branchOffice/list/">List branch offices</a>

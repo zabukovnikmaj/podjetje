@@ -1,3 +1,4 @@
+<?php view('partials/navBar' , []); ?>
 <p>
     <a href="/branchOffices/create/">New branch office</a>
 </p>

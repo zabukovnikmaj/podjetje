@@ -1,3 +1,4 @@
+<?php view('partials/navBar' , []); ?>
 <h1>Enter information about the branch office</h1>
 <?php
 if(!isset($err)){
