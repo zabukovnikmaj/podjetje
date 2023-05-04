@@ -15,15 +15,17 @@ view('partials/errors', [
     'err' => $err
 ]); ?>
 
+<a href="/employees/list/">Back</a>
+
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
-    <input type="text" name="branchOffice"> <br> <br>
+    <input type="text" name="branchOffice" value="<?php echo htmlspecialchars($formData['branchOffice']) ?? ''; ?>"> <br> <br>
 
     <label for="name">Employee name</label><br>
-    <input type="text" name="name"> <br> <br>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"> <br> <br>
 
     <label for="position">Employee position</label><br>
-    <input type="text" name="position"> <br> <br>
+    <input type="text" name="position" value="<?php echo htmlspecialchars($formData['position']) ?? ''; ?>"> <br> <br>
 
     <label for="age">Employee age</label><br>
     <input type="number" name="age" step="1" min="15" max="100"><br><br>
@@ -35,7 +37,7 @@ view('partials/errors', [
     <label for="female">Female</label><br><br>
 
     <label for="email">Employee email</label><br>
-    <input type="email" name="email"> <br> <br>
+    <input type="email" name="email" value="<?php echo htmlspecialchars($formData['email']) ?? ''; ?>"> <br> <br>
 
     <input type="submit" value="Save employee data"> <br> <br>
 </form>

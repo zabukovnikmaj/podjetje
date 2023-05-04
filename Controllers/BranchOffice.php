@@ -56,13 +56,14 @@ class BranchOffice extends BaseController
 
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-                'err' => $err
+                'err' => $err,
+                'formData' => $_POST
             ]);
             return;
         }
         $branchOfficeModel = new BranchOfficeModels();
-        $branchOfficeModel->setName($_POST['name']);
-        $branchOfficeModel->setAddress($_POST['address']);
+        $branchOfficeModel->setName(htmlspecialchars($_POST['name']));
+        $branchOfficeModel->setAddress(htmlspecialchars($_POST['address']));
         $branchOfficeModel->setProducts($this->makeArray($_POST['products']));
         $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();

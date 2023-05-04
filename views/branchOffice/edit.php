@@ -7,6 +7,8 @@ view('partials/errors', [
     'err' => $err
 ]); ?>
 
+<a href="/branchOffice/list/">Back</a>
+
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
     <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"><br><br>
@@ -15,8 +17,7 @@ view('partials/errors', [
     <input type="text" name="address" value="<?php echo htmlspecialchars($filteredData['address']); ?>"><br><br>
 
     <label for="products">Products name</label><br>
-    <textarea name="products" cols="50" rows="4"><?php echo htmlspecialchars(implode(', ', $filteredData['products'])); ?></textarea> <br>
-    <br>
+    <textarea name="products" cols="50" rows="4"><?php echo htmlspecialchars(implode(', ', $filteredData['products'])); ?></textarea> <br><br>
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>

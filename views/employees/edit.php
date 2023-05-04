@@ -15,6 +15,8 @@ view('partials/errors', [
 ]);
 ?>
 
+<a href="/employees/list/">Back</a>
+
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
     <input type="text" name="branchOffice" value="<?php echo htmlspecialchars($filteredData['branchOffice']); ?>"> <br> <br>

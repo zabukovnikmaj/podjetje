@@ -2,6 +2,8 @@
     <a href="/employees/create/">New employee</a>
 </p>
 
+<a href="/">Back</a>
+
 <table>
     <thead>
     <tr>
