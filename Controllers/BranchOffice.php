@@ -60,6 +60,7 @@ class BranchOffice extends BaseController
             view('branchOffice/branchOfficeForm', [
                 'err' => $err,
                 'products' => Storage::loadElements('products')
+                'formData' => $_POST
             ]);
             return;
         }

@@ -11,6 +11,8 @@ spl_autoload_register(function ($class) {
     require_once __DIR__ . '/../' . str_replace("\\", "/", $class) . '.php';
 });
 
+createDirectory(base_path('data'));
+
 // Router should handle request
 $router = new Router();
 $router->loadConfig();

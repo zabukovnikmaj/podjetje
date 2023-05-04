@@ -2,6 +2,8 @@
     <a href="/branchOffices/create/">New branch office</a>
 </p>
 
+<a href="/">Back</a>
+
 <table>
     <thead>
     <tr>

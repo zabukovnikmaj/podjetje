@@ -2,6 +2,8 @@
     <a href="/employees/create/">New employee</a>
 </p>
 
+<a href="/">Back</a>
+
 <table>
     <thead>
     <tr>
@@ -18,7 +20,7 @@
     <?php if (count($employees) > 0): ?>
         <?php foreach ($employees as $employee): ?>
             <tr>
-                <td><?php echo htmlspecialchars($employee['branchOffice']); ?></td>
+                <td><?php echo $employee['branchOffice'] == null ?  'This branch office does not exist!': htmlspecialchars($employee['branchOffice']); ?></td>
                 <td><?php echo htmlspecialchars($employee['name']); ?></td>
                 <td><?php echo htmlspecialchars($employee['position']); ?></td>
                 <td><?php echo htmlspecialchars($employee['age']); ?></td>

@@ -36,6 +36,19 @@ function view(string $path, array $attributes = []): void
 }
 
 /**
+ * function for creating  directory if it does not exist yet
+ *
+ * @param string $name
+ * @return void
+ */
+function createDirectory(string $path): void
+{
+    if (!is_dir($path)) {
+        mkdir($path, 0777, true);
+    }
+}
+
+/**
  * Method generates unique UUID
  *
  * @return string

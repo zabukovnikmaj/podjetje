@@ -14,14 +14,17 @@ view('partials/errors', [
     'err' => $err
 ]); ?>
 
+<a href="/branchOffice/list/">Back</a>
+
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
-    <input type="text" name="name"><br><br>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"><br><br>
 
     <label for="address">Branch address</label><br>
-    <input type="text" name="address"><br><br>
+    <input type="text" name="address" value="<?php echo htmlspecialchars($formData['address']) ?? ''; ?>"><br><br>
 
     <label for="products">Products name</label><br>
+    
     <?php view('partials/productsCheckbox', [
             'products' => $products
 ]); ?>
