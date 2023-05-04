@@ -82,7 +82,8 @@ abstract class BaseController
 
         if (!empty($err)) {
             view($filename . '/edit', [
-                'err' => $err
+                'err' => $err,
+                'filteredData' => $_POST
             ]);
             return;
         }

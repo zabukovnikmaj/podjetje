@@ -50,7 +50,8 @@ class Employees extends BaseController
 
         if (!empty($err)) {
             view('employees/employeesForm', [
-                'err' => $err
+                'err' => $err,
+                'formData' => $_POST
             ]);
             return;
         }

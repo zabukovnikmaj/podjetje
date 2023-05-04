@@ -56,7 +56,8 @@ class BranchOffice extends BaseController
 
         if (!empty($err)) {
             view('branchOffice/branchOfficeForm', [
-                'err' => $err
+                'err' => $err,
+                'formData' => $_POST
             ]);
             return;
         }
