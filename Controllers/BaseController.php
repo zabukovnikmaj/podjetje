@@ -60,6 +60,11 @@ abstract class BaseController
             }
         }
 
+        if($filteredData === []){
+            http_response_code(404);
+            die("404 Not Found");
+        }
+
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         view($filename . '/edit', [
