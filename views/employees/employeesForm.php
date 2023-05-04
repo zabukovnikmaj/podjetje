@@ -8,7 +8,7 @@
 <h1>Enter information about an employee</h1>
 
 <?php
-if(!isset($err)){
+if (!isset($err)) {
     $err = [];
 }
 view('partials/errors', [
@@ -27,11 +27,14 @@ view('partials/errors', [
     <label for="position">Employee position</label><br>
     <input type="text" name="position" value="<?php echo htmlspecialchars($formData['position']) ?? ''; ?>"> <br> <br>
 
-    <label for="age">Employee age<label><br>
-    <input type="number" name="age" step="1" min="15" max="100" value="<?php echo htmlspecialchars($formData['age']) ?? ''; ?>"><br><br>
+    <label for="age">Employee age</label><br>
+    <input type="number" name="age" step="1" min="15" max="100"><br><br>
 
-    <label for="sex">Employee sex</label><br>
-    <input type="text" name="sex" value="<?php echo htmlspecialchars($formData['sex']) ?? ''; ?>"> <br> <br>
+    <label>Employee sex:</label><br>
+    <input type="radio" name="sex" value="m" <?php if ($filteredData['sex'] === 'm') echo 'checked'; ?>>
+    <label for="male">Male</label><br>
+    <input type="radio" name="sex" value="f" <?php if ($filteredData['sex'] === 'f') echo 'checked'; ?>>
+    <label for="female">Female</label><br><br>
 
     <label for="email">Employee email</label><br>
     <input type="email" name="email" value="<?php echo htmlspecialchars($formData['email']) ?? ''; ?>"> <br> <br>
