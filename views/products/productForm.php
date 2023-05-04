@@ -10,15 +10,36 @@
 <?php
 if (!isset($err)) {
     $err = [];
-}
-view('partials/errors', [
-    'err' => $err
-]); ?>
+} ?>
 
 <a href="/products/list/">Back</a>
 
 <form action="" method="POST">
     <label for="name">Product name</label><br>
+
+    <input type="text" name="name"> <br>
+    <?php view('partials/errors', [
+        'err' => $err['name']
+    ]); ?><br>
+
+    <label for="description">Product description</label><br>
+    <textarea name="description" cols="50" rows="4"></textarea> <br>
+    <?php view('partials/errors', [
+        'err' => $err['description']
+    ]); ?><br>
+
+    <label for="price">Product price</label><br>
+    <input type="number" name="price" step="0.01" min="0" max="10000"><br>
+    <?php view('partials/errors', [
+        'err' => $err['price']
+    ]); ?><br>
+
+    <label for="deliveryDate">Product delivery date</label><br>
+    <input type="date" name="deliveryDate"><br>
+    <?php view('partials/errors', [
+        'err' => $err['deliveryDate']
+    ]); ?><br>
+
     <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"> <br> <br>
 
     <label for="description">Product description</label><br>
