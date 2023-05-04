@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use Exception;
+
 abstract class BaseModel
 {
     /**
@@ -11,7 +13,8 @@ abstract class BaseModel
      */
     public function savingData(): void
     {
-        $directory = __DIR__ . '/../data/' . basename(get_class($this)) . '.json';
+        $className = str_replace('\\', '/', get_class($this));
+        $directory = __DIR__ . '/../data/' . basename($className) . '.json';
         $data = json_decode(file_get_contents($directory), true);
         $new_entry = [];
 
@@ -27,7 +30,7 @@ abstract class BaseModel
      * method for generating uuid
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getUuid(): string
     {

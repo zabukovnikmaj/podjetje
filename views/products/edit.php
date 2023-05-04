@@ -5,6 +5,8 @@ if(!isset($err)){
     $err = [];
 } ?>
 
+<a href="/products/list/">Back</a>
+
 <form action="" method="POST">
     <label for="name">Product name</label><br>
     <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"> <br>

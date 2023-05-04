@@ -2,6 +2,8 @@
     <a href="/products/create/">New product</a>
 </p>
 
+<a href="/">Back</a>
+
 <table>
     <thead>
     <tr>
