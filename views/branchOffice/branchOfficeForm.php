@@ -14,6 +14,8 @@ view('partials/errors', [
     'err' => $err
 ]); ?>
 
+<a href="/branchOffice/list/">Back</a>
+
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
     <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"><br><br>
