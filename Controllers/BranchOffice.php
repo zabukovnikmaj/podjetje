@@ -62,8 +62,8 @@ class BranchOffice extends BaseController
             return;
         }
         $branchOfficeModel = new BranchOfficeModels();
-        $branchOfficeModel->setName($_POST['name']);
-        $branchOfficeModel->setAddress($_POST['address']);
+        $branchOfficeModel->setName(htmlspecialchars($_POST['name']));
+        $branchOfficeModel->setAddress(htmlspecialchars($_POST['address']));
         $branchOfficeModel->setProducts($this->makeArray($_POST['products']));
         $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();
