@@ -69,6 +69,9 @@ abstract class BaseController
 
         view($filename . '/edit', [
             'filteredData' => $filteredData,
+            'products' => Storage::loadElements('products'),
+            //TODO: already selected products should be selected when editing
+            'branchOffices' => Storage::loadElements('BranchOffice')
         ]);
     }
 
@@ -88,6 +91,8 @@ abstract class BaseController
         if (!empty($err)) {
             view($filename . '/edit', [
                 'err' => $err,
+                'products' => Storage::loadElements('products'),
+                'branchOffices' => Storage::loadElements('BranchOffice')
                 'filteredData' => $_POST
             ]);
             return;
@@ -113,11 +118,7 @@ abstract class BaseController
             if ($data['uuid'] === $_GET['id']) {
                 foreach ($data as $filed => $element) {
                     if (isset($_POST[$filed])) {
-                        if ($filed === 'products') {
-                            $existingData[$index][$filed] = $this->makeArray($_POST['products']);
-                        } else {
-                            $existingData[$index][$filed] = $_POST[$filed];
-                        }
+                        $existingData[$index][$filed] = $_POST[$filed];
                     }
                 }
                 break;

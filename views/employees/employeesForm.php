@@ -19,7 +19,10 @@ view('partials/errors', [
 
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
-    <input type="text" name="branchOffice" value="<?php echo htmlspecialchars($formData['branchOffice']) ?? ''; ?>"> <br> <br>
+
+    <?php view('partials/branchNameRadioButtons', [
+            'branchOffices' => $branchOffices
+    ]); ?>
 
     <label for="name">Employee name</label><br>
     <input type="text" name="name" value="<?php echo htmlspecialchars($formData['name']) ?? ''; ?>"> <br> <br>
