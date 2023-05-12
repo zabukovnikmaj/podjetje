@@ -9,10 +9,7 @@ if(!isset($err)){
 
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
-    <?php view('partials/branchNameRadioButtons', [
-        'branchOffices' => $branchOffices,
-        'existingBranchOffice' => $filteredData['name']
-    ]); ?>
+    <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"><br><br>
     <?php view('partials/errors', [
         'err' => $err['name']
     ]); ?>
