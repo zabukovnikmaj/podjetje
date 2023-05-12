@@ -20,7 +20,7 @@
                 <?php echo request_method('PUT', $filteredData ?? null); ?>
 
                 <div class="form-group">
-                    <label for="branchOffice">Branch name</label><br>
+                    <label for="branchOffice">Branch office name</label><br>
                     <?php view('partials/branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
                         'existingBranchOffice' => $filteredData['branchOffice']
@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                     <label for="email">Employee email</label><br>
-                    <input type="email" name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>"> <br>
+                    <input type="email" class="form-control" name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>"> <br>
                     <?php view('partials/errors', [
                         'err' => $err['email']
                     ]); ?><br>
