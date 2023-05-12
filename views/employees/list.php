@@ -2,7 +2,7 @@
     <a href="/employees/create/">New employee</a>
 </p>
 
-<a href="/">Back</a>
+<a href="/">Back</a><br><br>
 
 <table>
     <thead>

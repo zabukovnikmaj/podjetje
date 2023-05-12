@@ -11,21 +11,17 @@ if (!isset($err)) {
     $err = [];
 } ?>
 
-<a href="/employees/list/">Back</a>
+<a href="/employees/list/">Back</a><br><br>
 
 <form action="" method="POST">
     <label for="branchOffice">Branch name</label><br>
-
-    <input type="text" name="branchOffice" value="<?php echo htmlspecialchars($filteredData['branchOffice']); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['branchOffice']
-    ]); ?><br>
-
     <?php view('partials/branchNameRadioButtons', [
         'branchOffices' => $branchOffices,
         'existingBranchOffice' => $filteredData['branchOffice']
     ]); ?>
-
+    <?php view('partials/errors', [
+        'err' => $err['branchOffice']
+    ]); ?>
 
     <label for="name">Employee name</label><br>
     <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"> <br>
@@ -46,18 +42,14 @@ if (!isset($err)) {
     ]); ?><br>
 
 
-    <label for="sex">Employee sex</label><br>
-    <input type="text" name="sex" value="<?php echo htmlspecialchars($filteredData['sex']); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['sex']
-    ]); ?><br>
-
     <label>Employee sex:</label><br>
     <input type="radio" name="sex" value="m" <?php if($filteredData['sex'] === 'm') echo 'checked'; ?>>
     <label for="male">Male</label><br>
     <input type="radio" name="sex" value="f" <?php if($filteredData['sex'] === 'f') echo 'checked'; ?>>
     <label for="female">Female</label><br><br>
-
+    <?php view('partials/errors', [
+        'err' => $err['sex']
+    ]); ?><br>
 
 
     <label for="email">Employee email</label><br>

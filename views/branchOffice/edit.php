@@ -5,14 +5,17 @@ if(!isset($err)){
 }
 ?>
 
-<a href="/branchOffice/list/">Back</a>
+<a href="/branchOffice/list/">Back</a><br><br>
 
 <form action="" method="POST">
     <label for="name">Branch name</label><br>
-    <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"><br>
+    <?php view('partials/branchNameRadioButtons', [
+        'branchOffices' => $branchOffices,
+        'existingBranchOffice' => $filteredData['name']
+    ]); ?>
     <?php view('partials/errors', [
         'err' => $err['name']
-    ]); ?><br>
+    ]); ?>
 
     <label for="address">Branch address</label><br>
     <input type="text" name="address" value="<?php echo htmlspecialchars($filteredData['address']); ?>"><br>
@@ -21,18 +24,13 @@ if(!isset($err)){
     ]); ?><br>
 
     <label for="products">Products name</label><br>
-
-    <textarea name="products" cols="50" rows="4"><?php echo htmlspecialchars(implode(', ', $filteredData['products'])); ?></textarea> <br>
-    <?php view('partials/errors', [
-        'err' => $err['products']
-    ]); ?><br>
-
-    
     <?php view('partials/productsCheckbox', [
         'products' => $products,
         'productsData' => $filteredData['products']
     ]); ?>
-
+    <?php view('partials/errors', [
+        'err' => $err['products']
+    ]); ?>
 
     <input type="submit" value="Save branch office data"> <br> <br>
 </form>

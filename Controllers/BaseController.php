@@ -92,7 +92,7 @@ abstract class BaseController
             view($filename . '/edit', [
                 'err' => $err,
                 'products' => Storage::loadElements('products'),
-                'branchOffices' => Storage::loadElements('BranchOffice')
+                'branchOffices' => Storage::loadElements('BranchOffice'),
                 'filteredData' => $_POST
             ]);
             return;

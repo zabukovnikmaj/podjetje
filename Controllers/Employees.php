@@ -53,7 +53,7 @@ class Employees extends BaseController
         if (!empty($err)) {
             view('employees/employeesForm', [
                 'err' => $err,
-                'branchOffices' => Storage::loadElements('BranchOffice')
+                'branchOffices' => Storage::loadElements('BranchOffice'),
                 'formData' => $_POST
             ]);
             return;
