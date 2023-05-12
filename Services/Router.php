@@ -26,6 +26,10 @@ class Router
      */
     public function handle(): void
     {
+        if (isset($_POST['_method'])) {
+            $_SERVER['REQUEST_METHOD'] = $_POST['_method'];
+        }
+
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
         if (!array_key_exists($uri, $this->routes)) {
             http_response_code(404);

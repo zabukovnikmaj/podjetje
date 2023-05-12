@@ -22,9 +22,10 @@
                 <td><?php echo htmlspecialchars(implode(', ', $branchOffice['products']));?></td>
                 <td>
                     <a href="/branchOffice/edit?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>">Edit</a>
-                    <a href="/branchOffice/delete?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>"
-                       onclick="return confirm('Confirm?');"
-                    >Delete</a>
+                    <form action="/branchOffice/delete?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>" method="POST">
+                        <?php echo request_method('DELETE', $branchOffice); ?>
+                        <button type="submit" onclick="return confirm('Confirm?');">Delete</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

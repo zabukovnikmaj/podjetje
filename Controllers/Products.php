@@ -15,7 +15,9 @@ class Products extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('products/productForm');
+        view('products/edit', [
+            'filteredData' => null
+        ]);
     }
     /**
      * function for displaying existing data
@@ -24,9 +26,8 @@ class Products extends BaseController
      */
     public function list(): void
     {
-        $products = Storage::loadElements('Products');
         view('products/list', [
-            'products' => $products
+            'products' => Storage::loadElements('Products')
         ]);
     }
 

@@ -7,15 +7,17 @@ if(!isset($err)){
 
 <a href="/branchOffice/list/">Back</a><br><br>
 
-<form action="" method="POST">
+<form method="POST">
+    <?php echo request_method('PUT', $filteredData ?? null); ?>
+
     <label for="name">Branch name</label><br>
-    <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"><br><br>
+    <input type="text" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"><br><br>
     <?php view('partials/errors', [
         'err' => $err['name']
     ]); ?>
 
     <label for="address">Branch address</label><br>
-    <input type="text" name="address" value="<?php echo htmlspecialchars($filteredData['address']); ?>"><br>
+    <input type="text" name="address" value="<?php echo old('address', isset($filteredData['address']) ? $filteredData['address'] : null); ?>"><br>
     <?php view('partials/errors', [
         'err' => $err['address']
     ]); ?><br>
@@ -29,5 +31,5 @@ if(!isset($err)){
         'err' => $err['products']
     ]); ?>
 
-    <input type="submit" value="Save branch office data"> <br> <br>
+    <button type="submit">Save</button> <br> <br>
 </form>

@@ -38,26 +38,26 @@ return [
 
 
     '/branchOffice/delete' => [
-        'GET' => [BranchOffice::class, 'deleteItem']
+        'DELETE' => [BranchOffice::class, 'deleteItem']
     ],
     '/employees/delete' => [
-        'GET' => [Employees::class, 'deleteItem']
+        'DELETE' => [Employees::class, 'deleteItem']
     ],
     '/products/delete' => [
-        'GET' => [Products::class, 'deleteItem']
+        'DELETE' => [Products::class, 'deleteItem']
     ],
 
 
     '/branchOffice/edit' => [
         'GET' => [BranchOffice::class, 'displayEditItem'],
-        'POST' => [BranchOffice::class, 'saveEditedData']
+        'PUT' => [BranchOffice::class, 'saveEditedData']
     ],
     '/employees/edit' => [
         'GET' => [Employees::class, 'displayEditItem'],
-        'POST' => [Employees::class, 'saveEditedData']
+        'PUT' => [Employees::class, 'saveEditedData']
     ],
     '/products/edit' => [
         'GET' => [Products::class, 'displayEditItem'],
-        'POST' => [Products::class, 'saveEditedData']
+        'PUT' => [Products::class, 'saveEditedData']
     ]
 ];

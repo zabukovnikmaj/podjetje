@@ -67,3 +67,34 @@ function uuid(): string
     // Output the 36 character UUID.
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
+
+/**
+ * Method retrieves old data for specific field from posted data.
+ *
+ * @param string $name
+ * @param string|null $default
+ * @return string
+ */
+function old(string $name, ?string $default = null): string
+{
+    if (isset($_POST[$name])) {
+        return htmlspecialchars($_POST[$name]);
+    }
+
+    return htmlspecialchars((string)$default);
+}
+
+/**
+ * Method is used to render request method field in form
+ *
+ * @param string $method
+ * @param $var
+ * @return string
+ */
+function request_method(string $method, $var): string
+{
+    if (!empty($var)) {
+        return '<input type="hidden" name="_method" value="' . $method . '">';
+    }
+    return '';
+}

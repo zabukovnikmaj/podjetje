@@ -15,8 +15,9 @@ class Employees extends BaseController
      */
     public function showCreateForm(): void
     {
-        view('employees/employeesForm', [
-            'branchOffices' => Storage::loadElements('BranchOffice')
+        view('employees/edit', [
+            'branchOffices' => Storage::loadElements('BranchOffice'),
+            'filteredData' => null
         ]);
     }
     /**

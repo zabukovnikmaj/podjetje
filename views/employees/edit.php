@@ -14,6 +14,8 @@ if (!isset($err)) {
 <a href="/employees/list/">Back</a><br><br>
 
 <form action="" method="POST">
+    <?php echo request_method('PUT', $filteredData ?? null); ?>
+
     <label for="branchOffice">Branch name</label><br>
     <?php view('partials/branchNameRadioButtons', [
         'branchOffices' => $branchOffices,
@@ -24,19 +26,19 @@ if (!isset($err)) {
     ]); ?>
 
     <label for="name">Employee name</label><br>
-    <input type="text" name="name" value="<?php echo htmlspecialchars($filteredData['name']); ?>"> <br>
+    <input type="text" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
     <?php view('partials/errors', [
         'err' => $err['name']
     ]); ?><br>
 
     <label for="position">Employee position</label><br>
-    <input type="text" name="position" value="<?php echo htmlspecialchars($filteredData['position']); ?>"> <br>
+    <input type="text" name="position" value="<?php echo old('position', isset($filteredData['position']) ? $filteredData['position'] : null); ?>"> <br>
     <?php view('partials/errors', [
         'err' => $err['position']
     ]); ?><br>
 
     <label for="age">Employee age</label><br>
-    <input type="number" name="age" step="1" min="15" max="100" value="<?php echo htmlspecialchars($filteredData['age']); ?>"><br>
+    <input type="number" name="age" step="1" min="15" max="100" value="<?php echo old('age', isset($filteredData['age']) ? $filteredData['age'] : null); ?>"><br>
     <?php view('partials/errors', [
         'err' => $err['age']
     ]); ?><br>
@@ -53,11 +55,11 @@ if (!isset($err)) {
 
 
     <label for="email">Employee email</label><br>
-    <input type="email" name="email" value="<?php echo htmlspecialchars($filteredData['email']); ?>"> <br>
+    <input type="email" name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>"> <br>
     <?php view('partials/errors', [
         'err' => $err['email']
     ]); ?><br>
 
-    <input type="submit" value="Save employee data"> <br> <br>
+    <button type="submit">Save</button> <br> <br>
 </form>
 </body>
