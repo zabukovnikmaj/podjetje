@@ -1,38 +1,58 @@
-<h1>Enter information about the products</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Enter information about the products</h1>
 
-<?php
-if(!isset($err)){
-    $err = [];
-} ?>
+    <?php
+    if(!isset($err)){
+        $err = [];
+    } ?>
 
-<a href="/products/list/">Back</a>
+    <a href="/products/list/">Back</a>
 
-<form action="" method="POST">
-    <?php echo request_method('PUT', $filteredData ?? null); ?>
+    <form action="" method="POST">
+        <?php echo request_method('PUT', $filteredData ?? null); ?>
 
-    <label for="name">Product name</label><br>
-    <input type="text" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['name']
-    ]); ?><br>
+        <div class="form-group">
+            <label for="name">Product name</label><br>
+            <input type="text" class="form-control" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
+            <?php view('partials/errors', [
+                'err' => $err['name']
+            ]); ?><br>
+        </div>
 
-    <label for="description">Product description</label><br>
-    <textarea name="description" cols="50" rows="4"><?php echo old('description', isset($filteredData['description']) ? $filteredData['description'] : null); ?></textarea> <br>
-    <?php view('partials/errors', [
-        'err' => $err['description']
-    ]); ?><br>
+        <div class="form-group">
+            <label for="description">Product description</label><br>
+            <textarea class="form-control" name="description" cols="50" rows="4"><?php echo old('description', isset($filteredData['description']) ? $filteredData['description'] : null); ?></textarea> <br>
+            <?php view('partials/errors', [
+                'err' => $err['description']
+            ]); ?><br>
+        </div>
 
-    <label for="price">Product price</label><br>
-    <input type="number" name="price" step="0.01" min="0" max="10000" value="<?php echo old('price', isset($filteredData['price']) ? $filteredData['price'] : null); ?>"><br>
-    <?php view('partials/errors', [
-        'err' => $err['price']
-    ]); ?><br>
+        <div class="form-group">
+            <label for="price">Product price</label><br>
+            <input type="number" class="form-control" name="price" step="0.01" min="0" max="10000" value="<?php echo old('price', isset($filteredData['price']) ? $filteredData['price'] : null); ?>"><br>
+            <?php view('partials/errors', [
+                'err' => $err['price']
+            ]); ?><br>
+        </div>
 
-    <label for="deliveryDate">Product delivery date</label><br>
-    <input type="date" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['deliveryDate']) ? $filteredData['deliveryDate'] : null); ?>"><br>
-    <?php view('partials/errors', [
-        'err' => $err['deliveryDate']
-    ]); ?><br>
+        <div class="form-group">
+            <label for="deliveryDate">Product delivery date</label><br>
+            <input type="date" class="form-control" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['deliveryDate']) ? $filteredData['deliveryDate'] : null); ?>"><br>
+            <?php view('partials/errors', [
+                'err' => $err['deliveryDate']
+            ]); ?><br>
+        </div>
 
-    <button type="submit">Save</button> <br> <br>
-</form>
+        <button type="submit" class="btn btn-primary">Save</button> <br> <br>
+    </form>
+</div>
+</body>
+</html>

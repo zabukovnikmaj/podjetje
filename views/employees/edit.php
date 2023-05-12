@@ -3,63 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Enter information about the employee</h1>
-<?php
-if (!isset($err)) {
-    $err = [];
-} ?>
+<div class="container">
+    <h1>Enter information about the employee</h1>
+    <?php
+    if (!isset($err)) {
+        $err = [];
+    } ?>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/employees/list/">Back</a><br><br>
 
-<a href="/employees/list/">Back</a><br><br>
+            <form action="" method="POST">
+                <?php echo request_method('PUT', $filteredData ?? null); ?>
 
-<form action="" method="POST">
-    <?php echo request_method('PUT', $filteredData ?? null); ?>
+                <div class="form-group">
+                    <label for="branchOffice">Branch name</label><br>
+                    <?php view('partials/branchNameRadioButtons', [
+                        'branchOffices' => $branchOffices,
+                        'existingBranchOffice' => $filteredData['branchOffice']
+                    ]); ?>
+                    <?php view('partials/errors', [
+                        'err' => $err['branchOffice']
+                    ]); ?>
+                </div>
 
-    <label for="branchOffice">Branch name</label><br>
-    <?php view('partials/branchNameRadioButtons', [
-        'branchOffices' => $branchOffices,
-        'existingBranchOffice' => $filteredData['branchOffice']
-    ]); ?>
-    <?php view('partials/errors', [
-        'err' => $err['branchOffice']
-    ]); ?>
+                <div class="form-group">
+                    <label for="name">Employee name</label><br>
+                    <input type="text" class="form-control" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
+                    <?php view('partials/errors', [
+                        'err' => $err['name']
+                    ]); ?><br>
+                </div>
 
-    <label for="name">Employee name</label><br>
-    <input type="text" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['name']
-    ]); ?><br>
+                <div class="form-group">
+                    <label for="position">Employee position</label><br>
+                    <input type="text" class="form-control" name="position" value="<?php echo old('position', isset($filteredData['position']) ? $filteredData['position'] : null); ?>"> <br>
+                    <?php view('partials/errors', [
+                        'err' => $err['position']
+                    ]); ?><br>
+                </div>
 
-    <label for="position">Employee position</label><br>
-    <input type="text" name="position" value="<?php echo old('position', isset($filteredData['position']) ? $filteredData['position'] : null); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['position']
-    ]); ?><br>
+                <div class="form-group">
+                    <label for="age">Employee age</label><br>
+                    <input type="number" class="form-control" name="age" step="1" min="15" max="100" value="<?php echo old('age', isset($filteredData['age']) ? $filteredData['age'] : null); ?>"><br>
+                    <?php view('partials/errors', [
+                        'err' => $err['age']
+                    ]); ?>
+                </div>
 
-    <label for="age">Employee age</label><br>
-    <input type="number" name="age" step="1" min="15" max="100" value="<?php echo old('age', isset($filteredData['age']) ? $filteredData['age'] : null); ?>"><br>
-    <?php view('partials/errors', [
-        'err' => $err['age']
-    ]); ?><br>
-
-
-    <label>Employee sex:</label><br>
-    <input type="radio" name="sex" value="m" <?php if($filteredData['sex'] === 'm') echo 'checked'; ?>>
-    <label for="male">Male</label><br>
-    <input type="radio" name="sex" value="f" <?php if($filteredData['sex'] === 'f') echo 'checked'; ?>>
-    <label for="female">Female</label><br><br>
-    <?php view('partials/errors', [
-        'err' => $err['sex']
-    ]); ?><br>
+                <div class="form-group">
+                    <label>Employee sex:</label><br>
+                    <input type="radio" name="sex" value="m" <?php if($filteredData['sex'] === 'm') echo 'checked'; ?>>
+                    <label for="male">Male</label><br>
+                    <input type="radio" name="sex" value="f" <?php if($filteredData['sex'] === 'f') echo 'checked'; ?>>
+                    <label for="female">Female</label><br><br>
+                    <?php view('partials/errors', [
+                        'err' => $err['sex']
+                    ]); ?>
+                </div>
 
 
-    <label for="email">Employee email</label><br>
-    <input type="email" name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>"> <br>
-    <?php view('partials/errors', [
-        'err' => $err['email']
-    ]); ?><br>
+                <div class="form-group">
+                    <label for="email">Employee email</label><br>
+                    <input type="email" name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>"> <br>
+                    <?php view('partials/errors', [
+                        'err' => $err['email']
+                    ]); ?><br>
+                </div>
 
-    <button type="submit">Save</button> <br> <br>
-</form>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
