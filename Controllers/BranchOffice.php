@@ -16,7 +16,7 @@ class BranchOffice extends BaseController
     public function showCreateForm(): void
     {
         view('branchOffice/edit', [
-            'products' => Storage::loadElements('products'),
+            'products' => Storage::loadElements('Products'),
             'filteredData' => null
         ]);
     }
