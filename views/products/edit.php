@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <label for="deliveryDate">Product delivery date</label><br>
-            <input type="date" class="form-control" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['deliveryDate']) ? $filteredData['deliveryDate'] : null); ?>"><br>
+            <input type="date" class="form-control" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['date']) ? $filteredData['date'] : null); ?>"><br>
             <?php view('partials/errors', [
                 'err' => $err['deliveryDate']
             ]); ?><br>

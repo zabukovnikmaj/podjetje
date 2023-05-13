@@ -44,9 +44,8 @@ class Products extends BaseController
         }
 
         if (!empty($err)) {
-            view('products/productForm', [
+            view('products/edit', [
                 'err' => $err,
-                'formData' => $_POST
             ]);
             return;
         }

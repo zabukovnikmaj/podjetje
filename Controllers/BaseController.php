@@ -70,7 +70,6 @@ abstract class BaseController
         view($filename . '/edit', [
             'filteredData' => $filteredData,
             'products' => Storage::loadElements('products'),
-            //TODO: already selected products should be selected when editing
             'branchOffices' => Storage::loadElements('BranchOffice')
         ]);
     }

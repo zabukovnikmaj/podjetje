@@ -52,10 +52,9 @@ class Employees extends BaseController
         }
 
         if (!empty($err)) {
-            view('employees/employeesForm', [
+            view('employees/edit', [
                 'err' => $err,
                 'branchOffices' => Storage::loadElements('BranchOffice'),
-                'formData' => $_POST
             ]);
             return;
         }
