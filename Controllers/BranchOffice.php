@@ -60,7 +60,7 @@ class BranchOffice extends BaseController
         if (!empty($err)) {
             view('branchOffice/edit', [
                 'err' => $err,
-                'products' => Storage::loadElements('products'),
+                'products' => Storage::loadElements('Products'),
             ]);
             return;
         }
