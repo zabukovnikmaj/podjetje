@@ -24,7 +24,7 @@
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
                     <td>
-                        <a href="/products/edit?id=<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary">Edit</a>
+                        <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary">Edit</a>
                         <form action="/products/delete?id=<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
                             <?php echo request_method('DELETE', $product); ?>
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
