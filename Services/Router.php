@@ -31,22 +31,27 @@ class Router
         }
 
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-        if (!array_key_exists($uri, $this->routes)) {
+
+        $params = end(explode('/', $uri));
+        $uri = rtrim($uri, '/' . $params) . '/';
+
+        if (!isset($this->routes[$uri])) {
             http_response_code(404);
-            die("404 Not Found");
+            die("404 stran ni bila najdena");
         }
 
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $routes = $this->routes[$uri];
-        if (!array_key_exists($requestMethod, $routes)) {
+
+        if (!isset($routes[$requestMethod])) {
             http_response_code(403);
-            die("Request method not allowed");
+            die("404 stran ni bila najdena");
         }
 
         $route = $routes[$requestMethod];
         $controller = new $route[0];
 
-        call_user_func_array([$controller, $route[1]], [$_REQUEST]);
+        call_user_func_array([$controller, $route[1]], [$params]);
     }
 }
