@@ -47,14 +47,14 @@ abstract class BaseController
      *
      * @return void
      */
-    public function displayEditItem(): void
+    public function displayEditItem(string $id): void
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $filteredData = [];
 
         foreach ($existingData as $data) {
-            if ($data['uuid'] == $_GET['id']) {
+            if ($data['uuid'] == $id) {
                 $filteredData = $data;
                 break;
             }
@@ -79,7 +79,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function saveEditedData(): void
+    public function saveEditedData(string $params): void
     {
         $err = $this->validateData([]);
 
@@ -90,14 +90,14 @@ abstract class BaseController
         if (!empty($err)) {
             view($filename . '/edit', [
                 'err' => $err,
-                'products' => Storage::loadElements('products'),
+                'products' => Storage::loadElements('Products'),
                 'branchOffices' => Storage::loadElements('BranchOffice'),
                 'filteredData' => $_POST
             ]);
             return;
         }
 
-        $existingData = $this->replaceExistingData($existingData);
+        $existingData = $this->replaceExistingData($existingData, $params);
 
         Storage::saveElements($this->getFilenameFromClass(), $existingData);
 
@@ -110,11 +110,11 @@ abstract class BaseController
      * @param array $existingData
      * @return array
      */
-    protected function replaceExistingData(array $existingData): array
+    protected function replaceExistingData(array $existingData, string $params): array
     {
         $index = 0;
         foreach ($existingData as $data) {
-            if ($data['uuid'] === $_GET['id']) {
+            if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
                     if (isset($_POST[$filed])) {
                         $existingData[$index][$filed] = $_POST[$filed];
