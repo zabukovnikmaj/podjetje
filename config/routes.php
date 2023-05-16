@@ -37,13 +37,13 @@ return [
     ],
 
 
-    '/branchOffice/delete' => [
+    '/branchOffice/delet/' => [
         'DELETE' => [BranchOffice::class, 'deleteItem']
     ],
-    '/employees/delete' => [
+    '/employees/delet/' => [
         'DELETE' => [Employees::class, 'deleteItem']
     ],
-    '/products/delete' => [
+    '/products/delet/' => [
         'DELETE' => [Products::class, 'deleteItem']
     ],
 

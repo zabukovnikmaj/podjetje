@@ -31,7 +31,7 @@
                             <td><?php echo htmlspecialchars($employee['email']); ?></td>
                             <td>
                                 <a href="/employees/edit/<?php echo htmlspecialchars($employee['uuid']); ?>" class="btn btn-primary">Edit</a>
-                                <form action="/employees/delete?id=<?php echo htmlspecialchars($employee['uuid']); ?>" method="POST">
+                                <form action="/employees/delete/<?php echo htmlspecialchars($employee['uuid']); ?>" method="POST">
                                     <?php echo request_method('DELETE', $employee); ?>
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
                                 </form>

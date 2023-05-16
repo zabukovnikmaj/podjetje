@@ -25,7 +25,7 @@
                             <td><?php echo htmlspecialchars(implode(', ', $branchOffice['products']));?></td>
                             <td>
                                 <a href="/branchOffice/edit/<?php echo htmlspecialchars($branchOffice['uuid']); ?>" class="btn btn-primary">Edit</a>
-                                <form action="/branchOffice/delete?id=<?php echo htmlspecialchars($branchOffice['uuid']); ?>" method="POST">
+                                <form action="/branchOffice/delete/<?php echo htmlspecialchars($branchOffice['uuid']); ?>" method="POST">
                                     <?php echo request_method('DELETE', $branchOffice); ?>
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
                                 </form>
