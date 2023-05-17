@@ -158,7 +158,7 @@ abstract class BaseController
 
         Storage::saveElements($this->getFilenameFromClass(), json($existingData));
 
-        header('Location: /' . $filename . '/list/');
+        redirect('/' . $filename . '/list/');
     }
 
     /**
