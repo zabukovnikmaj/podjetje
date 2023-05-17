@@ -105,7 +105,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function displayEditItem(string $id): void
+    public function displayEditItem(string $id): string
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
@@ -125,7 +125,7 @@ abstract class BaseController
 
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
-        view($filename . '/edit', [
+        return view($filename . '/edit', [
             'filteredData' => $filteredData,
             'products' => Storage::loadElements('Products'),
             'branchOffices' => Storage::loadElements('BranchOffice')
@@ -137,7 +137,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function saveEditedData(string $params): void
+    public function saveEditedData(string $params): string
     {
         $err = $this->validateData([]);
 
@@ -146,13 +146,12 @@ abstract class BaseController
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         if (!empty($err)) {
-            view($filename . '/edit', [
+            return view($filename . '/edit', [
                 'err' => $err,
                 'products' => Storage::loadElements('Products'),
                 'branchOffices' => Storage::loadElements('BranchOffice'),
                 'filteredData' => $_POST
             ]);
-            return;
         }
 
         $existingData = $this->replaceExistingData($existingData, $params);
