@@ -26,20 +26,78 @@ abstract class BaseController
      *
      * @return void
      */
-    public function deleteItem(): void
+    public function deleteItem(string $id): void
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $newData = [];
 
         foreach ($existingData as $item) {
-            if ($item['uuid'] != $_GET['id']) {
+            if ($item['uuid'] != $id) {
                 $newData[] = $item;
             }
         }
 
         Storage::saveElements($filename, $newData);
+
+        $this->cascadeDelete();
+
         header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+    }
+
+    /**
+     * function responsible for deleting all the foreign keys after primary key has been deleted
+     *
+     * @return void
+     */
+    private function cascadeDelete(): void{
+        $employees = Storage::loadElements('Employees');
+        $products = Storage::loadElements('Products');
+        $branchOffices = Storage::loadElements('BranchOffice');
+        $newBranchOffices = [];
+
+        //checking relation branchOffice : products
+        for($i = 0; $i < sizeof($branchOffices); $i++){
+            foreach($branchOffices[$i] as $key => $value){
+                if($key !== 'products') {
+                    $newBranchOffices[$i][$key] = $value;
+                }  else{
+                    $newBranchOffices[$i][$key] = [];
+                }
+            }
+            for($j = 0; $j < sizeof($branchOffices[$i]['products']); $j++){
+                if($this->isInArray($branchOffices[$i]['products'][$j], $products)){
+                    $newBranchOffices[$i]['products'][$j] = $branchOffices[$i]['products'][$j];
+                }
+            }
+        }
+
+        //checking relation employee : branchOffice
+        for($i = 0; $i < sizeof($employees); $i++){
+            if(!$this->isInArray($employees[$i]['branchOffice'], $branchOffices)){
+                $employees[$i]['branchOffice'] = '';
+            }
+        }
+
+        //saving changed data
+        Storage::saveElements('Employees', $employees);
+        Storage::saveElements('BranchOffice', $newBranchOffices);
+    }
+
+    /**
+     * function for finding if some element is inside array
+     *
+     * @param string $needle
+     * @param array $haystack
+     * @return bool
+     */
+    private function isInArray(string $needle, array $haystack): bool{
+        foreach($haystack as $item){
+            if ($item['uuid'] === $needle){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -47,14 +105,14 @@ abstract class BaseController
      *
      * @return void
      */
-    public function displayEditItem(): void
+    public function displayEditItem(string $id): void
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
         $filteredData = [];
 
         foreach ($existingData as $data) {
-            if ($data['uuid'] == $_GET['id']) {
+            if ($data['uuid'] == $id) {
                 $filteredData = $data;
                 break;
             }
@@ -79,7 +137,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function saveEditedData(): void
+    public function saveEditedData(string $params): void
     {
         $err = $this->validateData([]);
 
@@ -90,14 +148,14 @@ abstract class BaseController
         if (!empty($err)) {
             view($filename . '/edit', [
                 'err' => $err,
-                'products' => Storage::loadElements('products'),
+                'products' => Storage::loadElements('Products'),
                 'branchOffices' => Storage::loadElements('BranchOffice'),
                 'filteredData' => $_POST
             ]);
             return;
         }
 
-        $existingData = $this->replaceExistingData($existingData);
+        $existingData = $this->replaceExistingData($existingData, $params);
 
         Storage::saveElements($this->getFilenameFromClass(), $existingData);
 
@@ -110,11 +168,11 @@ abstract class BaseController
      * @param array $existingData
      * @return array
      */
-    protected function replaceExistingData(array $existingData): array
+    protected function replaceExistingData(array $existingData, string $params): array
     {
         $index = 0;
         foreach ($existingData as $data) {
-            if ($data['uuid'] === $_GET['id']) {
+            if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
                     if (isset($_POST[$filed])) {
                         $existingData[$index][$filed] = $_POST[$filed];
