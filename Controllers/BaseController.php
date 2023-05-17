@@ -41,7 +41,7 @@ abstract class BaseController
         Storage::saveElements($filename, $newData);
 
         $this->cascadeDelete();
-        
+
         header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
     }
 
@@ -80,7 +80,7 @@ abstract class BaseController
         }
 
         //saving changed data
-        Storage::saveElements('Products', $products);
+        Storage::saveElements('Employees', $employees);
         Storage::saveElements('BranchOffice', $newBranchOffices);
     }
 
