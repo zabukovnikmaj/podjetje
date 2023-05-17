@@ -13,9 +13,9 @@ class Products extends BaseController
      *
      * @return void
      */
-    public function showCreateForm(): void
+    public function showCreateForm(): string
     {
-        view('products/edit', [
+        return view('products/edit', [
             'filteredData' => null
         ]);
     }
@@ -24,9 +24,9 @@ class Products extends BaseController
      *
      * @return void
      */
-    public function list(): void
+    public function list(): string
     {
-        view('products/list', [
+        return view('products/list', [
             'products' => Storage::loadElements('Products')
         ]);
     }
@@ -36,7 +36,7 @@ class Products extends BaseController
      *
      * @return void
      */
-    public function processData(): void
+    public function processData(): string
     {
         $err = Validator::required([], $_POST, 'name', 'description', 'price', 'deliveryDate');
         if(empty($err)){
@@ -44,10 +44,9 @@ class Products extends BaseController
         }
 
         if (!empty($err)) {
-            view('products/edit', [
+            return view('products/edit', [
                 'err' => $err,
             ]);
-            return;
         }
 
         $productsModes = new ProductsModel();

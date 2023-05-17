@@ -28,11 +28,11 @@ function storage_path(string $path): string
  * @param array $attributes
  * @return void
  */
-function view(string $path, array $attributes = []): void
+function view(string $path, array $attributes = []): string
 {
     extract($attributes);
 
-    include base_path("views/" . $path . ".php");
+    return require base_path("views/" . $path . ".php");
 }
 
 /**
@@ -46,6 +46,17 @@ function createDirectory(string $path): void
     if (!is_dir($path)) {
         mkdir($path, 0777, true);
     }
+}
+
+/**
+ * function for making redirects
+ *
+ * @param string $path
+ * @return void
+ */
+function redirect(string $path): void{
+    header('Location: ' . $path);
+    exit();
 }
 
 /**

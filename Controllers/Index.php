@@ -9,7 +9,7 @@ class Index
      *
      * @return void
      */
-    public function index(): void{
-        view('index/index');
+    public function index(): string {
+        return view('index/index');
     }
 }
