@@ -38,7 +38,7 @@ abstract class BaseController
             }
         }
 
-        Storage::saveElements($filename, $newData);
+        Storage::saveElements($filename, json($newData));
 
         $this->cascadeDelete();
 
@@ -80,8 +80,8 @@ abstract class BaseController
         }
 
         //saving changed data
-        Storage::saveElements('Employees', $employees);
-        Storage::saveElements('BranchOffice', $newBranchOffices);
+        Storage::saveElements('Employees', json($employees));
+        Storage::saveElements('BranchOffice', json($newBranchOffices));
     }
 
     /**
@@ -156,7 +156,7 @@ abstract class BaseController
 
         $existingData = $this->replaceExistingData($existingData, $params);
 
-        Storage::saveElements($this->getFilenameFromClass(), $existingData);
+        Storage::saveElements($this->getFilenameFromClass(), json($existingData));
 
         header('Location: /' . $filename . '/list/');
     }
