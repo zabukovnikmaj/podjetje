@@ -56,7 +56,7 @@ class Products extends BaseController
         $productsModes->setDescription(htmlspecialchars($_POST['description']));
         $productsModes->setUuid();
         $productsModes->savingData();
-        header('Location: /');
+        redirect('/');
     }
 
     /**

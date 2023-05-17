@@ -42,7 +42,7 @@ abstract class BaseController
 
         $this->cascadeDelete();
 
-        header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+        redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
     }
 
     /**

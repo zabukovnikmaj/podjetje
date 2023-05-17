@@ -20,6 +20,7 @@ class Employees extends BaseController
             'filteredData' => null
         ]);
     }
+
     /**
      * function for displaying existing data
      *
@@ -68,7 +69,7 @@ class Employees extends BaseController
         $employeesModel->setEmail(htmlspecialchars($_POST['email']));
         $employeesModel->setUuid();
         $employeesModel->savingData();
-        header('Location: /');
+        redirect('/');
     }
 
     /**
