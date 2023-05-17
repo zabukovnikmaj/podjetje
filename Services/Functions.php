@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  * method that makes path into one string
  *
@@ -57,6 +60,10 @@ function createDirectory(string $path): void
 function redirect(string $path): void{
     header('Location: ' . $path);
     exit();
+}
+
+function json(array $dataToEncode): string{
+    return json_encode($dataToEncode, JSON_PRETTY_PRINT);
 }
 
 /**
