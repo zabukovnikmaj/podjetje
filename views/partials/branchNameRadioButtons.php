@@ -13,6 +13,6 @@ if(isset($branchOffices) && !empty($branchOffices)):
 endif;
 if(!(isset($branchOffices) && !empty($branchOffices))):
     ?>
-    <p>No branch offices have been entered yet!</p>
+    <div>No branch offices have been entered yet!</div>
 <?php endif; ?>
 <br>
