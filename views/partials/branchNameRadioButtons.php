@@ -6,7 +6,7 @@ if(isset($branchOffices) && !empty($branchOffices)):
                 <input type="radio" name="branchOffice" value="<?php echo htmlspecialchars($branchOffice['uuid']) ?>"
                 <?php echo ($existingBranchOffice === $branchOffice['uuid']) ? 'checked' : ''; ?>>
                 <?php echo htmlspecialchars($branchOffice['name']) ?>
-        </label><br>
+        </label> <br>
 
     <?php
     endforeach;

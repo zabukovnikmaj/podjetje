@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            <label for="products">Products name</label>
+            <label for="products">Products name</label> <br>
             <?php view('partials/productsCheckbox', [
                 'products' => $products,
                 'productsData' => $filteredData['products']

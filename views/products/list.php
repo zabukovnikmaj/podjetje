@@ -25,10 +25,10 @@
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
                     <td>
-                        <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary">Edit</a>
                         <form action="/products/delete/<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
+                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
                             <?php echo request_method('DELETE', $product); ?>
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
                         </form>
                     </td>
                 </tr>
