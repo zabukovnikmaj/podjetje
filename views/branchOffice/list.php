@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px">
+    <h1 style="margin-top: 0px">Branch offices information</h1>
     <div class="row">
         <div class="col-md-12">
             <p>

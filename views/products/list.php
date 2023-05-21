@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px;">
+    <h1 style="margin-top: 0px">Products information</h1>
     <a href="/products/create/" class="btn btn-primary">New product</a>
 
     <a href="/" class="btn btn-default">Back</a>
