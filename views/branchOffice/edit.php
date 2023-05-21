@@ -15,9 +15,6 @@
         $err = [];
     }
     ?>
-
-    <a href="/branchOffice/list/" class="btn btn-secondary mb-3">Back</a>
-
     <form method="POST">
         <?php echo request_method('PUT', $filteredData ?? null); ?>
 
@@ -49,6 +46,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/branchOffice/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
 </div>
 

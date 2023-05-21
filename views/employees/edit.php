@@ -14,8 +14,6 @@
     } ?>
     <div class="row">
         <div class="col-md-12">
-            <a href="/employees/list/">Back</a><br><br>
-
             <form action="" method="POST">
                 <?php echo request_method('PUT', $filteredData ?? null); ?>
 
@@ -76,6 +74,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/employees/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
             </form>
         </div>
     </div>

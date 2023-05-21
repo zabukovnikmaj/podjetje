@@ -14,8 +14,6 @@
         $err = [];
     } ?>
 
-    <a href="/products/list/">Back</a>
-
     <form action="" method="POST">
         <?php echo request_method('PUT', $filteredData ?? null); ?>
 
@@ -51,8 +49,10 @@
             ]); ?>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button> <br> <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/products/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
+
 </div>
 </body>
 </html>
