@@ -14,7 +14,7 @@
         $err = [];
     } ?>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <?php echo request_method('PUT', $filteredData ?? null); ?>
 
         <div class="form-group">
@@ -50,10 +50,10 @@
         </div>
 
         <div class="form-group">
-            <label for="productPicture">Product picture</label><br>
+            <label for="productFile">Product picture</label><br>
             <input type="file" class="form-control-file" name="productFile" id="productFile">
             <?php view('partials/errors', [
-                'err' => $err['productPicture']
+                'err' => $err['productFile']
             ]); ?>
         </div>
 
