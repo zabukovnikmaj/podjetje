@@ -9,6 +9,7 @@ class Products extends BaseModel
     protected string $description;
     protected float $price;
     protected string $date;
+    protected string $fileType;
 
     /**
      * setter for uuid
@@ -32,6 +33,17 @@ class Products extends BaseModel
     }
 
     /**
+     * setter for FileType
+     *
+     * @param string $type
+     * @return void
+     */
+    public function setFileType(string $type): void
+    {
+        $this->fileType = $type;
+    }
+
+    /**
      * setter for description
      *
      * @param string $description
@@ -39,7 +51,7 @@ class Products extends BaseModel
      */
     public function setDescription(string $description): void
     {
-            $this->description = $description;
+        $this->description = $description;
     }
 
     /**
