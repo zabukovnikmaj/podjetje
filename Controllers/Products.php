@@ -39,6 +39,10 @@ class Products extends BaseController
     public function processData(): void
     {
         $err = Validator::required([], $_POST, 'name', 'description', 'price', 'deliveryDate');
+        if(empty($_FILES['productFile'])){
+            $err['productFile'] = 'Image of a product was not uploaded!';
+        }
+
         if(empty($err)){
             $err = $this->validateData($err);
         }
