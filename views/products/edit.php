@@ -49,6 +49,14 @@
             ]); ?>
         </div>
 
+        <div class="form-group">
+            <label for="productPicture">Product picture</label><br>
+            <input type="file" class="form-control-file" name="productFile" id="productFile">
+            <?php view('partials/errors', [
+                'err' => $err['productPicture']
+            ]); ?>
+        </div>
+
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="/products/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
