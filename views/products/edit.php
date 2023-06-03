@@ -14,45 +14,45 @@
         $err = [];
     } ?>
 
-    <a href="/products/list/">Back</a>
-
     <form action="" method="POST">
         <?php echo request_method('PUT', $filteredData ?? null); ?>
 
         <div class="form-group">
             <label for="name">Product name</label><br>
-            <input type="text" class="form-control" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>"> <br>
+            <input type="text" class="form-control" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>">
             <?php view('partials/errors', [
                 'err' => $err['name']
-            ]); ?><br>
+            ]); ?>
         </div>
 
         <div class="form-group">
             <label for="description">Product description</label><br>
-            <textarea class="form-control" name="description" cols="50" rows="4"><?php echo old('description', isset($filteredData['description']) ? $filteredData['description'] : null); ?></textarea> <br>
+            <textarea class="form-control" name="description" cols="50" rows="4"><?php echo old('description', isset($filteredData['description']) ? $filteredData['description'] : null); ?></textarea>
             <?php view('partials/errors', [
                 'err' => $err['description']
-            ]); ?><br>
+            ]); ?>
         </div>
 
         <div class="form-group">
             <label for="price">Product price</label><br>
-            <input type="number" class="form-control" name="price" step="0.01" min="0" max="10000" value="<?php echo old('price', isset($filteredData['price']) ? $filteredData['price'] : null); ?>"><br>
+            <input type="number" class="form-control" name="price" step="0.01" min="0" max="10000" value="<?php echo old('price', isset($filteredData['price']) ? $filteredData['price'] : null); ?>">
             <?php view('partials/errors', [
                 'err' => $err['price']
-            ]); ?><br>
+            ]); ?>
         </div>
 
         <div class="form-group">
             <label for="deliveryDate">Product delivery date</label><br>
-            <input type="date" class="form-control" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['date']) ? $filteredData['date'] : null); ?>"><br>
+            <input type="date" class="form-control" name="deliveryDate" value="<?php echo old('deliveryDate', isset($filteredData['date']) ? $filteredData['date'] : null); ?>">
             <?php view('partials/errors', [
                 'err' => $err['deliveryDate']
-            ]); ?><br>
+            ]); ?>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button> <br> <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/products/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
+
 </div>
 </body>
 </html>

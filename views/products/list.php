@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px;">
+    <h1 style="margin-top: 0px">Products information</h1>
     <a href="/products/create/" class="btn btn-primary">New product</a>
 
     <a href="/" class="btn btn-default">Back</a>
@@ -24,10 +25,10 @@
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
                     <td>
-                        <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary">Edit</a>
                         <form action="/products/delete/<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
+                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
                             <?php echo request_method('DELETE', $product); ?>
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px;">
+    <h1 style="margin-top: 0px">Employees information</h1>
     <div class="row">
         <div class="col-md-12">
             <p>
@@ -30,10 +31,10 @@
                             <td><?php echo htmlspecialchars($employee['sex']); ?></td>
                             <td><?php echo htmlspecialchars($employee['email']); ?></td>
                             <td>
-                                <a href="/employees/edit/<?php echo htmlspecialchars($employee['uuid']); ?>" class="btn btn-primary">Edit</a>
                                 <form action="/employees/delete/<?php echo htmlspecialchars($employee['uuid']); ?>" method="POST">
+                                    <a href="/employees/edit/<?php echo htmlspecialchars($employee['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
                                     <?php echo request_method('DELETE', $employee); ?>
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
                                 </form>
                             </td>
                         </tr>

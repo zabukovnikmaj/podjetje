@@ -16,6 +16,6 @@ if(isset($products) && !empty($products)):
 endif;
 if(!(isset($products) && !empty($products))):
 ?>
-    <p>No products have been entered yet!</p>
+    <div>No products have been entered yet!</div>
 <?php endif; ?>
 <br>
