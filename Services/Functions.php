@@ -57,7 +57,8 @@ function createDirectory(string $path): void
  * @param string $path
  * @return void
  */
-function redirect(string $path): void{
+function redirect(string $path): void
+{
     header('Location: ' . $path);
     exit();
 }
@@ -68,13 +69,31 @@ function redirect(string $path): void{
  * @param array $dataToEncode
  * @return string
  */
-function json(array $dataToEncode): string {
+function json(array $dataToEncode): string
+{
     $jsonData = json_encode($dataToEncode, JSON_PRETTY_PRINT);
     header('Content-Type: application/json');
     header('Content-Length: ' . strlen($jsonData));
     return $jsonData;
 }
 
+/**
+ * function for starting file download on client side
+ *
+ * @param string $filename
+ * @return void
+ */
+function fileDownload(string $filename): void
+{
+    $basePath = base_path('data/files/');
+
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . $basePath . $filename . '"');
+    header('Content-Length: ' . filesize($basePath . $filename));
+
+    readfile($basePath . $filename);
+    exit;
+}
 
 /**
  * Method generates unique UUID
