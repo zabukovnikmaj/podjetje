@@ -62,9 +62,19 @@ function redirect(string $path): void{
     exit();
 }
 
-function json(array $dataToEncode): string{
-    return json_encode($dataToEncode, JSON_PRETTY_PRINT);
+/**
+ * function for converting array to json
+ *
+ * @param array $dataToEncode
+ * @return string
+ */
+function json(array $dataToEncode): string {
+    $jsonData = json_encode($dataToEncode, JSON_PRETTY_PRINT);
+    header('Content-Type: application/json');
+    header('Content-Length: ' . strlen($jsonData));
+    return $jsonData;
 }
+
 
 /**
  * Method generates unique UUID
