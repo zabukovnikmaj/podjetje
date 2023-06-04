@@ -36,6 +36,9 @@ abstract class BaseController
             if ($item['uuid'] != $id) {
                 $newData[] = $item;
             }
+            else{
+                $this->deleteImage($item['uuid'], $item['fileType']);
+            }
         }
 
         Storage::saveElements($filename, $newData);
@@ -43,6 +46,22 @@ abstract class BaseController
         $this->cascadeDelete();
 
         header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+    }
+
+    /**
+     * function for deleting image if it exists
+     *
+     * @param string $uuid
+     * @param string $extension
+     * @return bool
+     */
+    private function deleteImage(string $uuid, string $extension): bool
+    {
+        $directory = $this->imagePathBuilder($uuid, $extension);
+        if(is_dir($directory)){
+            return rmdir($directory);
+        }
+        return false;
     }
 
     /**
@@ -257,7 +276,6 @@ abstract class BaseController
         http_response_code(404);
         echo "Image not found";
     }
-
 
 
 }
