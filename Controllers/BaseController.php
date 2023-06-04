@@ -177,6 +177,7 @@ abstract class BaseController
             return;
         }
 
+
         $existingData = $this->replaceExistingData($existingData, $params);
 
         Storage::saveElements($this->getFilenameFromClass(), $existingData);
@@ -188,6 +189,7 @@ abstract class BaseController
      * function for finding data that will be changed and changing it
      *
      * @param array $existingData
+     * @param string $params
      * @return array
      */
     protected function replaceExistingData(array $existingData, string $params): array
@@ -196,7 +198,12 @@ abstract class BaseController
         foreach ($existingData as $data) {
             if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
-                    if (isset($_POST[$filed])) {
+                    if(!empty($_FILES) && $filed === 'fileType'){
+                        $existingData[$index][$filed] = pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION);
+                        $model = new \Models\Products();
+                        $model->saveImage($this->getFilenameFromClass(), $existingData[$index]['uuid']);
+                    }
+                    else if (isset($_POST[$filed])) {
                         $existingData[$index][$filed] = $_POST[$filed];
                     }
                 }

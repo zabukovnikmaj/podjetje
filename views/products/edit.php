@@ -54,7 +54,9 @@
             <input type="file" class="form-control-file" name="productFile" id="productFile">
             <?php view('partials/errors', [
                 'err' => $err['productFile']
-            ]); ?>
+            ]); ?><br>
+
+            <img src="/products/images/!<?php echo $filteredData['uuid']; ?>" alt="Product picture has not been uploaded yet!" style="max-width: 300px; max-height: 300px">
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

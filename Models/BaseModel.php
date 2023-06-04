@@ -48,7 +48,7 @@ abstract class BaseModel
      * @param string $filename
      * @return bool
      */
-    protected function saveImage(string $folderName, string $filename): bool
+    public function saveImage(string $folderName, string $filename): bool
     {
         $fileDir = base_path('data/files/' . $folderName . '/');
 
