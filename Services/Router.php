@@ -33,11 +33,16 @@ class Router
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
         $seperatedUri = explode('/', $uri);
-        $params = $seperatedUri[sizeof($seperatedUri) - 1];
-        if($params === ""){
-            $params = $seperatedUri[sizeof($seperatedUri) - 2];
+        $uri = '/';
+        for ($i = 0; $i < sizeof($seperatedUri); $i++){
+            if(strpos($seperatedUri[$i], '!')){
+                //params are passed as !uuid...
+                $params = substr($seperatedUri[$i], 1);
+            }
+            else if($seperatedUri[$i] !== ""){
+                $uri .= $seperatedUri[$i];
+            }
         }
-        $uri = rtrim($uri, '/' . $params) . '/';
 
         if (!isset($this->routes[$uri])) {
             http_response_code(404);
