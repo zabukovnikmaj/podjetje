@@ -59,5 +59,10 @@ return [
     '/products/edit/' => [
         'GET' => [Products::class, 'displayEditItem'],
         'PUT' => [Products::class, 'saveEditedData']
+    ],
+
+
+    '/products/images/' => [
+        'GET' => [Products::class, 'prepareImage']
     ]
 ];
