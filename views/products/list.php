@@ -1,9 +1,8 @@
 <script>
     window.onload = function () {
-        var imagePath = window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1);
-        var image = document.getElementById("myImage");
-        image.src = imagePath + "image.jpg";
-        console.log("Current path: " + imagePath);
+        const currentDirectory = process.cwd();
+        console.log("Current Directory:", currentDirectory);
+
     };
 </script>
 
@@ -35,16 +34,15 @@
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
                     <td>
+                        <img src="/../narava.jpg" alt="slika">
                         <?php
                         var_dump('../data/files/Products/' . $product['uuid'] . '.' . $product['fileType']);
                         ?>
-                        <img src="/../../../data/files/Products/<?php echo $product['uuid'] . '.' . $product['fileType']; ?>"
-                             alt="Product picture">
                     </td>
 
                     <td>
-                        <form action="/products/delete/<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
-                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>"
+                        <form action="/products/delete/!<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
+                            <a href="/products/edit/!<?php echo htmlspecialchars($product['uuid']); ?>"
                                class="btn btn-primary btn-sm">Edit</a>
                             <?php echo request_method('DELETE', $product); ?>
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">
