@@ -33,12 +33,7 @@
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
-                    <td>
-                        <img src="/../narava.jpg" alt="slika">
-                        <?php
-                        var_dump('../data/files/Products/' . $product['uuid'] . '.' . $product['fileType']);
-                        ?>
-                    </td>
+                    <td><img src="/products/images/!<?php echo $product['uuid']; ?>" alt="product picture" style="max-width: 300px; max-height: 300px"></td>
 
                     <td>
                         <form action="/products/delete/!<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
