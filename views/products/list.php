@@ -1,3 +1,12 @@
+<script>
+    window.onload = function () {
+        var imagePath = window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1);
+        var image = document.getElementById("myImage");
+        image.src = imagePath + "image.jpg";
+        console.log("Current path: " + imagePath);
+    };
+</script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px;">
@@ -13,6 +22,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Delivery date</th>
+            <th>Product picture</th>
             <th></th>
         </tr>
         </thead>
@@ -25,10 +35,21 @@
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
                     <td>
+                        <?php
+                        var_dump('../data/files/Products/' . $product['uuid'] . '.' . $product['fileType']);
+                        ?>
+                        <img src="/../../../data/files/Products/<?php echo $product['uuid'] . '.' . $product['fileType']; ?>"
+                             alt="Product picture">
+                    </td>
+
+                    <td>
                         <form action="/products/delete/<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
-                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>"
+                               class="btn btn-primary btn-sm">Edit</a>
                             <?php echo request_method('DELETE', $product); ?>
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
