@@ -56,12 +56,21 @@ abstract class BaseModel
             mkdir($fileDir, 0755, true);
         }
 
-        $targetPath = $fileDir . $filename . '.' . pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION);
+        $allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
 
-        if (move_uploaded_file($_FILES['productFile']['tmp_name'], $targetPath)) {
+        $uploadedFile = $_FILES['productFile'];
+        $fileExtension = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($fileExtension, $allowedFormats)) {
+            return false;
+        }
+
+        $targetPath = $fileDir . $filename . '.' . $fileExtension;
+
+        if (move_uploaded_file($uploadedFile['tmp_name'], $targetPath)) {
             return true;
         }
+
         return false;
     }
-
 }
