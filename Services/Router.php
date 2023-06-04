@@ -40,7 +40,7 @@ class Router
                 $params = substr($seperatedUri[$i], 1);
             }
             else if($seperatedUri[$i] !== ""){
-                $uri .= $seperatedUri[$i];
+                $uri .= $seperatedUri[$i] . '/';
             }
         }
 
