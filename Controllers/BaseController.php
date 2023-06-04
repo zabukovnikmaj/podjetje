@@ -37,7 +37,7 @@ abstract class BaseController
                 $newData[] = $item;
             }
             else{
-                $this->deleteImage($item['uuid'], $item['fileType']);
+                $this->deleteImage($item['uuid'], $item['fileType'] ?? '');
             }
         }
 
