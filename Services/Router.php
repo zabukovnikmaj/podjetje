@@ -32,12 +32,16 @@ class Router
 
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-        $params = end(explode('/', $uri));
+        $seperatedUri = explode('/', $uri);
+        $params = $seperatedUri[sizeof($seperatedUri) - 1];
+        if($params === ""){
+            $params = $seperatedUri[sizeof($seperatedUri) - 2];
+        }
         $uri = rtrim($uri, '/' . $params) . '/';
 
         if (!isset($this->routes[$uri])) {
             http_response_code(404);
-            die("404 stran ni bila najdena");
+            die("404 stran ni bila najdena!");
         }
 
         $requestMethod = $_SERVER['REQUEST_METHOD'];
