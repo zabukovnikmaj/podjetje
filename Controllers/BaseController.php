@@ -50,31 +50,32 @@ abstract class BaseController
      *
      * @return void
      */
-    private function cascadeDelete(): void{
+    private function cascadeDelete(): void
+    {
         $employees = Storage::loadElements('Employees');
         $products = Storage::loadElements('Products');
         $branchOffices = Storage::loadElements('BranchOffice');
         $newBranchOffices = [];
 
         //checking relation branchOffice : products
-        for($i = 0; $i < sizeof($branchOffices); $i++){
-            foreach($branchOffices[$i] as $key => $value){
-                if($key !== 'products') {
+        for ($i = 0; $i < sizeof($branchOffices); $i++) {
+            foreach ($branchOffices[$i] as $key => $value) {
+                if ($key !== 'products') {
                     $newBranchOffices[$i][$key] = $value;
-                }  else{
+                } else {
                     $newBranchOffices[$i][$key] = [];
                 }
             }
-            for($j = 0; $j < sizeof($branchOffices[$i]['products']); $j++){
-                if($this->isInArray($branchOffices[$i]['products'][$j], $products)){
+            for ($j = 0; $j < sizeof($branchOffices[$i]['products']); $j++) {
+                if ($this->isInArray($branchOffices[$i]['products'][$j], $products)) {
                     $newBranchOffices[$i]['products'][$j] = $branchOffices[$i]['products'][$j];
                 }
             }
         }
 
         //checking relation employee : branchOffice
-        for($i = 0; $i < sizeof($employees); $i++){
-            if(!$this->isInArray($employees[$i]['branchOffice'], $branchOffices)){
+        for ($i = 0; $i < sizeof($employees); $i++) {
+            if (!$this->isInArray($employees[$i]['branchOffice'], $branchOffices)) {
                 $employees[$i]['branchOffice'] = '';
             }
         }
@@ -91,9 +92,10 @@ abstract class BaseController
      * @param array $haystack
      * @return bool
      */
-    private function isInArray(string $needle, array $haystack): bool{
-        foreach($haystack as $item){
-            if ($item['uuid'] === $needle){
+    private function isInArray(string $needle, array $haystack): bool
+    {
+        foreach ($haystack as $item) {
+            if ($item['uuid'] === $needle) {
                 return true;
             }
         }
@@ -118,7 +120,7 @@ abstract class BaseController
             }
         }
 
-        if($filteredData === []){
+        if ($filteredData === []) {
             http_response_code(404);
             die("404 Not Found");
         }
@@ -205,11 +207,57 @@ abstract class BaseController
     protected function getNameFromUuid(string $table, string $uuid): string
     {
         $data = Storage::loadElements($table);
-        foreach ($data as $item){
-            if($item['uuid'] == $uuid){
+        foreach ($data as $item) {
+            if ($item['uuid'] == $uuid) {
                 return $item['name'];
             }
         }
         return '';
     }
+
+    /**
+     * function for returning path to the image
+     *
+     * @param string $uuid
+     * @param string $extension
+     * @return string
+     */
+    protected function imagePathBuilder(string $uuid, string $extension): string
+    {
+        return base_path('data/files/' . $this->getFilenameFromClass() . '/' . $uuid . '.' . $extension);
+    }
+
+    /**
+     * function for returning image to a request
+     *
+     * @param string $uuid
+     * @return void
+     */
+    public function prepareImage(string $uuid): void
+    {
+        $imagePath = '';
+        $data = Storage::loadElements($this->getFilenameFromClass());
+        foreach ($data as $item) {
+            if ($item['uuid'] === $uuid) {
+                $imagePath = $this->imagePathBuilder($uuid, $item['fileType']);
+            }
+        }
+
+        if (file_exists($imagePath) && is_file($imagePath)) {
+            $mime = mime_content_type($imagePath);
+            $imageData = file_get_contents($imagePath);
+
+            header("Content-Type: $mime");
+            header("Content-Disposition: inline; filename=image.jpg");
+
+            echo $imageData;
+            exit();
+        }
+
+        http_response_code(404);
+        echo "Image not found";
+    }
+
+
+
 }
