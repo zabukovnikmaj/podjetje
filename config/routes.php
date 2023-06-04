@@ -48,13 +48,13 @@ return [
     ],
 
 
-    '/branchOffice/api/' => [
+    '/api/branchOffice/' => [
         'GET' => [BranchOffice::class, 'apiData']
     ],
-    '/employees/api/' => [
+    '/api/employees/' => [
         'GET' => [Employees::class, 'apiData']
     ],
-    '/products/api/' => [
+    '/api/products/' => [
         'GET' => [Products::class, 'apiData']
     ],
 
