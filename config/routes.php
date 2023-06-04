@@ -48,6 +48,17 @@ return [
     ],
 
 
+    '/branchOffice/api/' => [
+        'GET' => [BranchOffice::class, 'apiData']
+    ],
+    '/employees/api/' => [
+        'GET' => [Employees::class, 'apiData']
+    ],
+    '/products/api/' => [
+        'GET' => [Products::class, 'apiData']
+    ],
+
+
     '/branchOffice/edit/' => [
         'GET' => [BranchOffice::class, 'displayEditItem'],
         'PUT' => [BranchOffice::class, 'saveEditedData']
