@@ -35,7 +35,7 @@ class Router
         $seperatedUri = explode('/', $uri);
         $uri = '/';
         for ($i = 0; $i < sizeof($seperatedUri); $i++){
-            if(strpos($seperatedUri[$i], '!')){
+            if(strpos($seperatedUri[$i], '!') !== false){
                 //params are passed as !uuid...
                 $params = substr($seperatedUri[$i], 1);
             }
@@ -55,7 +55,7 @@ class Router
 
         if (!isset($routes[$requestMethod])) {
             http_response_code(403);
-            die("404 stran ni bila najdena");
+            die("404 stran ni bila najdena :(");
         }
 
         $route = $routes[$requestMethod];
