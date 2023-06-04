@@ -24,6 +24,7 @@ abstract class BaseController
     /**
      *general function for deleting selected item from json file
      *
+     * @param string $id
      * @return void
      */
     public function deleteItem(string $id): void
@@ -85,7 +86,7 @@ abstract class BaseController
                     $newBranchOffices[$i][$key] = [];
                 }
             }
-            for ($j = 0; $j < sizeof($branchOffices[$i]['products']); $j++) {
+            for ($j = 0; $j < sizeof($branchOffices[$i]['products']) - 1; $j++) {
                 if ($this->isInArray($branchOffices[$i]['products'][$j], $products)) {
                     $newBranchOffices[$i]['products'][$j] = $branchOffices[$i]['products'][$j];
                 }
