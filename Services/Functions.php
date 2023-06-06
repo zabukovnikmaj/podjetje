@@ -71,10 +71,7 @@ function redirect(string $path): void
  */
 function json(array $dataToEncode): string
 {
-    $jsonData = json_encode($dataToEncode, JSON_PRETTY_PRINT);
-    header('Content-Type: application/json');
-    header('Content-Length: ' . strlen($jsonData));
-    return $jsonData;
+    return json_encode($dataToEncode, JSON_PRETTY_PRINT);
 }
 
 /**
