@@ -37,13 +37,13 @@ return [
     ],
 
 
-    '/branchOffice/delet/' => [
+    '/branchOffice/delete/' => [
         'DELETE' => [BranchOffice::class, 'deleteItem']
     ],
-    '/employees/delet/' => [
+    '/employees/delete/' => [
         'DELETE' => [Employees::class, 'deleteItem']
     ],
-    '/products/delet/' => [
+    '/products/delete/' => [
         'DELETE' => [Products::class, 'deleteItem']
     ],
 
@@ -59,5 +59,10 @@ return [
     '/products/edit/' => [
         'GET' => [Products::class, 'displayEditItem'],
         'PUT' => [Products::class, 'saveEditedData']
+    ],
+
+
+    '/products/images/' => [
+        'GET' => [Products::class, 'prepareImage']
     ]
 ];

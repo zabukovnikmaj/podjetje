@@ -24,6 +24,7 @@ abstract class BaseController
     /**
      *general function for deleting selected item from json file
      *
+     * @param string $id
      * @return void
      */
     public function deleteItem(string $id): void
@@ -36,6 +37,9 @@ abstract class BaseController
             if ($item['uuid'] != $id) {
                 $newData[] = $item;
             }
+            else{
+                $this->deleteImage($item['uuid'], $item['fileType'] ?? '');
+            }
         }
 
         Storage::saveElements($filename, $newData);
@@ -46,35 +50,52 @@ abstract class BaseController
     }
 
     /**
+     * function for deleting image if it exists
+     *
+     * @param string $uuid
+     * @param string $extension
+     * @return bool
+     */
+    private function deleteImage(string $uuid, string $extension): bool
+    {
+        $directory = $this->imagePathBuilder($uuid, $extension);
+        if(file_exists($directory)){
+            return unlink($directory);
+        }
+        return false;
+    }
+
+    /**
      * function responsible for deleting all the foreign keys after primary key has been deleted
      *
      * @return void
      */
-    private function cascadeDelete(): void{
+    private function cascadeDelete(): void
+    {
         $employees = Storage::loadElements('Employees');
         $products = Storage::loadElements('Products');
         $branchOffices = Storage::loadElements('BranchOffice');
         $newBranchOffices = [];
 
         //checking relation branchOffice : products
-        for($i = 0; $i < sizeof($branchOffices); $i++){
-            foreach($branchOffices[$i] as $key => $value){
-                if($key !== 'products') {
+        for ($i = 0; $i < sizeof($branchOffices); $i++) {
+            foreach ($branchOffices[$i] as $key => $value) {
+                if ($key !== 'products') {
                     $newBranchOffices[$i][$key] = $value;
-                }  else{
+                } else {
                     $newBranchOffices[$i][$key] = [];
                 }
             }
-            for($j = 0; $j < sizeof($branchOffices[$i]['products']); $j++){
-                if($this->isInArray($branchOffices[$i]['products'][$j], $products)){
+            for ($j = 0; $j < sizeof($branchOffices[$i]['products']) - 1; $j++) {
+                if ($this->isInArray($branchOffices[$i]['products'][$j], $products)) {
                     $newBranchOffices[$i]['products'][$j] = $branchOffices[$i]['products'][$j];
                 }
             }
         }
 
         //checking relation employee : branchOffice
-        for($i = 0; $i < sizeof($employees); $i++){
-            if(!$this->isInArray($employees[$i]['branchOffice'], $branchOffices)){
+        for ($i = 0; $i < sizeof($employees); $i++) {
+            if (!$this->isInArray($employees[$i]['branchOffice'], $branchOffices)) {
                 $employees[$i]['branchOffice'] = '';
             }
         }
@@ -91,9 +112,10 @@ abstract class BaseController
      * @param array $haystack
      * @return bool
      */
-    private function isInArray(string $needle, array $haystack): bool{
-        foreach($haystack as $item){
-            if ($item['uuid'] === $needle){
+    private function isInArray(string $needle, array $haystack): bool
+    {
+        foreach ($haystack as $item) {
+            if ($item['uuid'] === $needle) {
                 return true;
             }
         }
@@ -118,7 +140,7 @@ abstract class BaseController
             }
         }
 
-        if($filteredData === []){
+        if ($filteredData === []) {
             http_response_code(404);
             die("404 Not Found");
         }
@@ -155,6 +177,7 @@ abstract class BaseController
             return;
         }
 
+
         $existingData = $this->replaceExistingData($existingData, $params);
 
         Storage::saveElements($this->getFilenameFromClass(), $existingData);
@@ -166,6 +189,7 @@ abstract class BaseController
      * function for finding data that will be changed and changing it
      *
      * @param array $existingData
+     * @param string $params
      * @return array
      */
     protected function replaceExistingData(array $existingData, string $params): array
@@ -174,7 +198,14 @@ abstract class BaseController
         foreach ($existingData as $data) {
             if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
-                    if (isset($_POST[$filed])) {
+                    if(!empty($_FILES) && $filed === 'fileType'){
+                        $this->deleteImage($existingData[$index]['uuid'], $existingData[$index]['fileType']);
+                        $model = new \Models\Products();
+                        if($model->saveImage($this->getFilenameFromClass(), $existingData[$index]['uuid'])){
+                            $existingData[$index][$filed] = pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION);
+                        }
+                    }
+                    else if (isset($_POST[$filed])) {
                         $existingData[$index][$filed] = $_POST[$filed];
                     }
                 }
@@ -205,11 +236,56 @@ abstract class BaseController
     protected function getNameFromUuid(string $table, string $uuid): string
     {
         $data = Storage::loadElements($table);
-        foreach ($data as $item){
-            if($item['uuid'] == $uuid){
+        foreach ($data as $item) {
+            if ($item['uuid'] == $uuid) {
                 return $item['name'];
             }
         }
         return '';
     }
+
+    /**
+     * function for returning path to the image
+     *
+     * @param string $uuid
+     * @param string $extension
+     * @return string
+     */
+    protected function imagePathBuilder(string $uuid, string $extension): string
+    {
+        return base_path('data/files/' . $this->getFilenameFromClass() . '/' . $uuid . '.' . $extension);
+    }
+
+    /**
+     * function for returning image to a request
+     *
+     * @param string $uuid
+     * @return void
+     */
+    public function prepareImage(string $uuid): void
+    {
+        $imagePath = '';
+        $data = Storage::loadElements($this->getFilenameFromClass());
+        foreach ($data as $item) {
+            if ($item['uuid'] === $uuid) {
+                $imagePath = $this->imagePathBuilder($uuid, $item['fileType']);
+            }
+        }
+
+        if (file_exists($imagePath) && is_file($imagePath)) {
+            $mime = mime_content_type($imagePath);
+            $imageData = file_get_contents($imagePath);
+
+            header("Content-Type: $mime");
+            header("Content-Disposition: inline; filename=image.jpg");
+
+            echo $imageData;
+            exit();
+        }
+
+        http_response_code(404);
+        echo "Image not found";
+    }
+
+
 }

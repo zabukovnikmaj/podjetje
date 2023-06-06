@@ -24,6 +24,10 @@ abstract class BaseModel
 
         $data[] = $new_entry;
         file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+
+        if(!empty($_FILES['productFile']['tmp_name'])){
+            $this->saveImage(basename($className), $new_entry['uuid']);
+        }
     }
 
     /**
@@ -35,5 +39,37 @@ abstract class BaseModel
     public function getUuid(): string
     {
         return uuid();
+    }
+
+    /**
+     * function for saving image to data/files/$folderName/$fileName directory
+     *
+     * @param string $folderName
+     * @param string $filename
+     * @return bool
+     */
+    public function saveImage(string $folderName, string $filename): bool
+    {
+        $uploadedFile = $_FILES['productFile'];
+        $fileExtension = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
+        $allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (!in_array($fileExtension, $allowedFormats)) {
+            return false;
+        }
+
+        $fileDir = base_path('data/files/' . $folderName . '/');
+
+        if (!is_dir($fileDir)) {
+            mkdir($fileDir, 0755, true);
+        }
+
+        $targetPath = $fileDir . $filename . '.' . $fileExtension;
+
+        if (move_uploaded_file($uploadedFile['tmp_name'], $targetPath)) {
+            return true;
+        }
+
+        return false;
     }
 }

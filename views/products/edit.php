@@ -14,7 +14,7 @@
         $err = [];
     } ?>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <?php echo request_method('PUT', $filteredData ?? null); ?>
 
         <div class="form-group">
@@ -47,6 +47,16 @@
             <?php view('partials/errors', [
                 'err' => $err['deliveryDate']
             ]); ?>
+        </div>
+
+        <div class="form-group">
+            <label for="productFile">Product picture</label><br>
+            <input type="file" class="form-control-file" name="productFile" id="productFile">
+            <?php view('partials/errors', [
+                'err' => $err['productFile']
+            ]); ?><br>
+
+            <img src="/products/images/!<?php echo $filteredData['uuid']; ?>" alt="Product picture has not been uploaded yet!" style="max-width: 300px; max-height: 300px">
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

@@ -1,3 +1,11 @@
+<script>
+    window.onload = function () {
+        const currentDirectory = process.cwd();
+        console.log("Current Directory:", currentDirectory);
+
+    };
+</script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div class="container" style="margin-top: 50px;">
@@ -13,6 +21,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Delivery date</th>
+            <th>Product picture</th>
             <th></th>
         </tr>
         </thead>
@@ -24,11 +33,16 @@
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['date']); ?></td>
+                    <td><img src="/products/images/!<?php echo $product['uuid']; ?>" alt="product picture" style="max-width: 300px; max-height: 300px"></td>
+
                     <td>
-                        <form action="/products/delete/<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
-                            <a href="/products/edit/<?php echo htmlspecialchars($product['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="/products/delete/!<?php echo htmlspecialchars($product['uuid']); ?>" method="POST">
+                            <a href="/products/edit/!<?php echo htmlspecialchars($product['uuid']); ?>"
+                               class="btn btn-primary btn-sm">Edit</a>
                             <?php echo request_method('DELETE', $product); ?>
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
