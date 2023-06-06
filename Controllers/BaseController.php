@@ -196,7 +196,7 @@ abstract class BaseController
         foreach ($existingData as $data) {
             if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
-                    if (!empty($_FILES) && $filed === 'fileType') {
+                    if (!empty($_FILES['productFile']['name']) && $filed === 'fileType') {
                         $this->deleteImage($existingData[$index]['uuid'], $existingData[$index]['fileType']);
                         $model = new \Models\Products();
                         if ($model->saveImage($this->getFilenameFromClass(), $existingData[$index]['uuid'])) {
