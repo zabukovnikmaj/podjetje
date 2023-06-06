@@ -225,14 +225,6 @@ abstract class BaseController
         $table = $this->getFilenameFromClass();
         $data = Storage::loadElements($table);
 
-        if (empty($data)) {
-            $this->sendResponse(500, [
-                'status' => 'error',
-                'message' => 'Failed to load data from storage!',
-                'data' => []
-            ]);
-        }
-
         $this->sendResponse(200, [
             'status' => 'success',
             'message' => 'Data loaded successfully!',
