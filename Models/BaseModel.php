@@ -50,19 +50,18 @@ abstract class BaseModel
      */
     public function saveImage(string $folderName, string $filename): bool
     {
+        $uploadedFile = $_FILES['productFile'];
+        $fileExtension = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
+        $allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (!in_array($fileExtension, $allowedFormats)) {
+            return false;
+        }
+
         $fileDir = base_path('data/files/' . $folderName . '/');
 
         if (!is_dir($fileDir)) {
             mkdir($fileDir, 0755, true);
-        }
-
-        $allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
-
-        $uploadedFile = $_FILES['productFile'];
-        $fileExtension = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($fileExtension, $allowedFormats)) {
-            return false;
         }
 
         $targetPath = $fileDir . $filename . '.' . $fileExtension;
