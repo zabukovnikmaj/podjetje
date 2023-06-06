@@ -4,6 +4,7 @@ use Controllers\Index;
 use Controllers\BranchOffice;
 use Controllers\Employees;
 use Controllers\Products;
+use Controllers\ApiBaseController;
 
 
 return [
@@ -45,6 +46,17 @@ return [
     ],
     '/products/delete/' => [
         'DELETE' => [Products::class, 'deleteItem']
+    ],
+
+
+    '/api/branchOffice/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
+    ],
+    '/api/employees/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
+    ],
+    '/api/products/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
     ],
 
 
