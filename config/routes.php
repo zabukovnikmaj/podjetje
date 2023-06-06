@@ -4,6 +4,7 @@ use Controllers\Index;
 use Controllers\BranchOffice;
 use Controllers\Employees;
 use Controllers\Products;
+use Controllers\ApiBaseController;
 
 
 return [
@@ -49,13 +50,13 @@ return [
 
 
     '/api/branchOffice/' => [
-        'GET' => [BranchOffice::class, 'apiData']
+        'GET' => [ApiBaseController::class, 'apiData']
     ],
     '/api/employees/' => [
-        'GET' => [Employees::class, 'apiData']
+        'GET' => [ApiBaseController::class, 'apiData']
     ],
     '/api/products/' => [
-        'GET' => [Products::class, 'apiData']
+        'GET' => [ApiBaseController::class, 'apiData']
     ],
 
 
