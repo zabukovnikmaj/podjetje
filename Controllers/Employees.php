@@ -13,19 +13,20 @@ class Employees extends BaseController
      *
      * @return void
      */
-    public function showCreateForm(): void
+    public function showCreateForm(): string
     {
-        view('employees/edit', [
+        return view('employees/edit', [
             'branchOffices' => Storage::loadElements('BranchOffice'),
             'filteredData' => null
         ]);
     }
+
     /**
      * function for displaying existing data
      *
      * @return void
      */
-    public function list(): void
+    public function list(): string
     {
         $employees = Storage::loadElements('Employees');
 
@@ -35,16 +36,17 @@ class Employees extends BaseController
             $employeesIndex++;
         }
 
-        view('employees/list', [
+        return view('employees/list', [
             'employees' => $employees
         ]);
     }
+
     /**
      * function for processing entered data and later saving it by using model
      *
      * @return void
      */
-    public function processData(): void
+    public function processData(): string
     {
         $err = Validator::required([], $_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
         if(empty($err)){
@@ -52,11 +54,10 @@ class Employees extends BaseController
         }
 
         if (!empty($err)) {
-            view('employees/edit', [
+            return view('employees/edit', [
                 'err' => $err,
                 'branchOffices' => Storage::loadElements('BranchOffice'),
             ]);
-            return;
         }
 
         $employeesModel = new EmployeesModel();
@@ -68,7 +69,7 @@ class Employees extends BaseController
         $employeesModel->setEmail(htmlspecialchars($_POST['email']));
         $employeesModel->setUuid();
         $employeesModel->savingData();
-        header('Location: /');
+        redirect('/');
     }
 
     /**

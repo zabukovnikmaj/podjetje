@@ -13,9 +13,9 @@ class BranchOffice extends BaseController
      *
      * @return void
      */
-    public function showCreateForm(): void
+    public function showCreateForm(): string
     {
-        view('branchOffice/edit', [
+        return view('branchOffice/edit', [
             'products' => Storage::loadElements('Products'),
             'filteredData' => null
         ]);
@@ -26,7 +26,7 @@ class BranchOffice extends BaseController
      *
      * @return void
      */
-    public function list(): void
+    public function list(): string
     {
         $branchOffices = Storage::loadElements('BranchOffice');
 
@@ -40,7 +40,7 @@ class BranchOffice extends BaseController
             $officeIndex++;
         }
 
-        view('branchOffice/list', [
+        return view('branchOffice/list', [
             'branchOffices' => $branchOffices
             ]);
     }
@@ -50,7 +50,7 @@ class BranchOffice extends BaseController
      *
      * @return void
      */
-    public function processData(): void
+    public function processData(): string
     {
         $err = Validator::required([], $_POST, 'name', 'address', 'products');
         if(empty($err)){
@@ -58,11 +58,10 @@ class BranchOffice extends BaseController
         }
 
         if (!empty($err)) {
-            view('branchOffice/edit', [
+            return view('branchOffice/edit', [
                 'err' => $err,
                 'products' => Storage::loadElements('Products'),
             ]);
-            return;
         }
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
@@ -71,7 +70,7 @@ class BranchOffice extends BaseController
         $branchOfficeModel->setProducts($_POST['products']);
         $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();
-        header('Location: /');
+        redirect('/');
     }
 
     /**

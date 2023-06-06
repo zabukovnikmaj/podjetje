@@ -42,11 +42,11 @@ abstract class BaseController
             }
         }
 
-        Storage::saveElements($filename, $newData);
+        Storage::saveElements($filename, json($newData));
 
         $this->cascadeDelete();
 
-        header('Location: /' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+        redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
     }
 
     /**
@@ -101,8 +101,8 @@ abstract class BaseController
         }
 
         //saving changed data
-        Storage::saveElements('Employees', $employees);
-        Storage::saveElements('BranchOffice', $newBranchOffices);
+        Storage::saveElements('Employees', json($employees));
+        Storage::saveElements('BranchOffice', json($newBranchOffices));
     }
 
     /**
@@ -127,7 +127,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function displayEditItem(string $id): void
+    public function displayEditItem(string $id): string
     {
         $filename = $this->getFilenameFromClass();
         $existingData = Storage::loadElements($filename);
@@ -147,7 +147,7 @@ abstract class BaseController
 
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
-        view($filename . '/edit', [
+        return view($filename . '/edit', [
             'filteredData' => $filteredData,
             'products' => Storage::loadElements('Products'),
             'branchOffices' => Storage::loadElements('BranchOffice')
@@ -159,7 +159,7 @@ abstract class BaseController
      *
      * @return void
      */
-    public function saveEditedData(string $params): void
+    public function saveEditedData(string $params): string
     {
         $err = $this->validateData([]);
 
@@ -168,21 +168,20 @@ abstract class BaseController
         $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         if (!empty($err)) {
-            view($filename . '/edit', [
+            return view($filename . '/edit', [
                 'err' => $err,
                 'products' => Storage::loadElements('Products'),
                 'branchOffices' => Storage::loadElements('BranchOffice'),
                 'filteredData' => $_POST
             ]);
-            return;
         }
 
 
         $existingData = $this->replaceExistingData($existingData, $params);
 
-        Storage::saveElements($this->getFilenameFromClass(), $existingData);
+        Storage::saveElements($this->getFilenameFromClass(), json($existingData));
 
-        header('Location: /' . $filename . '/list/');
+        redirect('/' . $filename . '/list/');
     }
 
     /**

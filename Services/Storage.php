@@ -30,7 +30,7 @@ class Storage
         $elements = $this->loadStorage($tableName);
         $elements["data"][$model->id] = $model;
 
-        $this->saveElements($tableName, $elements);
+        $this->saveElements($tableName, json($elements));
     }
 
     /**
@@ -51,15 +51,15 @@ class Storage
     }
 
     /**
-     * Save elements to table
+     * save elements to the table
      *
      * @param string $tableName
-     * @param array $elements
+     * @param string $jsonEncodedData
      * @return void
      */
-    public static function saveElements(string $tableName, array $elements): void
+    public static function saveElements(string $tableName, string $jsonEncodedData): void
     {
         $filename = storage_path($tableName . ".json");
-        file_put_contents($filename, json_encode($elements, JSON_PRETTY_PRINT));
+        file_put_contents($filename, $jsonEncodedData);
     }
 }

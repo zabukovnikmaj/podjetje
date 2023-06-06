@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  * method that makes path into one string
  *
@@ -28,11 +31,11 @@ function storage_path(string $path): string
  * @param array $attributes
  * @return void
  */
-function view(string $path, array $attributes = []): void
+function view(string $path, array $attributes = []): string
 {
     extract($attributes);
 
-    include base_path("views/" . $path . ".php");
+    return require base_path("views/" . $path . ".php");
 }
 
 /**
@@ -46,6 +49,47 @@ function createDirectory(string $path): void
     if (!is_dir($path)) {
         mkdir($path, 0777, true);
     }
+}
+
+/**
+ * function for making redirects
+ *
+ * @param string $path
+ * @return void
+ */
+function redirect(string $path): void
+{
+    header('Location: ' . $path);
+    exit();
+}
+
+/**
+ * function for converting array to json
+ *
+ * @param array $dataToEncode
+ * @return string
+ */
+function json(array $dataToEncode): string
+{
+    return json_encode($dataToEncode, JSON_PRETTY_PRINT);
+}
+
+/**
+ * function for starting file download on client side
+ *
+ * @param string $filename
+ * @return void
+ */
+function fileDownload(string $filename): void
+{
+    $basePath = base_path('data/files/');
+
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . $basePath . $filename . '"');
+    header('Content-Length: ' . filesize($basePath . $filename));
+
+    readfile($basePath . $filename);
+    exit;
 }
 
 /**
