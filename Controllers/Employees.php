@@ -31,7 +31,7 @@ class Employees extends BaseController
         $employees = Storage::loadElements('Employees');
 
         $employeesIndex = 0;
-        foreach ($employees as $employee){
+        foreach ($employees as $employee) {
             $employees[$employeesIndex]['branchOffice'] = $this->getNameFromUuid('BranchOffice', $employee['branchOffice']);
             $employeesIndex++;
         }
@@ -49,7 +49,7 @@ class Employees extends BaseController
     public function processData(): string
     {
         $err = Validator::required([], $_POST, 'branchOffice', 'name', 'position', 'age', 'sex', 'email');
-        if(empty($err)){
+        if (empty($err)) {
             $err = $this->validateData($err);
         }
 

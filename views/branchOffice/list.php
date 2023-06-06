@@ -23,12 +23,17 @@
                         <tr>
                             <td><?php echo htmlspecialchars($branchOffice['name']); ?></td>
                             <td><?php echo htmlspecialchars($branchOffice['address']); ?></td>
-                            <td><?php echo htmlspecialchars(implode(', ', $branchOffice['products']));?></td>
+                            <td><?php echo htmlspecialchars(implode(', ', $branchOffice['products'])); ?></td>
                             <td>
-                                <form action="/branchOffice/delete/!<?php echo htmlspecialchars($branchOffice['uuid']); ?>" method="POST">
-                                    <a href="/branchOffice/edit/!<?php echo htmlspecialchars($branchOffice['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
+                                <form
+                                    action="/branchOffice/delete/!<?php echo htmlspecialchars($branchOffice['uuid']); ?>"
+                                    method="POST">
+                                    <a href="/branchOffice/edit/!<?php echo htmlspecialchars($branchOffice['uuid']); ?>"
+                                       class="btn btn-primary btn-sm">Edit</a>
                                     <?php echo request_method('DELETE', $branchOffice); ?>
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Confirm?');">Delete
+                                    </button>
                                 </form>
                             </td>
                         </tr>

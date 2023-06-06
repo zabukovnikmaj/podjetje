@@ -25,7 +25,7 @@ abstract class BaseModel
         $data[] = $new_entry;
         file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
 
-        if(!empty($_FILES['productFile']['tmp_name'])){
+        if (!empty($_FILES['productFile']['tmp_name'])) {
             $this->saveImage(basename($className), $new_entry['uuid']);
         }
     }

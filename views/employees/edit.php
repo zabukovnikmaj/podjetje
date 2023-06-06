@@ -30,7 +30,8 @@
 
                 <div class="form-group">
                     <label for="name">Employee name</label><br>
-                    <input type="text" class="form-control" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>">
+                    <input type="text" class="form-control" name="name"
+                           value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>">
                     <?php view('partials/errors', [
                         'err' => $err['name']
                     ]); ?>
@@ -38,7 +39,8 @@
 
                 <div class="form-group">
                     <label for="position">Employee position</label><br>
-                    <input type="text" class="form-control" name="position" value="<?php echo old('position', isset($filteredData['position']) ? $filteredData['position'] : null); ?>">
+                    <input type="text" class="form-control" name="position"
+                           value="<?php echo old('position', isset($filteredData['position']) ? $filteredData['position'] : null); ?>">
                     <?php view('partials/errors', [
                         'err' => $err['position']
                     ]); ?>
@@ -46,7 +48,8 @@
 
                 <div class="form-group">
                     <label for="age">Employee age</label><br>
-                    <input type="number" class="form-control" name="age" step="1" min="15" max="100" value="<?php echo old('age', isset($filteredData['age']) ? $filteredData['age'] : null); ?>">
+                    <input type="number" class="form-control" name="age" step="1" min="15" max="100"
+                           value="<?php echo old('age', isset($filteredData['age']) ? $filteredData['age'] : null); ?>">
                     <?php view('partials/errors', [
                         'err' => $err['age']
                     ]); ?>
@@ -54,9 +57,9 @@
 
                 <div class="form-group">
                     <label>Employee sex:</label><br>
-                    <input type="radio" name="sex" value="m" <?php if($filteredData['sex'] === 'm') echo 'checked'; ?>>
+                    <input type="radio" name="sex" value="m" <?php if ($filteredData['sex'] === 'm') echo 'checked'; ?>>
                     <label for="male">Male</label><br>
-                    <input type="radio" name="sex" value="f" <?php if($filteredData['sex'] === 'f') echo 'checked'; ?>>
+                    <input type="radio" name="sex" value="f" <?php if ($filteredData['sex'] === 'f') echo 'checked'; ?>>
                     <label for="female">Female</label>
                     <?php view('partials/errors', [
                         'err' => $err['sex']
@@ -67,7 +70,8 @@
                 <div class="form-group">
                     <label for="email">Employee email</label>
                     <input type="email" class="form-control"
-                           name="email" value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>">
+                           name="email"
+                           value="<?php echo old('email', isset($filteredData['email']) ? $filteredData['email'] : null); ?>">
                     <?php view('partials/errors', [
                         'err' => $err['email']
                     ]); ?>

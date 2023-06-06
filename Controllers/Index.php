@@ -9,7 +9,8 @@ class Index
      *
      * @return void
      */
-    public function index(): string {
+    public function index(): string
+    {
         return view('index/index');
     }
 }

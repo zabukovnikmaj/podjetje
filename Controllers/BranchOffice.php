@@ -31,9 +31,9 @@ class BranchOffice extends BaseController
         $branchOffices = Storage::loadElements('BranchOffice');
 
         $officeIndex = 0;
-        foreach ($branchOffices as $branchOffice){
+        foreach ($branchOffices as $branchOffice) {
             $productIndex = 0;
-            foreach ($branchOffice['products'] as $product){
+            foreach ($branchOffice['products'] as $product) {
                 $branchOffices[$officeIndex]['products'][$productIndex] = $this->getNameFromUuid('Products', $product);
                 $productIndex++;
             }
@@ -42,7 +42,7 @@ class BranchOffice extends BaseController
 
         return view('branchOffice/list', [
             'branchOffices' => $branchOffices
-            ]);
+        ]);
     }
 
     /**
@@ -53,7 +53,7 @@ class BranchOffice extends BaseController
     public function processData(): string
     {
         $err = Validator::required([], $_POST, 'name', 'address', 'products');
-        if(empty($err)){
+        if (empty($err)) {
             $err = $this->validateData($err);
         }
 

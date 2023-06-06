@@ -24,17 +24,21 @@
                 <?php if (count($employees) > 0): ?>
                     <?php foreach ($employees as $employee): ?>
                         <tr>
-                            <td><?php echo $employee['branchOffice'] == null ?  'This branch office does not exist!': htmlspecialchars($employee['branchOffice']); ?></td>
+                            <td><?php echo $employee['branchOffice'] == null ? 'This branch office does not exist!' : htmlspecialchars($employee['branchOffice']); ?></td>
                             <td><?php echo htmlspecialchars($employee['name']); ?></td>
                             <td><?php echo htmlspecialchars($employee['position']); ?></td>
                             <td><?php echo htmlspecialchars($employee['age']); ?></td>
                             <td><?php echo htmlspecialchars($employee['sex']); ?></td>
                             <td><?php echo htmlspecialchars($employee['email']); ?></td>
                             <td>
-                                <form action="/employees/delete/!<?php echo htmlspecialchars($employee['uuid']); ?>" method="POST">
-                                    <a href="/employees/edit/!<?php echo htmlspecialchars($employee['uuid']); ?>" class="btn btn-primary btn-sm">Edit</a>
+                                <form action="/employees/delete/!<?php echo htmlspecialchars($employee['uuid']); ?>"
+                                      method="POST">
+                                    <a href="/employees/edit/!<?php echo htmlspecialchars($employee['uuid']); ?>"
+                                       class="btn btn-primary btn-sm">Edit</a>
                                     <?php echo request_method('DELETE', $employee); ?>
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Confirm?');">Delete
+                                    </button>
                                 </form>
                             </td>
                         </tr>

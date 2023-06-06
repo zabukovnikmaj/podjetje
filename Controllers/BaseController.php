@@ -36,8 +36,7 @@ abstract class BaseController
         foreach ($existingData as $item) {
             if ($item['uuid'] != $id) {
                 $newData[] = $item;
-            }
-            else{
+            } else {
                 $this->deleteImage($item['uuid'], $item['fileType'] ?? '');
             }
         }
@@ -59,7 +58,7 @@ abstract class BaseController
     private function deleteImage(string $uuid, string $extension): bool
     {
         $directory = $this->imagePathBuilder($uuid, $extension);
-        if(file_exists($directory)){
+        if (file_exists($directory)) {
             return unlink($directory);
         }
         return false;
@@ -197,14 +196,13 @@ abstract class BaseController
         foreach ($existingData as $data) {
             if ($data['uuid'] === $params) {
                 foreach ($data as $filed => $element) {
-                    if(!empty($_FILES) && $filed === 'fileType'){
+                    if (!empty($_FILES) && $filed === 'fileType') {
                         $this->deleteImage($existingData[$index]['uuid'], $existingData[$index]['fileType']);
                         $model = new \Models\Products();
-                        if($model->saveImage($this->getFilenameFromClass(), $existingData[$index]['uuid'])){
+                        if ($model->saveImage($this->getFilenameFromClass(), $existingData[$index]['uuid'])) {
                             $existingData[$index][$filed] = pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION);
                         }
-                    }
-                    else if (isset($_POST[$filed])) {
+                    } else if (isset($_POST[$filed])) {
                         $existingData[$index][$filed] = $_POST[$filed];
                     }
                 }

@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h1>Enter information about the branch office</h1>
     <?php
-    if(!isset($err)){
+    if (!isset($err)) {
         $err = [];
     }
     ?>
@@ -20,7 +20,8 @@
 
         <div class="form-group">
             <label for="name">Branch name</label>
-            <input type="text" class="form-control <?php echo isset($err['name']) ? 'is-invalid' : ''; ?>" name="name" value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>">
+            <input type="text" class="form-control <?php echo isset($err['name']) ? 'is-invalid' : ''; ?>" name="name"
+                   value="<?php echo old('name', isset($filteredData['name']) ? $filteredData['name'] : null); ?>">
             <?php view('partials/errors', [
                 'err' => $err['name']
             ]); ?>
@@ -28,7 +29,9 @@
 
         <div class="form-group">
             <label for="address">Branch address</label>
-            <input type="text" class="form-control <?php echo isset($err['address']) ? 'is-invalid' : ''; ?>" name="address" value="<?php echo old('address', isset($filteredData['address']) ? $filteredData['address'] : null); ?>">
+            <input type="text" class="form-control <?php echo isset($err['address']) ? 'is-invalid' : ''; ?>"
+                   name="address"
+                   value="<?php echo old('address', isset($filteredData['address']) ? $filteredData['address'] : null); ?>">
             <?php view('partials/errors', [
                 'err' => $err['address']
             ]); ?>
@@ -51,6 +54,8 @@
 </div>
 
 <!-- Bootstrap 5 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-TgSK8d+l4iDeSQeqvuhyHw+9BzvbV4JF6kjcEjwA7pnbYAvv6x3S8Wif4Osmg9VgHwCf+7SWHYf3HjRg+rsQyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-TgSK8d+l4iDeSQeqvuhyHw+9BzvbV4JF6kjcEjwA7pnbYAvv6x3S8Wif4Osmg9VgHwCf+7SWHYf3HjRg+rsQyA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

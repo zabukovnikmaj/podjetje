@@ -104,7 +104,7 @@ class Validator
      */
     public static function checkDescription(string $description): string
     {
-        if(strlen($description) > 1000){
+        if (strlen($description) > 1000) {
             return "The description is too long!";
         }
         return "";
@@ -119,7 +119,7 @@ class Validator
     public static function checkDate(string $date): string
     {
         $dateFromFormat = DateTime::createFromFormat('Y-m-d', $date);
-        if(!($dateFromFormat && $dateFromFormat->format('Y-m-d') === $date)){
+        if (!($dateFromFormat && $dateFromFormat->format('Y-m-d') === $date)) {
             return "Date is in the wrong format!";
         }
         return "";
@@ -135,12 +135,12 @@ class Validator
     {
         $data = Storage::loadElements("Products");
         $foundMatches = [];
-        foreach ($data as $element){
+        foreach ($data as $element) {
             if (in_array($element['uuid'], $products)) {
                 $foundMatches[] = $element['uuid'];
             }
         }
-        if(count($foundMatches) === count($products)){
+        if (count($foundMatches) === count($products)) {
             return "";
         }
         return "One or more of the entered products do not exists in database!";
@@ -155,7 +155,7 @@ class Validator
     public static function checkBranchOffice(string $branchOffice): string
     {
         $data = Storage::loadElements("BranchOffice");
-        foreach ($data as $element){
+        foreach ($data as $element) {
             if ($element['uuid'] === $branchOffice) {
                 return "";
             }

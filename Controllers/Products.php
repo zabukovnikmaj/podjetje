@@ -19,6 +19,7 @@ class Products extends BaseController
             'filteredData' => null
         ]);
     }
+
     /**
      * function for displaying existing data
      *
@@ -39,11 +40,11 @@ class Products extends BaseController
     public function processData(): string
     {
         $err = Validator::required([], $_POST, 'name', 'description', 'price', 'deliveryDate');
-        if(empty($_FILES['productFile'])){
+        if (empty($_FILES['productFile'])) {
             $err['productFile'] = 'Image of a product was not uploaded!';
         }
 
-        if(empty($err)){
+        if (empty($err)) {
             $err = $this->validateData($err);
         }
 
