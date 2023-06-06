@@ -212,38 +212,4 @@ abstract class BaseController
         }
         return '';
     }
-
-    /**
-     * Function for generating REST response
-     *
-     * @return void
-     */
-    public function apiData(): void
-    {
-        //TODO: adding authentication of the user, so only certain users can access this API
-
-        $table = $this->getFilenameFromClass();
-        $data = Storage::loadElements($table);
-
-        $this->sendResponse(200, [
-            'status' => 'success',
-            'message' => 'Data loaded successfully!',
-            'data' => $data
-        ]);
-    }
-
-    /**
-     * function for sending API response with specific status code and data
-     *
-     * @param int $statusCode
-     * @param array $data
-     * @return void
-     */
-    protected function sendResponse(int $statusCode, array $data): void
-    {
-        http_response_code($statusCode);
-        header('Content-Type: application/json');
-        echo json($data);
-        exit;
-    }
 }
