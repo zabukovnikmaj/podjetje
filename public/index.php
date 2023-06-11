@@ -4,6 +4,9 @@ use Services\Router;
 
 const BASE_PATH = __DIR__ . '/../';
 
+$config = require BASE_PATH . 'config/config.php';
+define("CONFIG", $config);
+
 require_once BASE_PATH . 'Services/Functions.php';
 
 // Autoloader function
