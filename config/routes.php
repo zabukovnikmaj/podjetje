@@ -64,12 +64,6 @@ return [
     ],
 
 
-    '/config/storageMethod/' => [
-        'GET' => [Config::class, 'show'],
-        'POST' => [Config::class, 'processData']
-    ],
-
-
     '/products/images/' => [
         'GET' => [Products::class, 'prepareImage']
     ],
