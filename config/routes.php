@@ -49,17 +49,6 @@ return [
     ],
 
 
-    '/api/branchOffice/' => [
-        'GET' => [ApiBaseController::class, 'apiData']
-    ],
-    '/api/employees/' => [
-        'GET' => [ApiBaseController::class, 'apiData']
-    ],
-    '/api/products/' => [
-        'GET' => [ApiBaseController::class, 'apiData']
-    ],
-
-
     '/branchOffice/edit/' => [
         'GET' => [BranchOffice::class, 'displayEditItem'],
         'PUT' => [BranchOffice::class, 'saveEditedData']
@@ -76,5 +65,15 @@ return [
 
     '/products/images/' => [
         'GET' => [Products::class, 'prepareImage']
+    ],
+
+    '/api/branchOffice/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
+    ],
+    '/api/employees/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
+    ],
+    '/api/products/' => [
+        'GET' => [ApiBaseController::class, 'apiData']
     ]
 ];
