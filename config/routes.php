@@ -5,6 +5,7 @@ use Controllers\BranchOffice;
 use Controllers\Employees;
 use Controllers\Products;
 use Controllers\ApiBaseController;
+use Controllers\Config;
 
 
 return [
@@ -13,7 +14,7 @@ return [
     ],
 
 
-    '/branchOffices/create/' =>[
+    '/branchOffices/create/' => [
         'GET' => [BranchOffice::class, 'showCreateForm'],
         'POST' => [BranchOffice::class, 'processData']
     ],
@@ -63,9 +64,16 @@ return [
     ],
 
 
+    '/config/storageMethod/' => [
+        'GET' => [Config::class, 'show'],
+        'POST' => [Config::class, 'processData']
+    ],
+
+
     '/products/images/' => [
         'GET' => [Products::class, 'prepareImage']
     ],
+
 
     '/api/branchOffice/' => [
         'GET' => [ApiBaseController::class, 'apiData']
