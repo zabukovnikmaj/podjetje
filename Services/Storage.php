@@ -2,46 +2,18 @@
 
 namespace Services;
 
-use Models\Model;
-
 class Storage
 {
-    /**
-     * Generate unique ID for element
-     *
-     * @param string $tableName
-     * @return int
-     */
-    public function generateId(string $tableName): int
-    {
-        $elements = $this->loadElements($tableName);
-        return count($elements) + 1;
-    }
-
-    /**
-     * Add new element
-     *
-     * @param string $tableName
-     * @param Model $model
-     * @return void
-     */
-    public function addElement(string $tableName, Model $model): void
-    {
-        $elements = $this->loadStorage($tableName);
-        $elements["data"][$model->id] = $model;
-
-        $this->saveElements($tableName, json($elements));
-    }
-
     /**
      * Load elements from table to array
      *
      * @param string $tableName
+     * @param string $extension
      * @return array
      */
-    public static function loadElements(string $tableName): array
+    public static function loadElements(string $tableName, string $extension = 'json'): array
     {
-        $filename = storage_path($tableName . ".json");
+        $filename = storage_path($tableName . '.' . $extension);
         if (!file_exists($filename)) {
             return [];
         }
@@ -54,12 +26,13 @@ class Storage
      * save elements to the table
      *
      * @param string $tableName
-     * @param string $jsonEncodedData
+     * @param string $encodedData
+     * @param string $extension
      * @return void
      */
-    public static function saveElements(string $tableName, string $jsonEncodedData): void
+    public static function saveElements(string $tableName, string $encodedData, string $extension = 'json'): void
     {
-        $filename = storage_path($tableName . ".json");
-        file_put_contents($filename, $jsonEncodedData);
+        $filename = storage_path($tableName . '.' . $extension);
+        file_put_contents($filename, $encodedData);
     }
 }
