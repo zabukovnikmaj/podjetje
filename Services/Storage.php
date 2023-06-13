@@ -19,7 +19,7 @@ class Storage
 
         $data = file_get_contents($filename);
         if(CONFIG['currentStorageMethod'] === 'xml'){
-            return (array)xmlrpc_decode($data);
+            return (array)json_decode(json_encode(xmlrpc_decode($data)), true);
         }
         return (array)json_decode($data, true);
     }
