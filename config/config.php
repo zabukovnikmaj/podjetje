@@ -1,7 +1,7 @@
 <?php
 return [
     'possibleStorageMethods' => [
-        'JSON', 'XML'
+        'json', 'xml'
     ],
-    'currentStorageMethod' => 'JSON'
+    'currentStorageMethod' => 'json'
 ];

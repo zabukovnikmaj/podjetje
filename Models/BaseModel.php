@@ -3,6 +3,7 @@
 namespace Models;
 
 use Exception;
+use SimpleXMLElement;
 
 abstract class BaseModel
 {
@@ -10,12 +11,58 @@ abstract class BaseModel
      * generalized method for saving all data from class variables to .json file with the same name as class
      *
      * @return void
+     * @throws Exception
      */
     public function savingData(): void
     {
+        $extension = CONFIG['currentStorageMethod'];
+
         $className = str_replace('\\', '/', get_class($this));
-        $directory = __DIR__ . '/../data/' . basename($className) . '.json';
+        $partialDirectory = __DIR__ . '/../data/' . basename($className) . '.';
+        $directory = $partialDirectory . $extension;
+
+        if ($extension === 'json') {
+            $this->saveAsJsonFile($directory);
+        } else if ($extension === 'xml') {
+            $this->saveAsXmlFile($directory);
+        }
+
+
+        if (!empty($_FILES['productFile']['tmp_name'])) {
+            $this->saveImage(basename($className), $this->getUuid());
+        }
+    }
+
+    /**
+     * function for saving data as .xml file
+     *
+     * @param string $directory
+     * @return bool
+     * @throws Exception
+     */
+    private function saveAsXmlFile(string $directory): bool
+    {
+        $xml = new \SimpleXMLElement(file_get_contents($directory));
+
+        $new_entry = $xml->addChild('entry');
+
+        foreach (get_object_vars($this) as $key => $value) {
+            $new_entry->addChild($key, $value);
+        }
+
+        return file_put_contents($directory, $xml->asXML());
+    }
+
+    /**
+     * function for saving data as .json file
+     *
+     * @param string $directory
+     * @return bool
+     */
+    private function saveAsJsonFile(string $directory): bool
+    {
         $data = json_decode(file_get_contents($directory), true);
+
         $new_entry = [];
 
         foreach (get_object_vars($this) as $key => $value) {
@@ -23,11 +70,7 @@ abstract class BaseModel
         }
 
         $data[] = $new_entry;
-        file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
-
-        if (!empty($_FILES['productFile']['tmp_name'])) {
-            $this->saveImage(basename($className), $new_entry['uuid']);
-        }
+        return file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     /**
