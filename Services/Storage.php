@@ -18,6 +18,9 @@ class Storage
         }
 
         $data = file_get_contents($filename);
+        if(CONFIG['currentStorageMethod'] === 'xml'){
+            return (array)xmlrpc_decode($data);
+        }
         return (array)json_decode($data, true);
     }
 
@@ -60,7 +63,7 @@ class Storage
         foreach ($tableContents as $key => $tableContent) {
             $extension = CONFIG['currentStorageMethod'];
             $dir = storage_path($key . '.' . $extension);
-            
+
             if ($tableContent['extension'] === 'json') {
                 file_put_contents($dir, xmlrpc_encode(json_decode($tableContent['content'])));
             } else if ($tableContent['extension'] === 'xml') {
