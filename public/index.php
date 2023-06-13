@@ -15,6 +15,7 @@ spl_autoload_register(function ($class) {
 });
 
 createDirectory(base_path('data'));
+\Services\Storage::changeDataFilesToCorrectFormat();
 
 // Router should handle request
 $router = new Router();
