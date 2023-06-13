@@ -60,63 +60,12 @@ class Storage
         foreach ($tableContents as $key => $tableContent) {
             $extension = CONFIG['currentStorageMethod'];
             $dir = storage_path($key . '.' . $extension);
-
+            
             if ($tableContent['extension'] === 'json') {
                 file_put_contents($dir, xmlrpc_encode(json_decode($tableContent['content'])));
             } else if ($tableContent['extension'] === 'xml') {
-                file_put_contents($dir, json_encode(xmlrpc_decode($tableContent['content'])));
+                file_put_contents($dir, json_encode(xmlrpc_decode($tableContent['content']), JSON_PRETTY_PRINT));
             }
         }
-    }
-
-    /**
-     * function for converting XML string to JSON
-     *
-     * @param string $xmlString
-     * @return string
-     * @throws \Exception
-     */
-    public static function convertXmlToJson(string $xmlString): string
-    {
-        $xmlData = xmlrpc_decode($xmlString);
-        return json_encode($xmlData);
-    }
-
-    /**
-     * function for converting JSON string to XML
-     *
-     * @param string $jsonString
-     * @return string
-     */
-    public static function convertJsonToXml(string $jsonString): string
-    {
-        $data = json_decode($jsonString, true);
-
-        $xmlString = '<?xml version="1.0" encoding="UTF-8"?><root>';
-
-        foreach ($data as $item) {
-            $xmlString .= '<item>';
-            foreach ($item as $key => $value) {
-                if (is_array($value)) {
-                    $xmlString .= '<' . $key . '>';
-                    foreach ($value as $val) {
-                        $xmlString .= '<product>' . $val . '</product>';
-                    }
-                    $xmlString .= '</' . $key . '>';
-                } else {
-                    $xmlString .= '<' . $key . '>' . htmlspecialchars($value) . '</' . $key . '>';
-                }
-            }
-            $xmlString .= '</item>';
-        }
-
-        $xmlString .= '</root>';
-
-        $dom = new \DOMDocument('1.0');
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-        $dom->loadXML($xmlString);
-
-        return $dom->saveXML();
     }
 }

@@ -3,5 +3,5 @@ return [
     'possibleStorageMethods' => [
         'json', 'xml'
     ],
-    'currentStorageMethod' => 'xml'
+    'currentStorageMethod' => 'json'
 ];
