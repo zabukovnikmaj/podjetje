@@ -8,12 +8,11 @@ class Storage
      * Load elements from table to array
      *
      * @param string $tableName
-     * @param string $extension
      * @return array
      */
-    public static function loadElements(string $tableName, string $extension = 'json'): array
+    public static function loadElements(string $tableName): array
     {
-        $filename = storage_path($tableName . '.' . $extension);
+        $filename = storage_path($tableName . '.' . CONFIG['currentStorageMethod']);
         if (!file_exists($filename)) {
             return [];
         }
