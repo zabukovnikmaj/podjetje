@@ -22,46 +22,10 @@ abstract class BaseModel
         $directory = $partialDirectory . $extension;
 
         if ($extension === 'json') {
-            $this->saveAsJsonFile($directory);
+            $data = json_decode(file_get_contents($directory), true);
         } else if ($extension === 'xml') {
-            $this->saveAsXmlFile($directory);
+            $data = xmlrpc_decode(file_get_contents($directory), true);
         }
-
-
-        if (!empty($_FILES['productFile']['tmp_name'])) {
-            $this->saveImage(basename($className), $this->getUuid());
-        }
-    }
-
-    /**
-     * function for saving data as .xml file
-     *
-     * @param string $directory
-     * @return bool
-     * @throws Exception
-     */
-    private function saveAsXmlFile(string $directory): bool
-    {
-        $xml = new \SimpleXMLElement(file_get_contents($directory));
-
-        $new_entry = $xml->addChild('entry');
-
-        foreach (get_object_vars($this) as $key => $value) {
-            $new_entry->addChild($key, $value);
-        }
-
-        return file_put_contents($directory, $xml->asXML());
-    }
-
-    /**
-     * function for saving data as .json file
-     *
-     * @param string $directory
-     * @return bool
-     */
-    private function saveAsJsonFile(string $directory): bool
-    {
-        $data = json_decode(file_get_contents($directory), true);
 
         $new_entry = [];
 
@@ -70,7 +34,17 @@ abstract class BaseModel
         }
 
         $data[] = $new_entry;
-        return file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+        file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+        if ($extension === 'json') {
+            file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+        } else if ($extension === 'xml') {
+            file_put_contents($directory, xmlrpc_encode($data));
+        }
+
+
+        if (!empty($_FILES['productFile']['tmp_name'])) {
+            $this->saveImage(basename($className), $this->getUuid());
+        }
     }
 
     /**
