@@ -18,7 +18,7 @@ class Storage
         }
 
         $data = file_get_contents($filename);
-        if(CONFIG['currentStorageMethod'] === 'xml'){
+        if (CONFIG['currentStorageMethod'] === 'xml') {
             return (array)json_decode(json_encode(xmlrpc_decode($data)), true);
         }
         return (array)json_decode($data, true);
@@ -51,11 +51,9 @@ class Storage
         foreach ($tableNames as $tableName) {
             foreach (CONFIG['possibleStorageMethods'] as $extension) {
                 $dir = storage_path($tableName . '.' . $extension);
-                if (file_exists($dir)) {
-                    if ($extension !== CONFIG['currentStorageMethod']) {
-                        $tableContents[$tableName] = ['content' => file_get_contents($dir), 'extension' => $extension];
-                        unlink($dir);
-                    }
+                if (file_exists($dir) && $extension !== CONFIG['currentStorageMethod']) {
+                    $tableContents[$tableName] = ['content' => file_get_contents($dir), 'extension' => $extension];
+                    unlink($dir);
                 }
             }
         }
