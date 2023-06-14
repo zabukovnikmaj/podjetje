@@ -3,7 +3,6 @@
 namespace Models;
 
 use Exception;
-use SimpleXMLElement;
 
 abstract class BaseModel
 {
