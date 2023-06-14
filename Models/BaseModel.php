@@ -10,12 +10,22 @@ abstract class BaseModel
      * generalized method for saving all data from class variables to .json file with the same name as class
      *
      * @return void
+     * @throws Exception
      */
     public function savingData(): void
     {
+        $extension = CONFIG['currentStorageMethod'];
+
         $className = str_replace('\\', '/', get_class($this));
-        $directory = __DIR__ . '/../data/' . basename($className) . '.json';
-        $data = json_decode(file_get_contents($directory), true);
+        $partialDirectory = __DIR__ . '/../data/' . basename($className) . '.';
+        $directory = $partialDirectory . $extension;
+
+        if ($extension === 'json') {
+            $data = json_decode(file_get_contents($directory), true);
+        } else if ($extension === 'xml') {
+            $data = xmlrpc_decode(file_get_contents($directory), true);
+        }
+
         $new_entry = [];
 
         foreach (get_object_vars($this) as $key => $value) {
@@ -24,9 +34,15 @@ abstract class BaseModel
 
         $data[] = $new_entry;
         file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+        if ($extension === 'json') {
+            file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
+        } else if ($extension === 'xml') {
+            file_put_contents($directory, xmlrpc_encode($data));
+        }
+
 
         if (!empty($_FILES['productFile']['tmp_name'])) {
-            $this->saveImage(basename($className), $new_entry['uuid']);
+            $this->saveImage(basename($className), $this->getUuid());
         }
     }
 
