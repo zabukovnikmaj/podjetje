@@ -1,0 +1,38 @@
+CREATE DATABASE company;
+USE company;
+
+CREATE TABLE Products (
+    uuid VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(60),
+    description TEXT,
+    price FLOAT,
+    date date,
+    fileType VARCHAR(5)
+);
+
+CREATE TABLE BranchOffices (
+    uuid VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(60),
+    address VARCHAR(255),
+    product VARCHAR(50),
+    FOREIGN KEY (product) REFERENCES Products(uuid)
+);
+
+CREATE TABLE BranchOfficeProduct (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    branchOfficeId VARCHAR(50),
+    productId VARCHAR(50),
+    FOREIGN KEY (branchOfficeId) REFERENCES BranchOffices(uuid),
+    FOREIGN KEY (productId) REFERENCES Products(uuid)
+);
+
+CREATE TABLE employees (
+    uuid VARCHAR(50) PRIMARY KEY,
+    branchOffice VARCHAR(50),
+    name VARCHAR(60),
+    position VARCHAR(255),
+    age INT,
+    sex CHAR(1),
+    email VARCHAR(255),
+    FOREIGN KEY (branchOffice) REFERENCES BranchOffices(uuid)
+);
