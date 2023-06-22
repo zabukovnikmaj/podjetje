@@ -7,7 +7,26 @@ use Exception;
 abstract class BaseModel
 {
     /**
-     * generalized method for saving all data from class variables to .json file with the same name as class
+     * Function for opening connection to DB
+     *
+     * @return \mysqli
+     */
+    protected function openCon(): \mysqli{
+        return (new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME));
+    }
+
+    /**
+     * Function for closing connection to DB
+     *
+     * @param $conn
+     * @return void
+     */
+    protected function closeCon($conn): void{
+        $conn->close();
+    }
+
+    /**
+     * Generalized method for saving all data from class variables to .json file with the same name as class
      *
      * @return void
      * @throws Exception
@@ -47,7 +66,7 @@ abstract class BaseModel
     }
 
     /**
-     * method for generating uuid
+     * Method for generating uuid
      *
      * @return string
      * @throws Exception
@@ -58,7 +77,7 @@ abstract class BaseModel
     }
 
     /**
-     * function for saving image to data/files/$folderName/$fileName directory
+     * Function for saving image to data/files/$folderName/$fileName directory
      *
      * @param string $folderName
      * @param string $filename
