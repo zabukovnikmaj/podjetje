@@ -3,5 +3,9 @@ return [
     'possibleStorageMethods' => [
         'json', 'xml'
     ],
-    'currentStorageMethod' => 'json'
+    'currentStorageMethod' => 'json',
+    'serverName' => 'localhost',
+    'username' => 'root',
+    'password' => 'aspiria00',
+    'databaseName' => 'company',
 ];
