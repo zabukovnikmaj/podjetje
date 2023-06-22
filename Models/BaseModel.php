@@ -51,7 +51,7 @@ abstract class BaseModel
         $new_entry = [];
 
         foreach (get_object_vars($this) as $key => $value) {
-            $new_entry[$key] = htmlspecialchars($value);
+            $new_entry[$key] = $value;
         }
 
         $data[] = $new_entry;
@@ -67,15 +67,22 @@ abstract class BaseModel
 
                 //building query that inserts values for any model (any number of attributes)
                 $query = 'INSERT INTO ' . $className . ' VALUES (';
+                $placeholders = '';
+                $values = [];
                 foreach ($new_entry as $key => $item) {
                     if ($key !== 'products') {
-                        $query .= '"' . $item . '", ';
+                        $values[] = $item;
+                        $query .= '?, ';
+                        $placeholders .= 's';
                     }
                 }
                 $query = rtrim($query, ', ');
                 $query .= ')';
 
-                $conn->query($query);
+                $stmt = $conn->prepare($query);
+                array_unshift($values, $placeholders);
+                call_user_func_array([$stmt, 'bind_param'], $values);
+                $stmt->execute();
 
                 //branchOffice needs to save all the products to separate table
                 if ($className === 'BranchOffice') {
