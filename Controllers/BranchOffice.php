@@ -63,6 +63,7 @@ class BranchOffice extends BaseController
                 'products' => Storage::loadElements('Products'),
             ]);
         }
+
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
         $branchOfficeModel->setAddress($_POST['address']);

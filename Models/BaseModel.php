@@ -3,6 +3,7 @@
 namespace Models;
 
 use Exception;
+use \mysqli;
 
 abstract class BaseModel
 {
@@ -11,17 +12,19 @@ abstract class BaseModel
      *
      * @return \mysqli
      */
-    protected function openCon(): \mysqli{
+    protected function openCon(): \mysqli
+    {
         return (new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME));
     }
 
     /**
      * Function for closing connection to DB
      *
-     * @param $conn
+     * @param mysqli $conn
      * @return void
      */
-    protected function closeCon($conn): void{
+    protected function closeCon(\mysqli $conn): void
+    {
         $conn->close();
     }
 
@@ -48,7 +51,7 @@ abstract class BaseModel
         $new_entry = [];
 
         foreach (get_object_vars($this) as $key => $value) {
-            $new_entry[$key] = $value;
+            $new_entry[$key] = htmlspecialchars($value);
         }
 
         $data[] = $new_entry;
@@ -57,8 +60,37 @@ abstract class BaseModel
             file_put_contents($directory, json_encode($data, JSON_PRETTY_PRINT));
         } else if ($extension === 'xml') {
             file_put_contents($directory, xmlrpc_encode($data));
-        }
+        } else if ($extension === 'mysql') {
+            $className = basename($className);
+            try {
+                $conn = $this->openCon();
 
+                //building query that inserts values for any model (any number of attributes)
+                $query = 'INSERT INTO ' . $className . ' VALUES (';
+                foreach ($new_entry as $key => $item) {
+                    if ($key !== 'products') {
+                        $query .= '"' . $item . '", ';
+                    }
+                }
+                $query = rtrim($query, ', ');
+                $query .= ')';
+
+                $conn->query($query);
+
+                //branchOffice needs to save all the products to separate table
+                if ($className === 'BranchOffice') {
+                    foreach ($new_entry['products'] as $product) {
+                        $query = $conn->prepare('INSERT INTO BranchOfficeProduct (branchOfficeId, productId) VALUES (?, ?)');
+                        $query->bind_param('ss', $new_entry['uuid'], $product);
+                        $query->execute();
+                    }
+                }
+
+                $this->closeCon($conn);
+            } catch (\mysql_xdevapi\Exception $e) {
+                var_dump($e);
+            }
+        }
 
         if (!empty($_FILES['productFile']['tmp_name'])) {
             $this->saveImage(basename($className), $this->getUuid());

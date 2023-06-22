@@ -1,9 +1,9 @@
 <?php
 return [
     'possibleStorageMethods' => [
-        'json', 'xml'
+        'json', 'xml', 'mysql',
     ],
-    'currentStorageMethod' => 'json',
+    'currentStorageMethod' => 'mysql',
     'serverName' => 'localhost',
     'username' => 'root',
     'password' => 'aspiria00',
