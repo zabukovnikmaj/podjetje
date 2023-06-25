@@ -2,6 +2,9 @@
 
 namespace Services;
 
+use Exception;
+use \mysqli;
+
 class Storage
 {
     /**
@@ -12,6 +15,15 @@ class Storage
      */
     public static function loadElements(string $tableName): array
     {
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            try {
+                $neki = self::loadFromDb($tableName);
+                //var_dump($neki);
+            } catch (\mysqli_sql_exception $exception) {
+                echo 'There was an error!';
+            }
+        }
+
         $filename = storage_path($tableName . '.' . CONFIG['currentStorageMethod']);
         if (!file_exists($filename)) {
             return [];
@@ -22,6 +34,32 @@ class Storage
             return (array)json_decode(json_encode(xmlrpc_decode($data)), true);
         }
         return (array)json_decode($data, true);
+    }
+
+    private static function loadFromDb(string $tableName): array
+    {
+        $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+        $sql = 'SELECT * FROM ' . $tableName;
+        if ($tableName === 'BranchOffice') {
+            $sql = "SELECT BranchOffice.*, GROUP_CONCAT(Products.name) AS products
+                            FROM BranchOffice
+                            LEFT JOIN BranchOfficeProduct ON BranchOffice.uuid = BranchOfficeProduct.branchOfficeId
+                            LEFT JOIN Products ON Products.uuid = BranchOfficeProduct.productId
+                            GROUP BY BranchOffice.uuid";
+
+        }
+
+        $result = $conn->query($sql);
+        $conn->close();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $output[] = $row;
+            }
+            var_dump($output);
+            return $output;
+        } else {
+            return [];
+        }
     }
 
     /**

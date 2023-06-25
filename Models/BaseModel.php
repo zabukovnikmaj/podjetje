@@ -95,7 +95,7 @@ abstract class BaseModel
 
                 $this->closeCon($conn);
             } catch (\mysql_xdevapi\Exception $e) {
-                var_dump($e);
+                var_dump('Something went wrong!');
             }
         }
 

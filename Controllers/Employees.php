@@ -24,7 +24,7 @@ class Employees extends BaseController
     /**
      * function for displaying existing data
      *
-     * @return void
+     * @return string
      */
     public function list(): string
     {
@@ -44,7 +44,8 @@ class Employees extends BaseController
     /**
      * function for processing entered data and later saving it by using model
      *
-     * @return void
+     * @return string
+     * @throws \Exception
      */
     public function processData(): string
     {
