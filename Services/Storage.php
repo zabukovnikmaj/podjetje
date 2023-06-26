@@ -11,13 +11,18 @@ class Storage
      * Load elements from table to array
      *
      * @param string $tableName
+     * @param bool $needsJoin
      * @return array
      */
-    public static function loadElements(string $tableName): array
+    public static function loadElements(string $tableName, bool $needsJoin = false): array
     {
         if (CONFIG['currentStorageMethod'] === 'mysql') {
-            $neki = self::loadFromDb($tableName);
-            var_dump($neki);
+            try {
+                return self::loadFromDatabase($tableName, $needsJoin);
+            } catch (\mysql_xdevapi\Exception $exception) {
+                return ['There was an error!'];
+            }
+
         }
 
         $filename = storage_path($tableName . '.' . CONFIG['currentStorageMethod']);
@@ -32,11 +37,18 @@ class Storage
         return (array)json_decode($data, true);
     }
 
-    private static function loadFromDb(string $tableName): array
+    /**
+     * Function for retrieving data from database
+     *
+     * @param string $tableName
+     * @param bool $needsJoin
+     * @return array
+     */
+    private static function loadFromDatabase(string $tableName, bool $needsJoin): array
     {
         $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         $sql = 'SELECT * FROM ' . $tableName;
-        if ($tableName === 'BranchOffice') {
+        if ($tableName === 'BranchOffice' && $needsJoin) {
             $sql = "SELECT BranchOffice.*, GROUP_CONCAT(Products.uuid) AS products
                             FROM BranchOffice
                             LEFT JOIN BranchOfficeProduct ON BranchOffice.uuid = BranchOfficeProduct.branchOfficeId
