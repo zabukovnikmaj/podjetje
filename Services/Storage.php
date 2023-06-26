@@ -16,12 +16,8 @@ class Storage
     public static function loadElements(string $tableName): array
     {
         if (CONFIG['currentStorageMethod'] === 'mysql') {
-            try {
-                $neki = self::loadFromDb($tableName);
-                //var_dump($neki);
-            } catch (\mysqli_sql_exception $exception) {
-                echo 'There was an error!';
-            }
+            $neki = self::loadFromDb($tableName);
+            var_dump($neki);
         }
 
         $filename = storage_path($tableName . '.' . CONFIG['currentStorageMethod']);
@@ -41,25 +37,23 @@ class Storage
         $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         $sql = 'SELECT * FROM ' . $tableName;
         if ($tableName === 'BranchOffice') {
-            $sql = "SELECT BranchOffice.*, GROUP_CONCAT(Products.name) AS products
+            $sql = "SELECT BranchOffice.*, GROUP_CONCAT(Products.uuid) AS products
                             FROM BranchOffice
                             LEFT JOIN BranchOfficeProduct ON BranchOffice.uuid = BranchOfficeProduct.branchOfficeId
                             LEFT JOIN Products ON Products.uuid = BranchOfficeProduct.productId
                             GROUP BY BranchOffice.uuid";
-
         }
 
-        $result = $conn->query($sql);
+        $result = mysqli_query($conn, $sql);
         $conn->close();
-        if ($result->num_rows > 0) {
+        $output = [];
+        if ($result) {
             while ($row = $result->fetch_assoc()) {
                 $output[] = $row;
             }
-            var_dump($output);
             return $output;
-        } else {
-            return [];
         }
+        return [];
     }
 
     /**
