@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use mysql_xdevapi\Exception;
 use Services\Storage;
 use Services\Validator;
 
@@ -30,6 +31,26 @@ abstract class BaseController
     public function deleteItem(string $id): void
     {
         $filename = $this->getFilenameFromClass();
+
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            try {
+                $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+               $stmt = $conn->prepare("DELETE FROM $filename WHERE uuid = ?");
+               $stmt->bind_param('s', $id);
+               $stmt->execute();
+
+               $stmt->close();
+               $conn->close();
+
+            } catch (Exception $e) {
+                echo 'There was an error!';
+            } finally {
+                redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+                return;
+            }
+        }
+
         $existingData = Storage::loadElements($filename);
         $newData = [];
 
