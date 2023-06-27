@@ -36,12 +36,12 @@ abstract class BaseController
             try {
                 $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-               $stmt = $conn->prepare("DELETE FROM $filename WHERE uuid = ?");
-               $stmt->bind_param('s', $id);
-               $stmt->execute();
+                $stmt = $conn->prepare("DELETE FROM $filename WHERE uuid = ?");
+                $stmt->bind_param('s', $id);
+                $stmt->execute();
 
-               $stmt->close();
-               $conn->close();
+                $stmt->close();
+                $conn->close();
 
             } catch (Exception $e) {
                 echo 'There was an error!';
@@ -181,11 +181,8 @@ abstract class BaseController
      */
     public function saveEditedData(string $params): string
     {
-        $err = $this->validateData([]);
-
         $filename = $this->getFilenameFromClass();
-        $existingData = Storage::loadElements($filename);
-        $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
+        $err = $this->validateData([]);
 
         if (!empty($err)) {
             return view($filename . '/edit', [
@@ -196,6 +193,48 @@ abstract class BaseController
             ]);
         }
 
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            try {
+                $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+                if ($filename === 'BranchOffice') {
+                    $stmt = $conn->prepare("UPDATE BranchOffice SET name = ?, address = ? WHERE uuid = ?");
+                    $stmt->bind_param('sss', $_POST['name'], $_POST['address'], $params);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    $stmt = $conn->prepare('DELETE FROM BranchOfficeProduct WHERE BranchOffice.name = uuid');
+                    $stmt->execute();
+                    $stmt->close();
+
+                    foreach ($_POST['products'] as $product) {
+                        $stmt = $conn->prepare("INSERT INTO BranchOfficeProduct (branchOfficeId, productsId) VALUES (?, ?)");
+                        $stmt->bind_param('ss', $params, $product);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+                } else if ($filename === 'Employees') {
+                    $stmt = $conn->prepare("UPDATE Employees SET branchOffice = ?, name = ?, position = ?, age = ?, sex = ?, email = ? WHERE uuid = ?");
+                    $stmt->bind_param('sssssss', $_POST['branchOffice'], $_POST['name'], $_POST['position'], $_POST['age'], $_POST['sex'], $_POST['email'], $params);
+                    $stmt->execute();
+                } else if ($filename === 'Products') {
+                    //TODO: update for file type
+                    $filetype = 'jpg';
+
+                    $stmt = $conn->prepare("UPDATE Products SET name = ?, description = ?, price = ?, date = ?, filetype = ? WHERE uuid = ?");
+                    $stmt->bind_param('ssssss', $_POST['name'], $_POST['description'], $_POST['price'], $_POST['date'], $filetype, $params);
+                    $stmt->execute();
+                }
+            } catch (\Exception $exception) {
+                echo 'There was an error!';
+            } finally {
+                $conn->close();
+                redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+                return '';
+            }
+        }
+
+        $existingData = Storage::loadElements($filename);
+        $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         $existingData = $this->replaceExistingData($existingData, $params);
 
