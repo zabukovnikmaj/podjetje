@@ -41,7 +41,7 @@
             <label for="products">Products name</label> <br>
             <?php view('partials/productsCheckbox', [
                 'products' => $products,
-                'productsData' => $filteredData['products']
+                'productsData' => is_array($filteredData['products']) ? $filteredData['products'] : explode(',', $filteredData['products'])
             ]); ?>
             <?php view('partials/errors', [
                 'err' => $err['products']
@@ -53,7 +53,6 @@
     </form>
 </div>
 
-<!-- Bootstrap 5 JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
         integrity="sha512-TgSK8d+l4iDeSQeqvuhyHw+9BzvbV4JF6kjcEjwA7pnbYAvv6x3S8Wif4Osmg9VgHwCf+7SWHYf3HjRg+rsQyA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

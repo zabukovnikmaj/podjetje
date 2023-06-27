@@ -150,7 +150,7 @@ abstract class BaseController
     public function displayEditItem(string $id): string
     {
         $filename = $this->getFilenameFromClass();
-        $existingData = Storage::loadElements($filename);
+        $existingData = Storage::loadElements($filename, true);
         $filteredData = [];
 
         foreach ($existingData as $data) {
