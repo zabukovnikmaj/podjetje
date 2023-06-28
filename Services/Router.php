@@ -10,7 +10,7 @@ class Router
     private array $routes;
 
     /**
-     * Method loads router configuration
+     * Function loads router configuration
      *
      * @return void
      */
@@ -20,7 +20,7 @@ class Router
     }
 
     /**
-     * Method handles server request
+     * Function handles server request
      *
      * @return void
      */

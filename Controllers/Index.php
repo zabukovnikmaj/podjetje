@@ -5,7 +5,7 @@ namespace Controllers;
 class Index
 {
     /**
-     * function for displaying form
+     * Function for displaying form
      *
      * @return void
      */

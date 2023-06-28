@@ -9,7 +9,7 @@ use Services\Validator;
 abstract class BaseController
 {
     /**
-     * function for filtering out specified data from inputed array
+     * Function for filtering out specified data from inputed array
      *
      * @param array $array
      * @param string $filterBy
@@ -23,7 +23,7 @@ abstract class BaseController
     }
 
     /**
-     *general function for deleting selected item from json file
+     * General function for deleting selected item from json file
      *
      * @param string $id
      * @return void
@@ -70,7 +70,7 @@ abstract class BaseController
     }
 
     /**
-     * function for deleting image if it exists
+     * Function for deleting image if it exists
      *
      * @param string $uuid
      * @param string $extension
@@ -86,7 +86,7 @@ abstract class BaseController
     }
 
     /**
-     * function responsible for deleting all the foreign keys after primary key has been deleted
+     * Function responsible for deleting all the foreign keys after primary key has been deleted
      *
      * @return void
      */
@@ -126,7 +126,7 @@ abstract class BaseController
     }
 
     /**
-     * function for finding if some element is inside array
+     * Function for finding if some element is inside array
      *
      * @param string $needle
      * @param array $haystack
@@ -143,9 +143,10 @@ abstract class BaseController
     }
 
     /**
-     * general function for displaying data to edit
+     * General function for displaying data to edit
      *
-     * @return void
+     * @param string $id
+     * @return string
      */
     public function displayEditItem(string $id): string
     {
@@ -175,9 +176,10 @@ abstract class BaseController
     }
 
     /**
-     * general function for saving edited data
+     * General function for saving edited data
      *
-     * @return void
+     * @param string $params
+     * @return string
      */
     public function saveEditedData(string $params): string
     {
@@ -244,7 +246,7 @@ abstract class BaseController
     }
 
     /**
-     * function for finding data that will be changed and changing it
+     * Function for finding data that will be changed and changing it
      *
      * @param array $existingData
      * @param string $params
@@ -274,7 +276,7 @@ abstract class BaseController
     }
 
     /**
-     * function for getting file name from class name
+     * Function for getting file name from class name
      *
      * @return string
      */
@@ -284,7 +286,7 @@ abstract class BaseController
     }
 
     /**
-     * function for getting name of the item/branch office from uuid for nicer data displaying
+     * Function for getting name of the item/branch office from uuid for nicer data displaying
      *
      * @param string $table
      * @param string $uuid
@@ -302,7 +304,7 @@ abstract class BaseController
     }
 
     /**
-     * function for returning path to the image
+     * Function for returning path to the image
      *
      * @param string $uuid
      * @param string $extension
@@ -314,7 +316,7 @@ abstract class BaseController
     }
 
     /**
-     * function for returning image to a request
+     * Function for returning image to a request
      *
      * @param string $uuid
      * @return void
@@ -343,6 +345,4 @@ abstract class BaseController
         http_response_code(404);
         echo "Image not found";
     }
-
-
 }

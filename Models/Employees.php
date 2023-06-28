@@ -13,9 +13,10 @@ class Employees extends BaseModel
     protected string $email;
 
     /**
-     * setter for uuid
+     * Setter for uuid
      *
      * @return void
+     * @throws \Exception
      */
     public function setUuid(): void
     {
@@ -23,7 +24,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for branch office
+     * Setter for branch office
      *
      * @param string $branchOffice
      * @return void
@@ -34,7 +35,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for name
+     * Setter for name
      *
      * @param string $name
      * @return void
@@ -45,7 +46,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for position
+     * Setter for position
      *
      * @param string $position
      * @return void
@@ -56,7 +57,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for age
+     * Setter for age
      *
      * @param int $age
      * @return void
@@ -67,7 +68,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for sex
+     * Setter for sex
      *
      * @param string $sex
      * @return void
@@ -78,7 +79,7 @@ class Employees extends BaseModel
     }
 
     /**
-     * setter for email
+     * Setter for email
      *
      * @param string $email
      * @return void

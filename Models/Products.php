@@ -12,9 +12,10 @@ class Products extends BaseModel
     protected string $fileType;
 
     /**
-     * setter for uuid
+     * Setter for uuid
      *
      * @return void
+     * @throws \Exception
      */
     public function setUuid(): void
     {
@@ -22,7 +23,7 @@ class Products extends BaseModel
     }
 
     /**
-     * setter for name
+     * Setter for name
      *
      * @param string $name
      * @return void
@@ -33,7 +34,7 @@ class Products extends BaseModel
     }
 
     /**
-     * setter for FileType
+     * Setter for FileType
      *
      * @param string $type
      * @return void
@@ -44,7 +45,7 @@ class Products extends BaseModel
     }
 
     /**
-     * setter for description
+     * Setter for description
      *
      * @param string $description
      * @return void
@@ -55,7 +56,7 @@ class Products extends BaseModel
     }
 
     /**
-     * setter for price
+     * Setter for price
      *
      * @param float $price
      * @return void
@@ -66,7 +67,7 @@ class Products extends BaseModel
     }
 
     /**
-     * setter for date
+     * Setter for date
      *
      * @param string $date
      * @return void

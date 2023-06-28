@@ -1,9 +1,7 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
-
 /**
- * method that makes path into one string
+ * Function that makes path into one string
  *
  * @param string $path
  * @return string
@@ -14,7 +12,7 @@ function base_path(string $path): string
 }
 
 /**
- * method for creating path for saving data into json
+ * Function for creating path for saving data into json
  *
  * @param string $path
  * @return string
@@ -25,7 +23,7 @@ function storage_path(string $path): string
 }
 
 /**
- * method for displaying appropriate views
+ * Function for displaying appropriate views
  *
  * @param string $path
  * @param array $attributes
@@ -39,7 +37,7 @@ function view(string $path, array $attributes = []): string
 }
 
 /**
- * function for creating  directory if it does not exist yet
+ * Function for creating  directory if it does not exist yet
  *
  * @param string $name
  * @return void
@@ -52,7 +50,7 @@ function createDirectory(string $path): void
 }
 
 /**
- * function for making redirects
+ * Function for making redirects
  *
  * @param string $path
  * @return void
@@ -64,7 +62,7 @@ function redirect(string $path): void
 }
 
 /**
- * function for converting array to json
+ * Function for converting array to json
  *
  * @param array $dataToEncode
  * @return string
@@ -75,7 +73,7 @@ function json(array $dataToEncode): string
 }
 
 /**
- * function for starting file download on client side
+ * Function for starting file download on client side
  *
  * @param string $filename
  * @return void
@@ -93,7 +91,7 @@ function fileDownload(string $filename): void
 }
 
 /**
- * Method generates unique UUID
+ * Function generates unique UUID
  *
  * @return string
  * @throws Exception
@@ -113,7 +111,7 @@ function uuid(): string
 }
 
 /**
- * Method retrieves old data for specific field from posted data.
+ * Function retrieves old data for specific field from posted data.
  *
  * @param string $name
  * @param string|null $default
@@ -129,7 +127,7 @@ function old(string $name, ?string $default = null): string
 }
 
 /**
- * Method is used to render request method field in form
+ * Function is used to render request method field in form
  *
  * @param string $method
  * @param $var

@@ -27,7 +27,7 @@ class ApiBaseController
     }
 
     /**
-     * function for sending API response with specific status code and data
+     * Function for sending API response with specific status code and data
      *
      * @param int $statusCode
      * @param array $data
@@ -42,7 +42,7 @@ class ApiBaseController
     }
 
     /**
-     * function for getting filename from URI
+     * Function for getting filename from URI
      *
      * @return string
      */

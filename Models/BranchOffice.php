@@ -12,9 +12,10 @@ class BranchOffice extends BaseModel
     protected array $products;
 
     /**
-     * setter for uuid
+     * Setter for uuid
      *
      * @return void
+     * @throws \Exception
      */
     public function setUuid(): void
     {
@@ -22,7 +23,7 @@ class BranchOffice extends BaseModel
     }
 
     /**
-     * setter for name
+     * Setter for name
      *
      * @param string $name
      * @return void
@@ -33,7 +34,7 @@ class BranchOffice extends BaseModel
     }
 
     /**
-     * setter for address
+     * Setter for address
      *
      * @param string $address
      * @return void
@@ -44,7 +45,7 @@ class BranchOffice extends BaseModel
     }
 
     /**
-     * setter for products
+     * Setter for products
      *
      * @param array $products
      * @return void

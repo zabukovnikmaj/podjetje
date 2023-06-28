@@ -7,7 +7,7 @@ use DateTime;
 class Validator
 {
     /**
-     * function for checking $_POST array for certain methods and returning array with errors if fields are empty
+     * Function for checking $_POST array for certain methods and returning array with errors if fields are empty
      *
      * @param array $errors
      * @param array $source
@@ -27,7 +27,7 @@ class Validator
     }
 
     /**
-     * function for checking if age is inside accaptable range
+     * Function for checking if age is inside accaptable range
      *
      * @param int $age
      * @return string
@@ -55,7 +55,7 @@ class Validator
     }
 
     /**
-     * function for checking if email contains @ and if it doesn't contain any whitespaces
+     * Function for checking if email contains @ and if it doesn't contain any whitespaces
      *
      * @param string $email
      * @return string
@@ -69,7 +69,7 @@ class Validator
     }
 
     /**
-     * function for checking if price is positive and smaller then 1000
+     * Function for checking if price is positive and smaller then 1000
      *
      * @param float $price
      * @return string
@@ -83,7 +83,7 @@ class Validator
     }
 
     /**
-     * function for checking general strings
+     * Function for checking general strings
      *
      * @param string $input
      * @return string
@@ -97,7 +97,7 @@ class Validator
     }
 
     /**
-     * validator for limiting description length
+     * Validator for limiting description length
      *
      * @param string $description
      * @return string
@@ -111,7 +111,7 @@ class Validator
     }
 
     /**
-     * validator for checking date validity
+     * Validator for checking date validity
      *
      * @param string $date
      * @return string
@@ -126,7 +126,7 @@ class Validator
     }
 
     /**
-     * function for checking if all the entered products already exist
+     * Function for checking if all the entered products already exist
      *
      * @param array $products
      * @return string
@@ -147,7 +147,7 @@ class Validator
     }
 
     /**
-     * funciton for checking if entered office already exists
+     * Function for checking if entered office already exists
      *
      * @param string $branchOffice
      * @return string

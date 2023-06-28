@@ -69,7 +69,7 @@ class Storage
     }
 
     /**
-     * save elements to the table
+     * Save elements to the table
      *
      * @param string $tableName
      * @param string $encodedData
@@ -83,12 +83,16 @@ class Storage
     }
 
     /**
-     * function for changing appropriate files with data to correct format as stated in config file
+     * Function for changing appropriate files with data to correct format as stated in config file
      *
      * @return void
      */
     public static function changeDataFilesToCorrectFormat(): void
     {
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            return;
+        }
+
         $tableNames = ['Products', 'Employees', 'BranchOffice'];
         $tableContents = [];
 
