@@ -23,6 +23,15 @@ class BranchOffice extends BaseModel
     }
 
     /**
+     * Getter for returning existing uuid
+     *
+     * @return string
+     */
+    public function getExistingUuid(): string {
+        return $this->uuid;
+    }
+
+    /**
      * Setter for name
      *
      * @param string $name

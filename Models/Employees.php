@@ -88,4 +88,13 @@ class Employees extends BaseModel
     {
         $this->email = $email;
     }
+
+    /**
+     * Getter for returning existing uuid
+     *
+     * @return string
+     */
+    public function getExistingUuid(): string {
+        return $this->uuid;
+    }
 }

@@ -76,4 +76,13 @@ class Products extends BaseModel
     {
         $this->date = $date;
     }
+
+    /**
+     * Getter for returning existing uuid
+     *
+     * @return string
+     */
+    public function getExistingUuid(): string {
+        return $this->uuid;
+    }
 }

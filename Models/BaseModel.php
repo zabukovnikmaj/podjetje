@@ -100,12 +100,12 @@ abstract class BaseModel
         }
 
         if (!empty($_FILES['productFile']['tmp_name'])) {
-            $this->saveImage(basename($className), $this->getUuid());
+            $this->saveImage(basename($className), $this->getExistingUuid());
         }
     }
 
     /**
-     * Method for generating uuid
+     * Function for generating uuid
      *
      * @return string
      * @throws Exception
