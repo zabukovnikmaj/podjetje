@@ -202,12 +202,12 @@ abstract class BaseController
                     $stmt->execute();
                     $stmt->close();
 
-                    $stmt = $conn->prepare('DELETE FROM BranchOfficeProduct WHERE BranchOffice.name = uuid');
+                    $stmt = $conn->prepare("DELETE FROM BranchOfficeProduct WHERE branchOfficeId = '$params'");
                     $stmt->execute();
                     $stmt->close();
 
                     foreach ($_POST['products'] as $product) {
-                        $stmt = $conn->prepare("INSERT INTO BranchOfficeProduct (branchOfficeId, productsId) VALUES (?, ?)");
+                        $stmt = $conn->prepare("INSERT INTO BranchOfficeProduct (branchOfficeId, productId) VALUES (?, ?)");
                         $stmt->bind_param('ss', $params, $product);
                         $stmt->execute();
                         $stmt->close();
@@ -224,8 +224,8 @@ abstract class BaseController
                     $stmt->bind_param('ssssss', $_POST['name'], $_POST['description'], $_POST['price'], $_POST['date'], $filetype, $params);
                     $stmt->execute();
                 }
-            } catch (\Exception $exception) {
-                echo 'There was an error!';
+            } catch (\mysqli_sql_exception $exception) {
+                echo $exception;
             } finally {
                 $conn->close();
                 redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
