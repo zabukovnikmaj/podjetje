@@ -219,11 +219,10 @@ abstract class BaseController
                     $stmt->bind_param('sssssss', $_POST['branchOffice'], $_POST['name'], $_POST['position'], $_POST['age'], $_POST['sex'], $_POST['email'], $params);
                     $stmt->execute();
                 } else if ($filename === 'Products') {
-                    //TODO: update for file type
-                    $filetype = 'jpg';
+                    $filetype = strtolower(pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION));
 
-                    $stmt = $conn->prepare("UPDATE Products SET name = ?, description = ?, price = ?, date = ?, filetype = ? WHERE uuid = ?");
-                    $stmt->bind_param('ssssss', $_POST['name'], $_POST['description'], $_POST['price'], $_POST['date'], $filetype, $params);
+                    $stmt = $conn->prepare("UPDATE Products SET name = ?, description = ?, price = ?, date = ?, fileType = ? WHERE uuid = ?");
+                    $stmt->bind_param('ssssss', $_POST['name'], $_POST['description'], $_POST['price'], $_POST['deliveryDate'], $filetype, $params);
                     $stmt->execute();
                 }
             } catch (\mysqli_sql_exception $exception) {
