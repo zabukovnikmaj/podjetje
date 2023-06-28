@@ -13,7 +13,7 @@ CREATE TABLE Products (
 CREATE TABLE BranchOffice (
     uuid VARCHAR(50) PRIMARY KEY,
     name VARCHAR(60),
-    address VARCHAR(255),
+    address VARCHAR(255)
 );
 
 CREATE TABLE BranchOfficeProduct (
