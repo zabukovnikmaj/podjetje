@@ -9,7 +9,7 @@ use Services\Storage;
 class BranchOffice extends BaseController
 {
     /**
-     * function for displaying form
+     * Function for displaying form
      *
      * @return void
      */
@@ -22,17 +22,23 @@ class BranchOffice extends BaseController
     }
 
     /**
-     * function for displaying existing data
+     * Function for displaying existing data
      *
-     * @return void
+     * @return string
      */
     public function list(): string
     {
-        $branchOffices = Storage::loadElements('BranchOffice');
+        $branchOffices = Storage::loadElements('BranchOffice', true);
 
         $officeIndex = 0;
         foreach ($branchOffices as $branchOffice) {
             $productIndex = 0;
+
+            if(!is_array($branchOffice['products'])){
+                $branchOffices[$officeIndex]['products'] = explode(',', $branchOffice['products']);
+                $branchOffice['products'] = explode(',', $branchOffice['products']);
+            }
+
             foreach ($branchOffice['products'] as $product) {
                 $branchOffices[$officeIndex]['products'][$productIndex] = $this->getNameFromUuid('Products', $product);
                 $productIndex++;
@@ -46,9 +52,10 @@ class BranchOffice extends BaseController
     }
 
     /**
-     * function for processing entered data and later saving it by using model
+     * Function for processing entered data and later saving it by using model
      *
-     * @return void
+     * @return string
+     * @throws \Exception
      */
     public function processData(): string
     {
@@ -63,18 +70,19 @@ class BranchOffice extends BaseController
                 'products' => Storage::loadElements('Products'),
             ]);
         }
+
         $branchOfficeModel = new BranchOfficeModels();
         $branchOfficeModel->setName($_POST['name']);
         $branchOfficeModel->setAddress($_POST['address']);
-        var_dump($_POST['products']);
         $branchOfficeModel->setProducts($_POST['products']);
         $branchOfficeModel->setUuid();
         $branchOfficeModel->savingData();
         redirect('/');
+        return '';
     }
 
     /**
-     * function for checking validity of entered arguments
+     * Function for checking validity of entered arguments
      *
      * @param array $err
      * @return array
@@ -87,7 +95,7 @@ class BranchOffice extends BaseController
     }
 
     /**
-     * function for creating array from string
+     * Function for creating array from string
      *
      * @param string $products
      * @return string[]

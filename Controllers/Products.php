@@ -9,9 +9,9 @@ use Services\Validator as Validator;
 class Products extends BaseController
 {
     /**
-     * function for displaying form
+     * Function for displaying form
      *
-     * @return void
+     * @return string
      */
     public function showCreateForm(): string
     {
@@ -21,9 +21,9 @@ class Products extends BaseController
     }
 
     /**
-     * function for displaying existing data
+     * Function for displaying existing data
      *
-     * @return void
+     * @return string
      */
     public function list(): string
     {
@@ -33,7 +33,7 @@ class Products extends BaseController
     }
 
     /**
-     * function for processing entered data and later saving it by using model
+     * Function for processing entered data and later saving it by using model
      *
      * @return void
      */
@@ -66,7 +66,7 @@ class Products extends BaseController
     }
 
     /**
-     * function for checking validity of entered arguments
+     * Function for checking validity of entered arguments
      *
      * @param array $err
      * @return array

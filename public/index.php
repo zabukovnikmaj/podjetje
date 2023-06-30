@@ -6,6 +6,10 @@ const BASE_PATH = __DIR__ . '/../';
 
 $config = require BASE_PATH . 'config/config.php';
 define("CONFIG", $config);
+define("DBUSER", $config['username']);
+define("DBPASS", $config['password']);
+define("DBNAME", $config['databaseName']);
+define("DBHOST", $config['serverName']);
 
 require_once BASE_PATH . 'Services/Functions.php';
 

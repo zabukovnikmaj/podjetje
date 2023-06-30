@@ -2,13 +2,14 @@
 
 namespace Controllers;
 
+use mysql_xdevapi\Exception;
 use Services\Storage;
 use Services\Validator;
 
 abstract class BaseController
 {
     /**
-     * function for filtering out specified data from inputed array
+     * Function for filtering out specified data from inputed array
      *
      * @param array $array
      * @param string $filterBy
@@ -22,7 +23,7 @@ abstract class BaseController
     }
 
     /**
-     *general function for deleting selected item from json file
+     * General function for deleting selected item from json file
      *
      * @param string $id
      * @return void
@@ -30,6 +31,26 @@ abstract class BaseController
     public function deleteItem(string $id): void
     {
         $filename = $this->getFilenameFromClass();
+
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            try {
+                $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+                $stmt = $conn->prepare("DELETE FROM $filename WHERE uuid = ?");
+                $stmt->bind_param('s', $id);
+                $stmt->execute();
+
+                $stmt->close();
+                $conn->close();
+
+            } catch (Exception $e) {
+                echo 'There was an error!';
+            } finally {
+                redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+                return;
+            }
+        }
+
         $existingData = Storage::loadElements($filename);
         $newData = [];
 
@@ -49,7 +70,7 @@ abstract class BaseController
     }
 
     /**
-     * function for deleting image if it exists
+     * Function for deleting image if it exists
      *
      * @param string $uuid
      * @param string $extension
@@ -65,7 +86,7 @@ abstract class BaseController
     }
 
     /**
-     * function responsible for deleting all the foreign keys after primary key has been deleted
+     * Function responsible for deleting all the foreign keys after primary key has been deleted
      *
      * @return void
      */
@@ -105,7 +126,7 @@ abstract class BaseController
     }
 
     /**
-     * function for finding if some element is inside array
+     * Function for finding if some element is inside array
      *
      * @param string $needle
      * @param array $haystack
@@ -122,14 +143,15 @@ abstract class BaseController
     }
 
     /**
-     * general function for displaying data to edit
+     * General function for displaying data to edit
      *
-     * @return void
+     * @param string $id
+     * @return string
      */
     public function displayEditItem(string $id): string
     {
         $filename = $this->getFilenameFromClass();
-        $existingData = Storage::loadElements($filename);
+        $existingData = Storage::loadElements($filename, true);
         $filteredData = [];
 
         foreach ($existingData as $data) {
@@ -154,17 +176,15 @@ abstract class BaseController
     }
 
     /**
-     * general function for saving edited data
+     * General function for saving edited data
      *
-     * @return void
+     * @param string $params
+     * @return string
      */
     public function saveEditedData(string $params): string
     {
-        $err = $this->validateData([]);
-
         $filename = $this->getFilenameFromClass();
-        $existingData = Storage::loadElements($filename);
-        $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
+        $err = $this->validateData([]);
 
         if (!empty($err)) {
             return view($filename . '/edit', [
@@ -175,6 +195,50 @@ abstract class BaseController
             ]);
         }
 
+        if (CONFIG['currentStorageMethod'] === 'mysql') {
+            try {
+                $conn = new \mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+                if ($filename === 'BranchOffice') {
+                    $stmt = $conn->prepare("UPDATE BranchOffice SET name = ?, address = ? WHERE uuid = ?");
+                    $stmt->bind_param('sss', $_POST['name'], $_POST['address'], $params);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    $stmt = $conn->prepare("DELETE FROM BranchOfficeProduct WHERE branchOfficeId = '$params'");
+                    $stmt->execute();
+                    $stmt->close();
+
+                    foreach ($_POST['products'] as $product) {
+                        $stmt = $conn->prepare("INSERT INTO BranchOfficeProduct (branchOfficeId, productId) VALUES (?, ?)");
+                        $stmt->bind_param('ss', $params, $product);
+                        $stmt->execute();
+                        $stmt->close();
+                    }
+                } else if ($filename === 'Employees') {
+                    $stmt = $conn->prepare("UPDATE Employees SET branchOffice = ?, name = ?, position = ?, age = ?, sex = ?, email = ? WHERE uuid = ?");
+                    $stmt->bind_param('sssssss', $_POST['branchOffice'], $_POST['name'], $_POST['position'], $_POST['age'], $_POST['sex'], $_POST['email'], $params);
+                    $stmt->execute();
+                } else if ($filename === 'Products') {
+                    $model = new \Models\Products();
+                    $filetype = strtolower(pathinfo($_FILES['productFile']['name'], PATHINFO_EXTENSION));
+
+                    $stmt = $conn->prepare("UPDATE Products SET name = ?, description = ?, price = ?, date = ?, fileType = ? WHERE uuid = ?");
+                    $stmt->bind_param('ssssss', $_POST['name'], $_POST['description'], $_POST['price'], $_POST['deliveryDate'], $filetype, $params);
+                    $stmt->execute();
+
+                    $model->saveImage($this->getFilenameFromClass(), $params);
+                }
+            } catch (\mysqli_sql_exception $exception) {
+                echo $exception;
+            } finally {
+                $conn->close();
+                redirect('/' . strtolower(substr($filename, 0, 1)) . substr($filename, 1) . '/list/');
+                return '';
+            }
+        }
+
+        $existingData = Storage::loadElements($filename);
+        $filename = strtolower(substr($filename, 0, 1)) . substr($filename, 1);
 
         $existingData = $this->replaceExistingData($existingData, $params);
 
@@ -184,7 +248,7 @@ abstract class BaseController
     }
 
     /**
-     * function for finding data that will be changed and changing it
+     * Function for finding data that will be changed and changing it
      *
      * @param array $existingData
      * @param string $params
@@ -214,7 +278,7 @@ abstract class BaseController
     }
 
     /**
-     * function for getting file name from class name
+     * Function for getting file name from class name
      *
      * @return string
      */
@@ -224,7 +288,7 @@ abstract class BaseController
     }
 
     /**
-     * function for getting name of the item/branch office from uuid for nicer data displaying
+     * Function for getting name of the item/branch office from uuid for nicer data displaying
      *
      * @param string $table
      * @param string $uuid
@@ -242,7 +306,7 @@ abstract class BaseController
     }
 
     /**
-     * function for returning path to the image
+     * Function for returning path to the image
      *
      * @param string $uuid
      * @param string $extension
@@ -254,7 +318,7 @@ abstract class BaseController
     }
 
     /**
-     * function for returning image to a request
+     * Function for returning image to a request
      *
      * @param string $uuid
      * @return void
@@ -283,6 +347,4 @@ abstract class BaseController
         http_response_code(404);
         echo "Image not found";
     }
-
-
 }
